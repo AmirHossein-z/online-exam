@@ -26,8 +26,7 @@
                             <form method="post" action="<?php echo URL ?>auth/login_user" id="signup_form_student"
                                 class="transition-all duration-150 ease-linear">
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="email">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="email">
                                         ایمیل
                                     </label>
                                     <input type="email" name="email" required
@@ -35,7 +34,7 @@
                                         placeholder="ایمیل" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         پسورد
                                     </label>
@@ -48,7 +47,7 @@
                                 </div>
                                 <div class="text-center mt-6">
                                     <button
-                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                         type="submit">
                                         ورود به عنوان دانشجو
                                     </button>
@@ -58,8 +57,7 @@
                             <form method="post" action="<?php echo URL ?>auth/login_user" id="signup_form_teacher"
                                 class="hidden">
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="email">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="email">
                                         ایمیل
                                     </label>
                                     <input type="email" name="email"
@@ -68,7 +66,7 @@
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         پسورد
                                     </label>
@@ -81,53 +79,62 @@
                                 </div>
                                 <div class="text-center mt-6">
                                     <button
-                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                         type="submit">
                                         ورود به عنوان استاد
                                     </button>
                                 </div>
                             </form>
+                            <div>
+                                <h2 class="block text-blueGray-600 text-sm text-center my-4">
+                                    حساب کاربری ندارید؟
+                                    <a class="underline font-bold hover:text-blueGray-800 transition-all duration-300 cursor-pointer"
+                                        href="<?php echo URL.'auth/register' ?>"> ثبت نام کنید</a>
+                                </h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="absolute w-full bottom-0 bg-blueGray-800 pb-6">
-            <div class="container mx-auto px-4">
-                <hr class="mb-6 border-b-1 border-blueGray-600" />
-                <div class="flex flex-wrap items-center md:justify-between justify-center">
-                    <div class="w-full md:w-4/12 px-4">
-                        <div class="text-sm text-white font-semibold py-1 text-center md:text-left">
-                            Copyright © <span id="get-current-year"></span>
-                            <a href="https://www.creative-tim.com?ref=njs-register"
-                                class="text-white hover:text-blueGray-300 text-sm font-semibold py-1">Creative Tim</a>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-8/12 px-4">
-                        <ul class="flex flex-wrap list-none md:justify-end justify-center">
-                            <li>
-                                <a href="https://www.creative-tim.com?ref=njs-register"
-                                    class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Creative
-                                    Tim</a>
-                            </li>
-                            <li>
-                                <a href="https://www.creative-tim.com/presentation?ref=njs-register"
-                                    class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">About
-                                    Us</a>
-                            </li>
-                            <li>
-                                <a href="http://blog.creative-tim.com?ref=njs-register"
-                                    class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Blog</a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-register"
-                                    class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">MIT
-                                    License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <footer class=" absolute w-full bottom-0 bg-blueGray-800 pb-6">
+                                        <div class="container mx-auto px-4">
+                                            <hr class="mb-6 border-b-1 border-blueGray-600" />
+                                            <div class="flex flex-wrap items-center md:justify-between justify-center">
+                                                <div class="w-full md:w-4/12 px-4">
+                                                    <div
+                                                        class="text-sm text-white font-semibold py-1 text-center md:text-left">
+                                                        Copyright © <span id="get-current-year"></span>
+                                                        <a href="https://www.creative-tim.com?ref=njs-register"
+                                                            class="text-white hover:text-blueGray-300 text-sm font-semibold py-1">Creative
+                                                            Tim</a>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full md:w-8/12 px-4">
+                                                    <ul class="flex flex-wrap list-none md:justify-end justify-center">
+                                                        <li>
+                                                            <a href="https://www.creative-tim.com?ref=njs-register"
+                                                                class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Creative
+                                                                Tim</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="https://www.creative-tim.com/presentation?ref=njs-register"
+                                                                class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">About
+                                                                Us</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="http://blog.creative-tim.com?ref=njs-register"
+                                                                class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">Blog</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-register"
+                                                                class="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3">MIT
+                                                                License</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </footer>
     </section>
 </main>

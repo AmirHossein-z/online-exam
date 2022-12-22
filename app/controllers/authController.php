@@ -5,7 +5,9 @@ class authController extends Controller
 {
     public function __construct()
     {
-
+        if (isset($_SESSION['name'])) {
+            header('Location: ' . URL . 'dashboard/index');
+        }
     }
 
     public function check_user(): string
@@ -15,6 +17,12 @@ class authController extends Controller
         if ($_POST['type'] === Controller::$MASTER)
             return Controller::$MASTER;
         return 'ERROR';
+    }
+
+    public function save_user_session($name)
+    {
+        $_SESSION['name'] = $name;
+        $_SESSION['type'] = $this->check_user();
     }
 
     public function register(): void
@@ -34,7 +42,19 @@ class authController extends Controller
         $duplicate_password = strip_tags($_POST['duplicate_password'], FILTER_SANITIZE_ENCODED);
 
         $person = $this->model($this->check_user());
-        $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
+        $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
+        if ($status === 1) {
+            echo "user with this information exists";
+        } else {
+            $status = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
+
+            if ($status) {
+                echo "register success";
+                header('Location: ' . URL . 'auth/login');
+            } else {
+                echo "register failed";
+            }
+        }
     }
 
     public function login(): void
@@ -51,8 +71,11 @@ class authController extends Controller
         $password = strip_tags($_POST['password'], FILTER_SANITIZE_ENCODED);
 
         $person = $this->model($this->check_user());
-        if ($person->isPersonExists($this->check_user(), $email, $password)['status'] === 1) {
-            echo "login ok";
+        $result = $person->isPersonExists($this->check_user(), $email, $password);
+        [$status, $name] = [$result['status'], $result['result']['name']];
+        if ($status === 1) {
+            $this->save_user_session($name);
+            header('Location: ' . URL . 'dashboard/index');
         } else {
             echo "login failed";
         }

@@ -8,7 +8,7 @@ class Model
         $this->connection = new mysqli('localhost', 'root', '123456', 'online-test');
     }
 
-    public function exeQuery(string $query, array $data = [])
+    public function exeQuery(string $query, array $data = [], bool $returnData)
     {
         // $data = [
         //     ['type' => 's', 'value' => 'string'],
@@ -24,8 +24,11 @@ class Model
             }
             $prepare->bind_param($type, ...$values);
         }
-        $prepare->execute();
-        return $prepare->get_result();
+        if ($returnData) {
+            $prepare->execute();
+            return $prepare->get_result();
+        }
+        return $prepare->execute();
     }
 
     public function insertPerson(string $person, string $fullname, string $mobile, string $email, string $password)
@@ -42,7 +45,7 @@ class Model
             ['type' => 's', 'value' => $password_hash],
             ['type' => 's', 'value' => $access_token],
         ];
-        return $this->exeQuery($query, $data);
+        return $this->exeQuery($query, $data, false);
     }
 
     public function isPersonExists(string $person, $email, $password)
@@ -51,7 +54,7 @@ class Model
         $data = [
             ['type' => 's', 'value' => $email]
         ];
-        $result = $this->exeQuery($query, $data);
+        $result = $this->exeQuery($query, $data, true);
 
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();

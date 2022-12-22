@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="shortcut icon" href="/online_exam/public/images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/online_exam/public/images/apple-icon.png" />
-    <link rel="stylesheet" href="<?php echo URL ?>public/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="shortcut icon" href="<?php echo URL ?>public/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo URL ?>public/images/apple-icon.png" />
+    <script src="https://kit.fontawesome.com/cf36ff6fd8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="<?php echo URL ?>public/css/tailwind.css">
     <link rel="stylesheet" href="<?php echo URL ?>public/css/style.css">
     <title>Register user</title>

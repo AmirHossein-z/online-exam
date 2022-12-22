@@ -26,46 +26,44 @@
                             <form method="post" action="<?php echo URL ?>auth/register_user" id="signup_form_student"
                                 class="transition-all duration-150 ease-linear">
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="fullname">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="fullname">
                                         نام و نام خانوادگی
                                     </label>
                                     <input type="text" name="fullname" required
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="نام خود را وارد کنید" />
+                                        placeholder="نام خود را وارد کنید" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="mobile">موبایل</label>
                                     <input type="text" name="mobile" required
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="نام خود را وارد کنید" />
+                                        placeholder="نام خود را وارد کنید" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="email">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="email">
                                         ایمیل
                                     </label>
                                     <input type="email" name="email" required
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="ایمیل" />
+                                        placeholder="ایمیل" autocomplete="on" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         پسورد
                                     </label>
                                     <input type="password" name="password" required
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="پسورد" />
+                                        placeholder="پسورد" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">تکرار پسورد</label>
                                     <input type="password" name="duplicate_password" required
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="تکرار پسورد" />
+                                        placeholder="تکرار پسورد" autocomplete="on" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
@@ -73,7 +71,7 @@
                                 </div>
                                 <div class="text-center mt-6">
                                     <button
-                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                         type="submit">
                                         ثبت نام به عنوان دانش آموز
                                     </button>
@@ -83,46 +81,44 @@
                             <form method="post" action="<?php echo URL ?>auth/register_user" id="signup_form_teacher"
                                 class="hidden">
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="fullname">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="fullname">
                                         نام و نام خانوادگی
                                     </label>
                                     <input type="text" name="fullname"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="نام خود را وارد کنید" />
+                                        placeholder="نام خود را وارد کنید" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="mobile">موبایل</label>
                                     <input type="text" name="mobile"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="نام خود را وارد کنید" />
+                                        placeholder="نام خود را وارد کنید" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="email">
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="email">
                                         ایمیل
                                     </label>
                                     <input type="email" name="email"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="ایمیل" />
+                                        placeholder="ایمیل" autocomplete="on" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">
                                         پسورد
                                     </label>
                                     <input type="password" name="password"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="پسورد" />
+                                        placeholder="پسورد" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password">تکرار پسورد</label>
                                     <input type="password" name="duplicate_password"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="تکرار پسورد" />
+                                        placeholder="تکرار پسورد" autocomplete="on" />
                                 </div>
 
                                 <div class="relative w-full mb-3">
@@ -130,12 +126,20 @@
                                 </div>
                                 <div class="text-center mt-6">
                                     <button
-                                        class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                        class="bg-blueGray-800 white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                         type="submit">
                                         ثبت نام به عنوان استاد
                                     </button>
                                 </div>
                             </form>
+
+                            <div>
+                                <h2 class="block text-blueGray-600 text-sm text-center my-4"> حساب کاربری
+                                    دارید؟ <a class="underline font-bold hover:text-blueGray-800 transition-all
+                                        duration-300 cursor-pointer" href="<?php echo URL . 'auth/login' ?>">وارد
+                                        شوید</a>
+                                </h2>
+                            </div>
                         </div>
                     </div>
                 </div>

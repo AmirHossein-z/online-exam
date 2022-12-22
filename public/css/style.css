@@ -9,6 +9,10 @@
 }
 
 body {
-    direction: rtl;
+    /* direction: rtl; */
     font-family: 'Shabnam';
+}
+
+.duration-300 {
+    transition-duration: 300ms;
 }
