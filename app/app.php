@@ -4,34 +4,66 @@ class App
 {
     public function __construct()
     {
-        $url_array = $this->explode($_GET['url']);
-        $controller = $url_array[0];
-        unset($url_array[0]);
-        $action = $url_array[1];
-        unset($url_array[1]);
+        $request_type = $_SERVER['REQUEST_METHOD'];
 
-        // if not found -> warning
-        $file_name = 'app/controllers/' . $controller . 'Controller.php';
+        $url = '/' . $_GET['url'];
+        $routes = [
+            'login' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/auth\/login$/',
+                'controller' => 'authController',
+                'action' => 'login',
+            ],
+            'loggedIn' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/auth\/login_user$/',
+                'controller' => 'authController',
+                'action' => 'login_user',
+            ],
+            'register' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/auth\/register$/',
+                'controller' => 'authController',
+                'action' => 'register'
+            ],
+            'registered' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/auth\/register_user$/',
+                'controller' => 'authController',
+                'action' => 'register_user'
+            ],
+            'dashboard' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/index$/',
+                'controller' => 'dashboardController',
+                'action' => 'index'
+            ],
+            'not_Found' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/auth\/register_user$/',
+                'controller' => 'notFoundController',
+                'action' => 'show'
+            ]
+        ];
 
-        // check if file exists
-        if (!file_exists($file_name)) {
-            echo "404 - Controller not found: " . $file_name;
-            exit();
+        $page_not_found = true;
+        foreach ($routes as $route) {
+            if (
+                preg_match(
+                    $route['pattern_url'],
+                    $url,
+                    $matches
+                ) && $request_type == $route['type']
+            ) {
+
+                unset($matches[0]);
+                require 'app/controllers/' . $route['controller'] . '.php';
+                $object = new $route['controller']();
+                call_user_func_array([$object, $route['action']], array_keys($matches));
+                $page_found = false;
+            }
         }
-        require $file_name;
-
-        $controller .= "Controller";
-
-        $object = new $controller();
-        if (!method_exists($object, $action)) {
-            echo "404 - action not found: " . $action;
-            exit();
-        }
-        call_user_func_array([$object, $action], array_values($url_array));
+        // if not found return 404 page here
     }
 
-    public function explode($url)
-    {
-        return explode('/', rtrim($url, characters: '/'));
-    }
 }
