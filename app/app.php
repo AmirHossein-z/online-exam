@@ -38,6 +38,18 @@ class App
                 'controller' => 'dashboardController',
                 'action' => 'index'
             ],
+            'add_question' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/add_question$/',
+                'controller' => 'questionController',
+                'action' => 'add_question'
+            ],
+            'add_one_question' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/add_one_question$/',
+                'controller' => 'questionController',
+                'action' => 'add_one_question'
+            ],
             'not_Found' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/auth\/register_user$/',
