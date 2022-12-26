@@ -14,6 +14,6 @@ class dashboardController extends Controller
     public function index()
     {
         $this->header('header');
-        $this->view('dashboard/masterDashboard');
+        $this->view('dashboard/dashboardView');
     }
 }
