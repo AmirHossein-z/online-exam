@@ -10,6 +10,10 @@ class authController extends Controller
         }
     }
 
+    /**
+     * check whether the user is student or master
+     * @return string
+     */
     public function check_user(): string
     {
         if ($_POST['type'] === Controller::$STUDENT)
@@ -19,12 +23,23 @@ class authController extends Controller
         return 'ERROR';
     }
 
-    public function save_user_session($name)
+    /**
+     * save user session
+     * @param string $name
+     * @param int $id
+     * @return void
+     */
+    public function save_user_session(string $name, int $id): void
     {
         $_SESSION['name'] = $name;
+        $_SESSION['id'] = $id;
         $_SESSION['type'] = $this->check_user();
     }
 
+    /**
+     * show register page
+     * @return void
+     */
     public function register(): void
     {
         $this->header('header');
@@ -33,6 +48,10 @@ class authController extends Controller
         $this->footer('footer');
     }
 
+    /**
+     * register a user in database
+     * @return void
+     */
     public function register_user(): void
     {
         $fullname = strip_tags($_POST['fullname'], FILTER_SANITIZE_ENCODED);
@@ -57,6 +76,10 @@ class authController extends Controller
         }
     }
 
+    /**
+     * show login page
+     * @return void
+     */
     public function login(): void
     {
         $this->header('header');
@@ -65,6 +88,10 @@ class authController extends Controller
         $this->footer('footer');
     }
 
+    /**
+     * login a user  
+     * @return void
+     */
     public function login_user(): void
     {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -72,9 +99,11 @@ class authController extends Controller
 
         $person = $this->model($this->check_user());
         $result = $person->isPersonExists($this->check_user(), $email, $password);
-        [$status, $name] = [$result['status'], $result['result']['name']];
+        $status = $result['status'];
+        $name = $result['result']['name'];
+        $id = $result['result']["{$this->check_user()}_id"];
         if ($status === 1) {
-            $this->save_user_session($name);
+            $this->save_user_session($name, $id);
             header('Location: ' . URL . 'dashboard/index');
         } else {
             echo "login failed";

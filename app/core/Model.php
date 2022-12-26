@@ -48,7 +48,7 @@ class Model
         return $this->exeQuery($query, $data, false);
     }
 
-    public function isPersonExists(string $person, $email, $password)
+    public function isPersonExists(string $person, string $email, string $password): array
     {
         $query = "SELECT * FROM $person WHERE email=? LIMIT 0,1";
         $data = [
