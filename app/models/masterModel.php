@@ -1,6 +1,7 @@
 <?php
 
-class masterModel extends Model
+require "app/models/personModel.php";
+class masterModel extends personModel
 {
     public function __construct()
     {
