@@ -109,4 +109,12 @@ class authController extends Controller
             echo "login failed";
         }
     }
+
+    public function logout()
+    {
+        session_destroy();
+        session_start();
+        header('Location:' . URL . 'auth/login');
+        exit();
+    }
 }

@@ -20,6 +20,12 @@ class App
                 'controller' => 'authController',
                 'action' => 'login_user',
             ],
+            'logout' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/auth\/logout$/',
+                'controller' => 'authController',
+                'action' => 'logout',
+            ],
             'register' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/auth\/register$/',
