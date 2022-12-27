@@ -131,7 +131,8 @@
               </a>
             </li>
             <li class="items-center">
-              <a href="" class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+              <a href="<?php echo URL . 'dashboard/questions' ?>"
+                class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                 <i class="fa-solid fa-plus text-blueGray-300 mr-2 text-sm"></i>
                 لیست تست ها
               </a>

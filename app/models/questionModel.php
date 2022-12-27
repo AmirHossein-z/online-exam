@@ -49,4 +49,23 @@ class questionModel extends Model
         ];
         return $this->exeQuery($query, $data, false);
     }
+
+    public function get_all_questions(int $master_id)
+    {
+        $query = "SELECT question.question_id,question.q_info AS question_info,question.type,question.grade,question.option_id AS answer_question_id,optionn.info AS option_info,optionn.option_id FROM question INNER JOIN optionn WHERE question.master_id = ? AND question.question_id = optionn.question_id;";
+
+        $data = [
+            ['type' => 'i', 'value' => $master_id],
+        ];
+        $result = $this->exeQuery($query, $data, true);
+        $questions = [];
+        if ($result->num_rows > 0) {
+            for ($i = 0; $i < $result->num_rows; $i++) {
+                array_push($questions, $result->fetch_assoc());
+            }
+            return ['status' => 1, 'result' => $questions];
+        } else {
+            return ['status' => 0, 'result' => 'Error'];
+        }
+    }
 }

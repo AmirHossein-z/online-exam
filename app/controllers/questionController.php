@@ -26,7 +26,6 @@ class questionController extends Controller
     {
         $question_info = $_POST['question_info'];
         $grade = (float) $_POST['grade'];
-        var_dump('grade', $grade);
         // $number_question = (int) $_POST['number_questions'] ?? 0;
         $option_lists = $_POST['option_multi'] ?? [0 => $_POST['option_descriptive']];
         $correct_option_index = (int) $_POST['check_correct_option'] ?? 0;
@@ -51,6 +50,32 @@ class questionController extends Controller
                     echo "failed";
                 }
             }
+        }
+    }
+
+    public function show_questions()
+    {
+
+        $question = $this->model("question");
+        $result = $question->get_all_questions($_SESSION['id']);
+
+        if ($result['status'] === 1) {
+            $question_ids = [];
+            $questions_info = [];
+            $options_info = [];
+            foreach ($result['result'] as $questions) {
+                if (!in_array($questions['question_id'], $question_ids)) {
+                    array_push($question_ids, $questions['question_id']);
+                    array_push($questions_info, ['id' => $questions['question_id'], 'info' => $questions['question_info'], 'type' => $questions['type'], 'grade' => $questions['grade']]);
+                }
+                array_push($options_info, ['info' => $questions['option_info'], 'is_correct' => $questions['answer_question_id'] === $questions['option_id'] ? 1 : 0, 'question_id' => $questions['question_id']]);
+            }
+
+            $data = [
+                'questions_info' => $questions_info,
+                'options_info' => $options_info,
+            ];
+            $this->view('dashboard/questionsView', $data);
         }
     }
 }

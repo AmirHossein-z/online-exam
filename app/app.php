@@ -45,6 +45,13 @@ class App
                 'action' => 'index',
                 'middleware' => ['personPolicy:is_login'],
             ],
+            'list_questions' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/questions$/',
+                'controller' => 'questionController',
+                'action' => 'show_questions',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
+            ],
             'add_question' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/add_question$/',
