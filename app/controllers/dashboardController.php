@@ -10,7 +10,11 @@ class dashboardController extends Controller
 
     public function index()
     {
+        $data = [
+            'name' => $_SESSION['name'],
+            'type' => $_SESSION['type']
+        ];
         $this->header('header');
-        $this->view('dashboard/dashboardView');
+        $this->view('dashboard/dashboardView', $data);
     }
 }

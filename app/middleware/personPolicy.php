@@ -6,13 +6,21 @@ class personPolicy
     {
     }
 
+    /**
+     * check whether person is logged in
+     * @return void|bool
+     */
     public function is_login()
     {
         if (isset($_SESSION) && $_SESSION['id']) {
             return true;
         }
-        header('Location: ' . URL . 'dashboard/index');
+        header('Location: ' . URL . 'auth/login');
     }
+    /**
+     * check whether person is logged in as master
+     * @return bool
+     */
     public function is_master()
     {
         if ($_SESSION['id'] && $_SESSION['type'] === MASTER) {
@@ -20,6 +28,10 @@ class personPolicy
         }
         return false;
     }
+    /**
+     * check whether person is logged in as student
+     * @return bool
+     */
     public function is_student()
     {
         if ($_SESSION['id'] && $_SESSION['type'] === STUDENT) {
@@ -27,5 +39,4 @@ class personPolicy
         }
         return false;
     }
-
 }
