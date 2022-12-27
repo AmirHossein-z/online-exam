@@ -25,7 +25,8 @@ class questionController extends Controller
     public function add_one_question()
     {
         $question_info = $_POST['question_info'];
-        $grade = $_POST['grade'];
+        $grade = (float) $_POST['grade'];
+        var_dump('grade', $grade);
         // $number_question = (int) $_POST['number_questions'] ?? 0;
         $option_lists = $_POST['option_multi'] ?? [0 => $_POST['option_descriptive']];
         $correct_option_index = (int) $_POST['check_correct_option'] ?? 0;

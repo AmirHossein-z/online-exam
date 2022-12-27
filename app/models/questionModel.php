@@ -16,13 +16,13 @@ class questionModel extends Model
      * @param int|null $option_id
      * @return int|string 
      */
-    public function insert_question(string $question_info, int $type, int $grade, int $master_id, int|null $option_id)
+    public function insert_question(string $question_info, int $type, float $grade, int $master_id, int|null $option_id)
     {
         $query = "INSERT INTO question(q_info,type,grade,master_id,option_id) VALUES (?,?,?,?,?)";
         $data = [
             ['type' => 's', 'value' => $question_info],
             ['type' => 'i', 'value' => $type],
-            ['type' => 'i', 'value' => $grade],
+            ['type' => 'd', 'value' => $grade],
             ['type' => 'i', 'value' => $master_id],
             ['type' => 'i', 'value' => $option_id],
         ];
