@@ -2,8 +2,6 @@
 
 class Controller
 {
-    public static $MASTER = 'master';
-    public static $STUDENT = 'student';
     public function __construct()
     {
 

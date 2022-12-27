@@ -5,9 +5,6 @@ class authController extends Controller
 {
     public function __construct()
     {
-        if (isset($_SESSION['name'])) {
-            header('Location: ' . URL . 'dashboard/index');
-        }
     }
 
     /**
@@ -16,10 +13,10 @@ class authController extends Controller
      */
     public function check_user(): string
     {
-        if ($_POST['type'] === Controller::$STUDENT)
-            return Controller::$STUDENT;
-        if ($_POST['type'] === Controller::$MASTER)
-            return Controller::$MASTER;
+        if ($_POST['type'] === STUDENT)
+            return STUDENT;
+        if ($_POST['type'] === MASTER)
+            return MASTER;
         return 'ERROR';
     }
 
