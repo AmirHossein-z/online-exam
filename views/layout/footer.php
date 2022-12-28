@@ -1,3 +1,5 @@
+
+</div>
 <script src="<?php echo URL ?>public/js/main.js"></script>
 <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 <script>
