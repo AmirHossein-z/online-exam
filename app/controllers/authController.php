@@ -96,14 +96,20 @@ class authController extends Controller
 
         $person = $this->model($this->check_user());
         $result = $person->isPersonExists($this->check_user(), $email, $password);
-        $status = $result['status'];
-        $name = $result['result']['name'];
-        $id = $result['result']["{$this->check_user()}_id"];
+        if($result['status'] === 1)
+        {
+            $status = $result['status'];
+            $name = $result['result']['name'];
+            $id = $result['result']["{$this->check_user()}_id"];
+        }
         if ($status === 1) {
             $this->save_user_session($name, $id);
             header('Location: ' . URL . 'dashboard/index');
+            exit;
         } else {
-            echo "login failed";
+            // echo "login failed";
+            // flash message
+            header('Location: ' . URL . 'auth/login');
         }
     }
 
