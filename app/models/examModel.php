@@ -15,11 +15,11 @@ class examModel extends Model
      * @param int duration
      * @param float final_grade
      * @param int show_grade
-     * @return bool
+     * @return int
      */
 
     public function insert(string $title, string $description, int $duration,
-    float $final_grade,int $show_grade)
+    float $final_grade,int $show_grade) : int
     {
         $query = "insert into exam
                   (title, description, duration, final_grade, show_grade)
@@ -34,16 +34,7 @@ class examModel extends Model
 
         // throw error
         $result = $this->exeQuery($query,$data,false);
-        if($result){
-            // flash message
-            header('Location: ' . URL . 'dashboard/exam/index');
-            exit;
-        }
-        else{
-            // flash message
-            header('Location: ' . URL . 'dashboard/exam/create');
-            exit;
-        }
+        return $this->connection->insert_id;
     }
 
     

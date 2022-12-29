@@ -13,9 +13,12 @@ class examController extends Controller
 
     public function create() : void
     {
+        $questions = $this->model('question');
+        $questions = $questions->get_all($_SESSION['id']);
+        $data = $questions;
         $this->header('header');
         // $this->navbar('navbar');
-        $this->view('dashboard/addExamView');
+        $this->view('dashboard/addExamView', $data);
         $this->footer('footer');
     }
 
@@ -26,13 +29,27 @@ class examController extends Controller
 
      public function store() : void
      {
-        $title = strip_tags($_POST['title'], FILTER_SANITIZE_ENCODED);
-        $description = strip_tags($_POST['description'], FILTER_SANITIZE_ENCODED);
-        $duration = intval(strip_tags($_POST['duration'], FILTER_SANITIZE_NUMBER_INT));
-        $grade = floatval(strip_tags($_POST['grade'], FILTER_SANITIZE_NUMBER_FLOAT));
-        $show_grade = strip_tags($_POST['show_grade'], FILTER_VALIDATE_BOOL) === "on" ? 1 : 0;
-        
+        // some validation in informations
+         $title = strip_tags($_POST['title'], FILTER_SANITIZE_ENCODED);
+         $description = strip_tags($_POST['description'], FILTER_SANITIZE_ENCODED);
+         $duration = intval(strip_tags($_POST['duration'], FILTER_SANITIZE_NUMBER_INT));
+         $grade = floatval(strip_tags($_POST['grade'], FILTER_SANITIZE_NUMBER_FLOAT));
+         $show_grade = strip_tags($_POST['show_grade'], FILTER_VALIDATE_BOOL) === "on" ? 1 : 0;
+         $question_ids = array_map('strip_tags', $_POST['questions']);
+
+        //  insert exam information into exam table and fetch it's ID
         $exam_model = $this->model('exam');
-        $exam_model->insert($title,$description,$duration,$grade,$show_grade);
+        $exam_id = $exam_model->insert($title,$description,$duration,$grade,$show_grade);
+
+        // insert exam questions in exam_question table
+        $exam_question_model = $this->model('exam_question');
+        foreach($question_ids as $question_id){
+            // each question and one exam has it's own ID
+            $exam_question_model->insert($exam_id, $question_id);
+        }
+
+        // redirect after insert
+        header('Location: ' . URL . 'dashboard/exam/index');
+        exit;
      }
 }

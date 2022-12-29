@@ -68,4 +68,21 @@ class questionModel extends Model
             return ['status' => 0, 'result' => 'Error'];
         }
     }
+
+    /**
+     * @param int master_id
+     * @return array
+     */
+
+     public function get_all(int $master_id) : array
+     {
+        $query = "select * from question
+        where question.master_id = ?;";
+
+        $data = [
+            ['type' => 'i', 'value' => $master_id],
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+     }
 }

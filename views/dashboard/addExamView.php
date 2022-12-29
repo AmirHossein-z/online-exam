@@ -37,7 +37,17 @@
                     class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" /><span
                     class="ml-2 text-sm font-semibold text-blueGray-600">نمایش نمره به دانشجویان در پایان آزمون</span></label>
         </div>
-
+            <div>
+                <select name="questions[]" multiple>
+                    <?php 
+                    $questions = $data;
+                    foreach($questions as $question)
+                    {
+                    ?>
+                        <option value="<?= $question['question_id']; ?>"><?= $question['q_info'] ?></option>   
+                    <?php } ?>
+                </select>
+            </div>
         <div class="text-center mt-2">
             <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
