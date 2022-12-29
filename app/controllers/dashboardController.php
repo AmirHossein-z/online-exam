@@ -15,6 +15,16 @@ class dashboardController extends Controller
             'type' => $_SESSION['type']
         ];
         $this->header('header');
-        $this->view('dashboard/dashboardView', $data);
+        // $this->navbar('navbar', $data);
+        // $this->view('dashboard/dashboardView', $data);
+        $this->view('layout/navbar', $data);
+
+        $this->footer('footer');
+    }
+
+    public function four_four()
+    {
+        $this->view('dashboard/four_fourView');
+        exit();
     }
 }

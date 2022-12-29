@@ -40,7 +40,7 @@ class authController extends Controller
     public function register(): void
     {
         $this->header('header');
-        $this->navbar('navbar');
+        // $this->navbar('navbar');
         $this->view('auth/registerView');
         $this->footer('footer');
     }
@@ -80,7 +80,7 @@ class authController extends Controller
     public function login(): void
     {
         $this->header('header');
-        $this->navbar('navbar');
+        // $this->navbar('navbar');
         $this->view('auth/loginView');
         $this->footer('footer');
     }
