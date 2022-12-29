@@ -37,10 +37,12 @@ class examModel extends Model
         if($result){
             // flash message
             header('Location: ' . URL . 'dashboard/exam/index');
+            exit;
         }
         else{
             // flash message
             header('Location: ' . URL . 'dashboard/exam/create');
+            exit;
         }
     }
 
