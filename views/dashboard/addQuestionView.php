@@ -20,7 +20,7 @@
             <label class="inline-flex items-center cursor-pointer"><input type="checkbox" id="toggle_checkbox"
                     name="is_multi_choice_option"
                     class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" /><span
-                    class="ml-2 text-sm font-semibold text-blueGray-600">گزینه تستی می خواهم</span></label>
+                    class="mr-1 text-sm font-semibold text-blueGray-600">گزینه تستی می خواهم</span></label>
         </div>
         <div class="relative w-full my-4 hidden">
             <div>
@@ -92,7 +92,7 @@
             option_multi_choice.innerHTML = "";
             for (let i = 0; i < number; i++) {
                 option_multi_choice.innerHTML += `
-                    <div class="relative w-full my-4">
+                    <div class="relative w-full my-2">
                         <label class="block text-blueGray-600 text-xs font-bold mb-2">
                             گزینه:
                         </label>
