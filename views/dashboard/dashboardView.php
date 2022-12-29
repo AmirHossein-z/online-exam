@@ -91,96 +91,96 @@
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none">
             <?php if ($data['type'] === MASTER) { ?>
-            <li class="items-center">
-              <a href="./settings.html"
-                class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
-                <i class="fa-solid fa-clipboard-question mr-2 text-sm text-blueGray-300"></i>
-                لیست آزمون ها
-              </a>
-            </li>
-            <li class="items-center">
-              <a href="../auth/login.html"
-                class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
-                <i class="fa-solid fa-file-circle-plus text-blueGray-300 mr-2 text-sm"></i>
-                افزودن آزمون
-              </a>
-            </li>
-            <?php } else if ($data['type'] === STUDENT) { ?>
-            <li class="items-center">
-              <a href="./settings.html"
-                class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
-                <i class="fa-solid fa-clipboard-question mr-2 text-sm text-blueGray-300"></i>
-                لیست آزمون ها
-              </a>
-            </li>
-            <?php } ?>
+              <li class="items-center">
+                <a href="./settings.html"
+                  class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
+                  <i class="fa-solid fa-clipboard-question mr-2 text-sm text-blueGray-300"></i>
+                  لیست آزمون ها
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="../auth/login.html"
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                  <i class="fa-solid fa-file-circle-plus text-blueGray-300 mr-2 text-sm"></i>
+                  افزودن آزمون
+                </a>
+              </li>
+              <?php } else if ($data['type'] === STUDENT) { ?>
+              <li class="items-center">
+                <a href="./settings.html"
+                  class="text-xs uppercase py-3 font-bold block text-pink-500 hover:text-pink-600">
+                  <i class="fa-solid fa-clipboard-question mr-2 text-sm text-blueGray-300"></i>
+                  لیست آزمون ها
+                </a>
+              </li>
+              <?php } ?>
           </ul>
 
           <?php if ($data['type'] === MASTER) { ?>
-          <!-- Divider -->
-          <hr class="my-4 md:min-w-full" />
-          <!-- Heading -->
-          <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">تست</h6>
+            <!-- Divider -->
+            <hr class="my-4 md:min-w-full" />
+            <!-- Heading -->
+            <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">تست</h6>
 
-          <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-            <li class="items-center">
-              <a href="<?php echo URL . 'dashboard/add_question' ?>"
-                class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
-                <i class="fa-solid fa-plus text-blueGray-300 mr-2 text-sm"></i>
-                افزودن تست
-              </a>
-            </li>
-            <li class="items-center">
-              <a href="<?php echo URL . 'dashboard/questions' ?>"
-                class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
-                <i class="fa-solid fa-plus text-blueGray-300 mr-2 text-sm"></i>
-                لیست تست ها
-              </a>
-            </li>
-          </ul>
-          <?php } ?>
+            <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+              <li class="items-center">
+                <a href="<?php echo URL . 'dashboard/add_question' ?>"
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                  <i class="fa-solid fa-plus text-blueGray-300 mr-2 text-sm"></i>
+                  افزودن تست
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="<?php echo URL . 'dashboard/questions' ?>"
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                  <i class="fa-solid fa-plus text-blueGray-300 mr-2 text-sm"></i>
+                  لیست تست ها
+                </a>
+              </li>
+            </ul>
+            <?php } ?>
 
           <!-- Divider -->
           <hr class="my-4 md:min-w-full" />
           <!-- Heading -->
           <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
             <?php if ($data['type'] === MASTER) { ?>دانشجو
-            <?php } else if ($data['type'] === STUDENT) { ?>استاد<?php } ?>
+              <?php } else if ($data['type'] === STUDENT) { ?>استاد<?php } ?>
           </h6>
           <!-- Navigation -->
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             <?php if ($data['type'] === MASTER) { ?>
-            <li class="items-center">
-              <a href="./dashboard.html"
-                class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
-                لیست دانشجویان
-              </a>
-            </li>
-            <li class="items-center">
-              <a href="./dashboard.html"
-                class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
-                افزودن دانشجو
-              </a>
-            </li>
-            <?php } else if ($data['type'] === STUDENT) { ?>
-            <li class="items-center">
-              <a href="./dashboard.html"
-                class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
-                لیست استادان
-              </a>
-            </li>
-            <li class="items-center">
-              <a href="./dashboard.html"
-                class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
-                <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
-                افزودن استاد
-              </a>
-            </li>
-            <?php } ?>
+              <li class="items-center">
+                <a href="./dashboard.html"
+                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
+                  لیست دانشجویان
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="./dashboard.html"
+                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
+                  افزودن دانشجو
+                </a>
+              </li>
+              <?php } else if ($data['type'] === STUDENT) { ?>
+              <li class="items-center">
+                <a href="./dashboard.html"
+                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
+                  لیست استادان
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="./dashboard.html"
+                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fa-solid fa-user-group mr-2 text-sm opacity-75"></i>
+                  افزودن استاد
+                </a>
+              </li>
+              <?php } ?>
           </ul>
         </div>
       </div>

@@ -75,7 +75,9 @@ class questionController extends Controller
                 'questions_info' => $questions_info,
                 'options_info' => $options_info,
             ];
+            $this->header('header');
             $this->view('dashboard/questionsView', $data);
+            $this->footer('footer');
         }
     }
 }
