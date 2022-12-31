@@ -28,4 +28,38 @@ class optionModel extends Model
         return "ERROR";
     }
 
+
+    /**
+     * get all options belongs to a specific question
+     * @param int $question_id
+     * @return array
+     */
+    public function get_all_option_by_question_id(int $question_id): array
+    {
+        $query = "SELECT * FROM optionn WHERE question_id = ?";
+
+        $data = [
+            ['type' => 's', 'value' => $question_id],
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+    }
+
+    /**
+     * update option info
+     * @param int $option_id
+     * @param string $option_info
+     * @return bool
+     */
+    public function update_option(int $option_id, string $option_info): bool
+    {
+        $query = "UPDATE optionn SET info=? WHERE optionn.option_id=?";
+
+        $data = [
+            ['type' => 's', 'value' => $option_info],
+            ['type' => 'i', 'value' => $option_id],
+        ];
+
+        return $this->exeQuery($query, $data, false);
+    }
 }

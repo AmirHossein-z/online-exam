@@ -1,6 +1,7 @@
 <?php
 
-class Router{
+class Router
+{
     public function __construct()
     {
         $request_type = $_SERVER['REQUEST_METHOD'];
@@ -71,6 +72,20 @@ class Router{
                 'action' => 'add_one_question',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
             ],
+            'edit_question' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/edit_question\/\d{1,10}$/',
+                'controller' => 'questionController',
+                'action' => 'edit_question',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
+            ],
+            'edit_one_question' => [
+                'type' => "POST",
+                'pattern_url' => '/^\/dashboard\/edit_one_question\/\d{1,10}$/',
+                'controller' => 'questionController',
+                'action' => 'edit_one_question',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
+            ],
             // exam Routing
             'create_exam' => [
                 'type' => 'GET',
@@ -120,14 +135,15 @@ class Router{
                 //     }
                 // }
 
-                unset($matches[0]);
+
+                $params = (array) explode('/', $matches[0])[3];
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
-                call_user_func_array([$object, $route['action']], array_keys($matches));
+                call_user_func_array([$object, $route['action']], $params);
                 $page_found = false;
             }
         }
-        echo '404 Location ' . $url . ' Not found!'; 
+        // echo '404 Location ' . $url . ' Not found!'; 
         // header('Location: '. '/online-exam/dashboard/four_four');
         // exit();
     }

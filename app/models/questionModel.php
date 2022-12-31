@@ -70,12 +70,29 @@ class questionModel extends Model
     }
 
     /**
+     * get a question by id
+     * @param int $question_id
+     * @return array
+     */
+    public function get_question_byID(int $question_id): array
+    {
+        $query = "SELECT * FROM question WHERE question_id = ?";
+
+        $data = [
+            ['type' => 'i', 'value' => $question_id],
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+
+    }
+
+    /**
      * @param int master_id
      * @return array
      */
 
-     public function get_all(int $master_id) : array
-     {
+    public function get_all(int $master_id): array
+    {
         $query = "select * from question
         where question.master_id = ?;";
 
@@ -84,5 +101,27 @@ class questionModel extends Model
         ];
 
         return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
-     }
+    }
+
+    /**
+     * update question info by question_id
+     * @param int $question_id
+     * @param int $option_id
+     * @param string $question_info
+     * @param float $grade
+     * @return bool
+     */
+    public function update_question(int $question_id, int $option_id, string $question_info, float $grade): bool
+    {
+        $query = "UPDATE question SET q_info=?, grade=?, question.option_id=? WHERE question.question_id=?";
+
+        $data = [
+            ['type' => 's', 'value' => $question_info],
+            ['type' => 'd', 'value' => $grade],
+            ['type' => 'i', 'value' => $option_id],
+            ['type' => 'i', 'value' => $question_id],
+        ];
+
+        return $this->exeQuery($query, $data, false);
+    }
 }

@@ -11,7 +11,7 @@
 
 <div class="grid grid-cols-2 gap-6 p-2">
     <?php foreach ($data['questions_info'] as $question) { ?>
-        <div class="grid border border-blueGray-200 rounded p-4 shadow-md">
+        <div class="grid items-center border border-blueGray-200 rounded p-4 shadow-md">
             <div class="flex justify-between items-center my-2">
                 <h1 class="block text-blueGray-600 text-sm text-center transition-all duration-300 cursor-pointer">
                     سوال:
@@ -55,10 +55,19 @@
                         <?php } ?>
                 </div>
                 <?php } ?>
+            <div class="flex items-center p-4 justify-end gap-6">
+                <button
+                    class="bg-lightBlue-500 text-white active:bg-blueGray-800 text-sm font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                    type="button">
+                    <a href="<?php echo URL . 'dashboard/edit_question/' . $question['id'] ?>">
+                        ویرایش</a>
+                </button>
+                <button
+                    class="bg-red-500 text-white active:bg-red-700 text-sm font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                    type="button" id="delete_question_btn" onclick="deleteQuestion()">
+                    حذف
+                </button>
+            </div>
         </div>
         <?php } ?>
 </div>
-<!-- <label class="inline-flex items-center cursor-pointer mt-3"><input type="radio" 
-                                name="check_correct_option" value="${i}"
-                                class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150" /><span
-                                class="ml-2 text-sm font-semibold text-blueGray-600">این گزینه درست است</span></label> -->
