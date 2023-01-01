@@ -46,15 +46,19 @@ class questionController extends Controller
                 $status = $question->update_optionID($question_id, $option_id);
                 if ($status) {
                     // show success message
-                    header('Location: ' . URL . 'dashboard/add_question');
+                    header('Location: ' . URL . 'dashboard/index');
                 } else {
                     // show failed message and try again
-                    header('Location: ' . URL . 'dashboard/add_question');
+                    header('Location: ' . URL . 'dashboard/index');
                 }
             }
         }
     }
 
+    /**
+     * show all questions
+     * @return void
+     */
     public function show_questions()
     {
 
@@ -78,10 +82,15 @@ class questionController extends Controller
                 'options_info' => $options_info,
             ];
 
-            $this->header('header');
-            $this->view('dashboard/questionsView', $data);
-            $this->footer('footer');
+        } else {
+            $data = [
+                'questions_info' => [],
+                'options_info' => [],
+            ];
         }
+        $this->header('header');
+        $this->view('dashboard/questionsView', $data);
+        $this->footer('footer');
     }
 
     /**
@@ -159,6 +168,28 @@ class questionController extends Controller
             header('Location: ' . URL . 'dashboard/edit_one_question/' . $question_id);
         }
 
+    }
+
+    /**
+     * delete a question
+     * @param int $question_id
+     * @return void
+     */
+    public function delete_question(int $question_id): void
+    {
+        $option = $this->model('option');
+        $status1 = $option->delete_option($question_id);
+
+        $question = $this->model('question');
+        $status2 = $question->delete_question($question_id);
+
+        if ($status1 && $status2) {
+            // show success message
+            header('Location: ' . URL . 'dashboard/questions');
+        } else {
+            // show failed message
+            header('Location: ' . URL . 'dashboard/questions');
+        }
     }
 
 }

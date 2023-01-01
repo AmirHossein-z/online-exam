@@ -124,4 +124,20 @@ class questionModel extends Model
 
         return $this->exeQuery($query, $data, false);
     }
+
+    /**
+     * delete a question
+     * @param int $question_id
+     * @return bool
+     */
+    public function delete_question(int $question_id): bool
+    {
+        $query = "DELETE FROM question WHERE question.question_id=?";
+
+        $data = [
+            ['type' => 'i', 'value' => $question_id]
+        ];
+
+        return $this->exeQuery($query, $data, false);
+    }
 }

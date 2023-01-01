@@ -62,4 +62,20 @@ class optionModel extends Model
 
         return $this->exeQuery($query, $data, false);
     }
+
+    /**
+     * delete a option
+     * @param int $question_id
+     * @return bool
+     */
+    public function delete_option(int $question_id): bool
+    {
+        $query = "DELETE FROM optionn WHERE optionn.question_id=?";
+
+        $data = [
+            ['type' => 'i', 'value' => $question_id]
+        ];
+
+        return $this->exeQuery($query, $data, false);
+    }
 }

@@ -86,6 +86,13 @@ class Router
                 'action' => 'edit_one_question',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
             ],
+            'delete_question' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/delete_question\/\d{1,10}$/',
+                'controller' => 'questionController',
+                'action' => 'delete_question',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
+            ],
             // exam Routing
             'create_exam' => [
                 'type' => 'GET',
