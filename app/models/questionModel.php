@@ -50,7 +50,12 @@ class questionModel extends Model
         return $this->exeQuery($query, $data, false);
     }
 
-    public function get_all_questions(int $master_id)
+    /**
+     * get all questions by master_id
+     * @param int $master_id
+     * @return array
+     */
+    public function get_all_questions(int $master_id): array
     {
         $query = "SELECT question.question_id,question.q_info AS question_info,question.type,question.grade,question.option_id AS answer_question_id,optionn.info AS option_info,optionn.option_id FROM question INNER JOIN optionn WHERE question.master_id = ? AND question.question_id = optionn.question_id;";
 
