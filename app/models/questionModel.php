@@ -130,6 +130,27 @@ class questionModel extends Model
         return $this->exeQuery($query, $data, false);
     }
 
+
+    /**
+     * check if the question exists in question_exam table
+     * @param int $question_id
+     * @return bool
+     */
+    public function is_question_exists_in_exam(int $question_id): bool
+    {
+        $query = "SELECT * FROM exam_question WHERE question_id=?";
+
+        $data = [
+            ['type' => 'i', 'value' => $question_id]
+        ];
+
+        $result = $this->exeQuery($query, $data, true);
+        if ($result->num_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * delete a question
      * @param int $question_id
@@ -144,5 +165,26 @@ class questionModel extends Model
         ];
 
         return $this->exeQuery($query, $data, false);
+    }
+
+    /**
+     * all questions' id in a special exam
+     * @param int $exam_id
+     * @return array
+     */
+    public function exam_questionsID(int $exam_id): array
+    {
+        $query = "SELECT * FROM exam_question WHERE exam_id=?";
+
+        $data = [
+            ['type' => 'i', 'value' => $exam_id]
+        ];
+
+        $result = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+        $questionsID = [];
+        foreach ($result as $item) {
+            array_push($questionsID, $item['question_id']);
+        }
+        return $questionsID;
     }
 }

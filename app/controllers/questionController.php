@@ -178,19 +178,63 @@ class questionController extends Controller
      */
     public function delete_question(int $question_id): void
     {
-        $option = $this->model('option');
-        $status1 = $option->delete_option($question_id);
-
         $question = $this->model('question');
-        $status2 = $question->delete_question($question_id);
+        $exists_in_exam = $question->is_question_exists_in_exam($question_id);
 
-        if ($status1 && $status2) {
-            // show success message
-            header('Location: ' . URL . 'dashboard/questions');
+        if (!$exists_in_exam) {
+            $option = $this->model('option');
+            $status1 = $option->delete_option($question_id);
+
+            $question = $this->model('question');
+            $status2 = $question->delete_question($question_id);
+
+
+            if ($status1 && $status2) {
+                // show success message
+                echo "success";
+                header('Location: ' . URL . 'dashboard/questions');
+            } else {
+                // show failed message
+                echo "failed";
+                header('Location: ' . URL . 'dashboard/questions');
+            }
+
         } else {
-            // show failed message
+            // show alert that can't remove question from db
             header('Location: ' . URL . 'dashboard/questions');
         }
+
     }
 
+    public function test(int $exam_id = 24)
+    {
+        $question = $this->model('question');
+        $option = $this->model('option');
+        $exam_questionsID = $question->exam_questionsID($exam_id);
+        $questions_info = [];
+        $options_info = [];
+
+        foreach ($exam_questionsID as $question_id) {
+            $question_item = $question->get_question_byID($question_id)[0];
+            array_push($questions_info, ['id' => $question_item['question_id'], 'info' => $question_item['q_info'], 'type' => $question_item['type'], 'grade' => $question_item['grade']]);
+            $option_list = $option->get_all_option_by_question_id($question_item['question_id']);
+
+            foreach ($option_list as $option_item) {
+                array_push($options_info, ['id' => $option_item['option_id'], 'info' => $question_item['type'] === 1 ? $option_item['info'] : "", 'question_id' => $option_item['question_id']]);
+            }
+        }
+
+        $data = [
+            'questions_info' => $questions_info,
+            'options_info' => $options_info,
+        ];
+        $this->header('header');
+        $this->view('dashboard/participateExamView', $data);
+        $this->footer('footer');
+    }
+
+    public function test_action(int $exam_id = 24)
+    {
+        var_dump($_POST);
+    }
 }

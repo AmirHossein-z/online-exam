@@ -61,7 +61,7 @@
                         href="<?php echo URL . 'dashboard/edit_question/' . $question['id'] ?>">
                         ویرایش</a>
                     <a class="bg-red-500 text-white active:bg-red-700 text-sm font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                        id="delete_question_btn" onclick="deleteQuestion()"
+                        id="delete_question_btn"
                         href="<?php echo URL . 'dashboard/delete_question/' . $question['id'] ?>">حذف</a>
                 </div>
             </div>
@@ -73,16 +73,8 @@
             class="block text-right text-blueGray-600 text-base text-center my-4 transition-all duration-300 cursor-pointer p-4">
             شما در حال حاضر هیچ سوالی ندارید</h3>
         <a href="<?php echo URL . 'dashboard/add_question' ?>" class=" bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow
-                            hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150
-                            text-center">افزودن
+                                hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150
+                                text-center">افزودن
             سوال جدید</a>
     </div>
 <?php } ?>
-<script>
-    const deleteQuestion = () => {
-        if (confirm('آیا از حذف سوال اطمینان دارید؟ ')) {
-            return true;
-        }
-        return false
-    }
-</script>
