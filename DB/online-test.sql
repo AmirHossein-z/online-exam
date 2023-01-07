@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2022 at 01:04 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jan 05, 2023 at 04:10 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `answer` (
   `answer_id` int(11) NOT NULL,
   `option_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ CREATE TABLE `exam` (
   `show_grade` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `exam`
@@ -72,7 +72,10 @@ INSERT INTO `exam` (`exam_id`, `title`, `description`, `duration`, `final_grade`
 (18, 'Facilis et blanditii', 'Qui ex qui voluptate', 46, 20.5, 1, '2022-12-29 11:53:20', '0000-00-00 00:00:00'),
 (19, 'Facilis et blanditii', 'Qui ex qui voluptate', 46, 20.5, 1, '2022-12-29 11:55:50', '0000-00-00 00:00:00'),
 (20, 'Facilis et blanditii', 'Qui ex qui voluptate', 46, 20.5, 1, '2022-12-29 12:00:59', '0000-00-00 00:00:00'),
-(21, 'Qui ipsa reprehende', 'Suscipit sequi volup', 2, 20.5, 0, '2022-12-29 12:02:40', '0000-00-00 00:00:00');
+(21, 'Qui ipsa reprehende', 'Suscipit sequi volup', 2, 20.5, 0, '2022-12-29 12:02:40', '0000-00-00 00:00:00'),
+(22, 'آزمون تستی', 'توضیحات ', 2, 20.5, 0, '2023-01-05 07:20:46', '0000-00-00 00:00:00'),
+(23, 'آزمون جدید', 'این یک آزمون جدید است', 22, 20.5, 0, '2023-01-05 07:45:55', '0000-00-00 00:00:00'),
+(24, 'عنوانی', 'خوبه', 2, 20.5, 0, '2023-01-05 07:48:15', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -83,16 +86,14 @@ INSERT INTO `exam` (`exam_id`, `title`, `description`, `duration`, `final_grade`
 CREATE TABLE `exam_question` (
   `exam_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `exam_question`
 --
 
 INSERT INTO `exam_question` (`exam_id`, `question_id`) VALUES
-(20, 59),
-(20, 60),
-(21, 60);
+(24, 63);
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,7 @@ CREATE TABLE `master` (
   `access_token` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `master`
@@ -129,16 +130,13 @@ CREATE TABLE `optionn` (
   `option_id` int(11) NOT NULL,
   `info` varchar(100) NOT NULL,
   `question_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `optionn`
 --
 
 INSERT INTO `optionn` (`option_id`, `info`, `question_id`) VALUES
-(49, 'انیشتین', 56),
-(50, 'استیون هاوکینگ', 56),
-(51, 'این یک سوال باز است که بسته به فرد ممکن است پاسخ متفاوتی داشته باشد', 57),
 (52, 'ماهی', 59),
 (53, 'مارمولک', 59),
 (54, 'اژدها', 59),
@@ -146,7 +144,8 @@ INSERT INTO `optionn` (`option_id`, `info`, `question_id`) VALUES
 (56, '۱', 60),
 (57, '۲', 60),
 (58, '', 60),
-(59, '۳', 60);
+(59, '۳', 60),
+(65, 'پاسخی بس تشریحی', 63);
 
 -- --------------------------------------------------------
 
@@ -163,7 +162,7 @@ CREATE TABLE `question` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `master_id` int(11) NOT NULL,
   `option_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `question`
@@ -171,9 +170,10 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`question_id`, `q_info`, `type`, `grade`, `created_at`, `updated_at`, `master_id`, `option_id`) VALUES
 (56, 'کدام دانشمند نظریه نسبیت عام را مطرح کرد؟', 1, 1.500, '2022-12-27 12:44:58', NULL, 3, 49),
-(57, 'این سوال تشریحی را پاسخ بدهید:چرا ما افریده شده ایم؟', 0, 0.500, '2022-12-27 12:48:11', NULL, 3, 51),
 (59, 'کدام یک از موجودات زیر آبزی است؟', 1, 0.000, '2022-12-28 09:43:39', NULL, 4, 52),
-(60, 'تست ۴ گزینه ای', 1, 0.000, '2022-12-28 09:58:42', NULL, 4, 56);
+(60, 'تست ۴ گزینه ای', 1, 0.000, '2022-12-28 09:58:42', NULL, 4, 56),
+(62, 'سوالی جدید', 1, 5.000, '2023-01-05 07:39:40', NULL, 3, 61),
+(63, 'سوال خوب', 0, 2.000, '2023-01-05 07:47:47', NULL, 3, 65);
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE `student` (
   `access_token` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
@@ -206,10 +206,11 @@ INSERT INTO `student` (`student_id`, `name`, `mobile`, `email`, `password`, `acc
 --
 
 CREATE TABLE `student_master` (
-  `student_id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
   `master_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` tinyint(1) NOT NULL,
+  `identification_token` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -283,7 +284,7 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `master`
@@ -295,13 +296,13 @@ ALTER TABLE `master`
 -- AUTO_INCREMENT for table `optionn`
 --
 ALTER TABLE `optionn`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `student`

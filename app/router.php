@@ -114,7 +114,21 @@ class Router
                 'controller' => 'examController',
                 'action' => 'store',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
-            ]
+            ],
+            'test' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/test$/',
+                'controller' => 'questionController',
+                'action' => 'test',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
+            ],
+            'test_action' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/test_action$/',
+                'controller' => 'questionController',
+                'action' => 'test_action',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
+            ],
         ];
 
         foreach ($routes as $route) {

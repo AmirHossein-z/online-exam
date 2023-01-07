@@ -51,24 +51,33 @@ class authController extends Controller
      */
     public function register_user(): void
     {
-        $fullname = strip_tags($_POST['fullname'], FILTER_SANITIZE_ENCODED);
-        $mobile = strip_tags($_POST['mobile'], FILTER_SANITIZE_ENCODED);
+        $fullname = filter_var($_POST['fullname'], FILTER_SANITIZE_STRING);
+        $mobile = filter_var($_POST['mobile'], FILTER_SANITIZE_NUMBER_INT);
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = strip_tags($_POST['password'], FILTER_SANITIZE_ENCODED);
-        $duplicate_password = strip_tags($_POST['duplicate_password'], FILTER_SANITIZE_ENCODED);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $duplicate_password = filter_var($_POST['duplicate_password'], FILTER_SANITIZE_STRING);
 
         $person = $this->model($this->check_user());
         $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
         if ($status === 1) {
-            echo "user with this information exists";
+            // $alert = ['type' => 'ERROR', 'title' => 'خطا', 'message' => 'کاربری با این اطلاعات وجود دارد! '];
+            // $data = [];
+            // $data['alert'] = $alert;
+            // $this->view('layout/alert', $data);
         } else {
             $status = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
             if ($status) {
-                echo "register success";
+                // $alert = ['type' => 'SUCCESS', 'title' => 'موفق', 'message' => 'با موفقیت ثبت نام شدید!'];
+                //     $data = [];
+                // $data['alert'] = $alert;
+                // $this->view('layout/alert', $data);
                 header('Location: ' . URL . 'auth/login');
             } else {
-                echo "register failed";
+                //     $alert = ['type' => 'ERROR', 'title' => 'خطا', 'message' => 'ثبت نام با خطا مواجه شد'];
+                //     $data = [];
+                // $data['alert'] = $alert;
+                // $this->view('layout/alert', $data);
             }
         }
     }
@@ -92,12 +101,11 @@ class authController extends Controller
     public function login_user(): void
     {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-        $password = strip_tags($_POST['password'], FILTER_SANITIZE_ENCODED);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
         $person = $this->model($this->check_user());
         $result = $person->isPersonExists($this->check_user(), $email, $password);
-        if($result['status'] === 1)
-        {
+        if ($result['status'] === 1) {
             $status = $result['status'];
             $name = $result['result']['name'];
             $id = $result['result']["{$this->check_user()}_id"];

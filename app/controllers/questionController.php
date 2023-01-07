@@ -24,11 +24,12 @@ class questionController extends Controller
      */
     public function add_one_question()
     {
-        $question_info = $_POST['question_info'];
-        $grade = (float) $_POST['grade'];
-        // $number_question = (int) $_POST['number_questions'] ?? 0;
+        $question_info = filter_var($_POST['question_info'], FILTER_SANITIZE_STRING);
+        $grade = (float) filter_var($_POST['grade'], FILTER_SANITIZE_NUMBER_FLOAT);
+
+        $number_question = (int) $_POST['number_questions'] ?? 0;
         $option_lists = $_POST['option_multi'] ?? [0 => $_POST['option_descriptive']];
-        $correct_option_index = (int) $_POST['check_correct_option'] ?? 0;
+        $correct_option_index = (int) filter_var($_POST['check_correct_option'], FILTER_SANITIZE_NUMBER_INT) ?? 0;
         // type:1 -> multi_option type:0 -> option_descriptive
         $type = $_POST['is_multi_choice_option'] === "on" ? 1 : 0;
 
@@ -132,26 +133,26 @@ class questionController extends Controller
      */
     public function edit_one_question(int $question_id)
     {
-        $question_info = $_POST['question_info'];
-        $grade = $_POST['grade'];
-        $type = (int) $_POST['type'];
+        $question_info = filter_var($_POST['question_info'], FILTER_SANITIZE_STRING);
+        $grade = (float) filter_var($_POST['grade'], FILTER_SANITIZE_NUMBER_FLOAT);
+        $type = (int) filter_var($_POST['type'], FILTER_SANITIZE_NUMBER_INT);
 
         if ($type === 1) {
             $option = $this->model('option');
-            $options_list = $_POST['option_multi'];
+            $options_list = $_POST['option_multi'] ?? [];
             foreach ($options_list as $option_id => $option_info) {
                 $status2 = $option->update_option($option_id, $option_info);
                 if ($status2 === false) {
                     break;
                 }
             }
-            $option_id = (int) $_POST['check_correct_option'];
+            $option_id = (int) filter_var($_POST['check_correct_option'], FILTER_SANITIZE_NUMBER_INT);
             $question = $this->model('question');
             $status1 = $question->update_question($question_id, $option_id, $question_info, $grade);
         } else if ($type === 0) {
             $question = $this->model('question');
-            $option_descriptive = $_POST['option_descriptive'];
-            $option_id = $_POST['option_id_descriptive'];
+            $option_descriptive = filter_var($_POST['option_descriptive'], FILTER_SANITIZE_STRING);
+            $option_id = filter_var($_POST['option_id_descriptive'], FILTER_SANITIZE_NUMBER_INT);
             $status1 = $question->update_question($question_id, $option_id, $question_info, $grade);
 
             $option = $this->model('option');
@@ -177,19 +178,63 @@ class questionController extends Controller
      */
     public function delete_question(int $question_id): void
     {
-        $option = $this->model('option');
-        $status1 = $option->delete_option($question_id);
-
         $question = $this->model('question');
-        $status2 = $question->delete_question($question_id);
+        $exists_in_exam = $question->is_question_exists_in_exam($question_id);
 
-        if ($status1 && $status2) {
-            // show success message
-            header('Location: ' . URL . 'dashboard/questions');
+        if (!$exists_in_exam) {
+            $option = $this->model('option');
+            $status1 = $option->delete_option($question_id);
+
+            $question = $this->model('question');
+            $status2 = $question->delete_question($question_id);
+
+
+            if ($status1 && $status2) {
+                // show success message
+                echo "success";
+                header('Location: ' . URL . 'dashboard/questions');
+            } else {
+                // show failed message
+                echo "failed";
+                header('Location: ' . URL . 'dashboard/questions');
+            }
+
         } else {
-            // show failed message
+            // show alert that can't remove question from db
             header('Location: ' . URL . 'dashboard/questions');
         }
+
     }
 
+    public function test(int $exam_id = 24)
+    {
+        $question = $this->model('question');
+        $option = $this->model('option');
+        $exam_questionsID = $question->exam_questionsID($exam_id);
+        $questions_info = [];
+        $options_info = [];
+
+        foreach ($exam_questionsID as $question_id) {
+            $question_item = $question->get_question_byID($question_id)[0];
+            array_push($questions_info, ['id' => $question_item['question_id'], 'info' => $question_item['q_info'], 'type' => $question_item['type'], 'grade' => $question_item['grade']]);
+            $option_list = $option->get_all_option_by_question_id($question_item['question_id']);
+
+            foreach ($option_list as $option_item) {
+                array_push($options_info, ['id' => $option_item['option_id'], 'info' => $question_item['type'] === 1 ? $option_item['info'] : "", 'question_id' => $option_item['question_id']]);
+            }
+        }
+
+        $data = [
+            'questions_info' => $questions_info,
+            'options_info' => $options_info,
+        ];
+        $this->header('header');
+        $this->view('dashboard/participateExamView', $data);
+        $this->footer('footer');
+    }
+
+    public function test_action(int $exam_id = 24)
+    {
+        var_dump($_POST);
+    }
 }
