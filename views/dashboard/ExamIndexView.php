@@ -1,93 +1,72 @@
-<?php
-
-var_dump('t');
-exit;
-?>
-<!-- <div>
-    <h1 class="block text-blueGray-800 text-2xl text-center my-4 transition-all duration-300 cursor-pointer">لیست سوالات
-        شما</h1>
+<div>
+    <h1 class="block text-blueGray-800 text-2xl text-center my-4 transition-all duration-300 cursor-pointer">لیست آزمون های شما</h1>
 </div>
-<?php if (count($data['questions_info']) > 0) { ?>
+<?php if (count($data) > 0) { ?>
     <h2
         class="block text-right text-blueGray-600 text-base text-center my-4 transition-all duration-300 cursor-pointer p-4">
-        تعداد کل سوالات: <span>
-            <?php echo count($data['questions_info']); ?>
+        تعداد کل آزمون ها: <span>
+            <?php echo count($data); ?>
         </span>
     </h2>
+    <!-- Table of exam properties -->
+            <div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-x-auto">
+        <table class="min-w-full">
+          <thead class="border-b">
+            <tr>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                #
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                عنوان
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                توضیحات
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                مدت زمان آزمون
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                نمره نهایی
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                نمایش نمره به دانشجویان
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr class="border-b"> -->
+              <!-- print every row of table -->
+            <?php foreach($data as $d) {?>
 
-    <div class="grid grid-cols-2 gap-6 p-2">
-        <?php foreach ($data['questions_info'] as $question) { ?>
-            <div class="grid items-center border border-blueGray-200 rounded p-4 shadow-md">
-                <div class="flex justify-between items-center my-2">
-                    <h1 class="block text-blueGray-600 text-sm text-center transition-all duration-300 cursor-pointer">
-                        سوال:
-                        <span>
-                            <?php echo $question['info']; ?>
-                        </span>
-                    </h1>
-                    <p class="block text-orange-500 text-sm font-bold transition-all duration-300 cursor-pointer">
-                        <span>
-                            <?php echo $question['grade']; ?> نمره
-                        </span>
-                    </p>
-                </div>
-                <?php if ($question['type'] === 1) { ?>
-                    <div class="grid items-center gap-6 my-2">
-                        <?php foreach ($data['options_info'] as $option) { ?>
-                            <?php if ($option['question_id'] === $question['id']) { ?>
-                                <div class="flex">
-                                    <p class="block text-gray-900 text-sm transition-all duration-300 cursor-pointer">
-                                        <?php echo $option['info']; ?>
-                                    </p>
-                                    <?php if ($option['is_correct'] === 1) { ?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" class="w-5 h-5 text-emerald-500">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                        </svg>
-                                        <?php } ?>
-                                </div>
-                                <?php } ?>
-                            <?php } ?>
+            <tr class="bg-white border-b">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?= $d['exam_id']; ?></td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <?= $d['title']; ?>
 
-                    </div>
-                    <?php } else if ($question['type'] === 0) { ?>
-                    <div class="flex">
-                        <?php foreach ($data['options_info'] as $option) { ?>
-                            <?php if ($option['question_id'] === $question['id']) { ?>
-                                <p class="block text-gray-900 text-sm transition-all duration-300 cursor-pointer">
-                                    <?php echo $option['info']; ?>
-                                </p>
-                                <?php } ?>
-                            <?php } ?>
-                    </div>
-                    <?php } ?>
-                <div class="flex items-center p-4 justify-end gap-6">
-                    <a class="bg-lightBlue-500 text-white active:bg-blueGray-800 text-sm font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                        href="<?php echo URL . 'dashboard/edit_question/' . $question['id'] ?>">
-                        ویرایش</a>
-                    <a class="bg-red-500 text-white active:bg-red-700 text-sm font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                        id="delete_question_btn" onclick="deleteQuestion()"
-                        href="<?php echo URL . 'dashboard/delete_question/' . $question['id'] ?>">حذف</a>
-                </div>
-            </div>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <?= $d['description']; ?>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                <?= $d['duration']; ?>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <?= $d['final_grade']; ?>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <?= $d['show_grade']; ?>
+              </td>
+            </tr>
             <?php } ?>
+
+            </tbody>
+        </table>
+      </div>
     </div>
-<?php } else { ?>
-    <div class="grid justify-center items-center">
-        <h3
-            class="block text-right text-blueGray-600 text-base text-center my-4 transition-all duration-300 cursor-pointer p-4">
-            شما در حال حاضر هیچ سوالی ندارید</h3>
-        <a href="<?php echo URL . 'dashboard/add_question' ?>" class=" bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow
-                            hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150
-                            text-center">افزودن
-            سوال جدید</a>
-    </div>
-<?php } ?>
-<script>
-    const deleteQuestion = () => {
-        if (confirm('آیا از حذف سوال اطمینان دارید؟ ')) {
-            return true;
-        }
-        return false
-    }
-</script> -->
+  </div>
+</div>
+
+    <?php } ?>

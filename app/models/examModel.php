@@ -45,8 +45,15 @@ class examModel extends Model
      public function select_all() : mixed
      {
         try{
-        $query = "SELECT * FROM exam";
-        $result = $this->exeQuery($query, [], false);    
+        $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam";
+        $result = $this->exeQuery($query, [], true);
+            if ($result->num_rows > 0) {
+                $exams = [];
+                for ($i = 0; $i < $result->num_rows; $i++) {
+                    array_push($exams, $result->fetch_assoc());
+                }
+            }
+            return $exams;
         }
         catch(customException $e)   {
             throw new $e;

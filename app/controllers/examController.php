@@ -63,10 +63,11 @@ class examController extends Controller
          $exam_model = $this->model('exam');
          $exam_model = new examModel;
          $exams = $exam_model->select_all();
-         var_dump($exams);
-         exit;
+        //  foreach ($exams as $exam) {
+        //      var_dump($exam);
+        //  }
         $data = $exams;
-        
+
         $this->header('header');
         // $this->navbar('navbar');
         $this->view('dashboard/ExamIndexView', $data);
