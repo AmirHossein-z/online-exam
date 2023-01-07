@@ -45,7 +45,7 @@ class examModel extends Model
      public function select_all() : mixed
      {
         try{
-        $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam";
+        $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam order by exam_id DESC";
         $result = $this->exeQuery($query, [], true);
             if ($result->num_rows > 0) {
                 $exams = [];

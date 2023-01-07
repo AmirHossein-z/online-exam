@@ -34,10 +34,12 @@
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 نمایش نمره به دانشجویان
               </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                جزئیات آزمون
+              </th>
             </tr>
           </thead>
           <tbody>
-            <!-- <tr class="border-b"> -->
               <!-- print every row of table -->
             <?php foreach($data as $d) {?>
 
@@ -58,6 +60,9 @@
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               <?= $d['show_grade']; ?>
+              </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <a href="<?= URL . 'exam/edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
               </td>
             </tr>
             <?php } ?>
