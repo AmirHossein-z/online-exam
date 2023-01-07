@@ -37,5 +37,20 @@ class examModel extends Model
         return $this->connection->insert_id;
     }
 
+    /**
+     * select all exams
+     * @return mixed
+     */
+
+     public function select_all() : mixed
+     {
+        try{
+        $query = "SELECT * FROM exam";
+        $result = $this->exeQuery($query, [], false);    
+        }
+        catch(customException $e)   {
+            throw new $e;
+        };
+     }
     
 }
