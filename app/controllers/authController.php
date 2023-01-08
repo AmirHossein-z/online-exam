@@ -65,9 +65,15 @@ class authController extends Controller
             // $data['alert'] = $alert;
             // $this->view('layout/alert', $data);
         } else {
-            $status = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
+            $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
-            if ($status) {
+            if ($this->check_user() === MASTER) {
+                // $master = $this->model($this->check_user());
+                $student_master = $this->model('student_master');
+                $status2 = $person->add_student_to_master_students_list($result['result']);
+            }
+
+            if ($result['status'] === 1 && $status2) {
                 // $alert = ['type' => 'SUCCESS', 'title' => 'موفق', 'message' => 'با موفقیت ثبت نام شدید!'];
                 //     $data = [];
                 // $data['alert'] = $alert;

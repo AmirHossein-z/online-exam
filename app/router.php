@@ -122,6 +122,35 @@ class Router
                 'action' => 'test_action',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
             ],
+            'list_students' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/list_students$/',
+                'controller' => 'masterController',
+                'action' => 'list_students',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
+            ],
+            'enable_student' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/enable_student\/\d{1,10}$/',
+                'controller' => 'masterController',
+                'action' => 'enable_student',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
+            ],
+            'list_masters' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/list_masters$/',
+                'controller' => 'studentController',
+                'action' => 'list_masters',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
+            ],
+            'add_master' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/add_master\/\d{1,10}$/',
+                'controller' => 'studentController',
+                'action' => 'add_master',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
+            ],
+
         ];
 
         foreach ($routes as $route) {

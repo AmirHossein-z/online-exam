@@ -12,7 +12,8 @@ class dashboardController extends Controller
     {
         $data = [
             'name' => $_SESSION['name'],
-            'type' => $_SESSION['type']
+            'type' => $_SESSION['type'],
+            'id' => $_SESSION['id']
         ];
         $this->header('header');
         // $this->navbar('navbar', $data);
