@@ -51,5 +51,26 @@ class examController extends Controller
         // redirect after insert
         header('Location: ' . URL . 'dashboard/exam/index');
         exit;
-    }
-}
+     }
+     
+/**
+      * show lists of exams
+      * @return void
+      */
+
+      public function index (): void
+      {
+          $exam_model = $this->model('exam');
+          $exam_model = new examModel;
+          $exams = $exam_model->select_all();
+         //  foreach ($exams as $exam) {
+         //      var_dump($exam);
+         //  }
+         $data = $exams;
+ 
+         $this->header('header');
+         // $this->navbar('navbar');
+         $this->view('dashboard/ExamIndexView', $data);
+         $this->footer('footer');
+      }
+ }

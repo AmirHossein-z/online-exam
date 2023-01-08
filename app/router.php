@@ -94,6 +94,13 @@ class Router
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master'],
             ],
             // exam Routing
+            'index_exam' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/exam\/index$/',
+                'controller' => 'examController',
+                'action' => 'index',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
+            ],
             'create_exam' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/exam\/create$/',

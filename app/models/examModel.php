@@ -37,5 +37,27 @@ class examModel extends Model
         return $this->connection->insert_id;
     }
 
+    /**
+     * select all exams
+     * @return mixed
+     */
+
+     public function select_all() : mixed
+     {
+        try{
+        $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam order by exam_id DESC";
+        $result = $this->exeQuery($query, [], true);
+            if ($result->num_rows > 0) {
+                $exams = [];
+                for ($i = 0; $i < $result->num_rows; $i++) {
+                    array_push($exams, $result->fetch_assoc());
+                }
+            }
+            return $exams;
+        }
+        catch(customException $e)   {
+            throw new $e;
+        };
+     }
     
 }
