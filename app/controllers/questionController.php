@@ -206,7 +206,7 @@ class questionController extends Controller
 
     }
 
-    public function test(int $exam_id = 24)
+    public function test(int $exam_id = 25)
     {
         $question = $this->model('question');
         $option = $this->model('option');
@@ -214,7 +214,7 @@ class questionController extends Controller
         $questions_info = [];
         $options_info = [];
 
-        foreach ($exam_questionsID as $question_id) {
+        foreach ($exam_questionsID as $index => $question_id) {
             $question_item = $question->get_question_byID($question_id)[0];
             array_push($questions_info, ['id' => $question_item['question_id'], 'info' => $question_item['q_info'], 'type' => $question_item['type'], 'grade' => $question_item['grade']]);
             $option_list = $option->get_all_option_by_question_id($question_item['question_id']);

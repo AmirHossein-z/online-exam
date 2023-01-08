@@ -38,9 +38,9 @@ class questionModel extends Model
      * update optionID to the corrected option
      * @param int $option_id
      * @param int $question_id
-     * @return bool|mysqli_result
+     * @return bool
      */
-    public function update_optionID(int $option_id, int $question_id)
+    public function update_optionID(int $option_id, int $question_id): bool
     {
         $query = "UPDATE question SET question.option_id=? WHERE question.question_id =?";
         $data = [
@@ -174,17 +174,18 @@ class questionModel extends Model
      */
     public function exam_questionsID(int $exam_id): array
     {
-        $query = "SELECT * FROM exam_question WHERE exam_id=?";
+        $query = "SELECT question_id FROM exam_question WHERE exam_id=?";
 
         $data = [
             ['type' => 'i', 'value' => $exam_id]
         ];
 
         $result = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
-        $questionsID = [];
+
+        $questions_id = [];
         foreach ($result as $item) {
-            array_push($questionsID, $item['question_id']);
+            array_push($questions_id, $item['question_id']);
         }
-        return $questionsID;
+        return $questions_id;
     }
 }

@@ -8,14 +8,15 @@ class personPolicy
 
     /**
      * check whether person is logged in
-     * @return void|bool
+     * @return bool
      */
-    public function is_login()
+    public function is_login(): bool
     {
         if (isset($_SESSION) && $_SESSION['id']) {
             return true;
         }
         header('Location: ' . URL . 'auth/login');
+        return false;
     }
     /**
      * check whether person is logged in as master

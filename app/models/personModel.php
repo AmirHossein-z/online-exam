@@ -6,7 +6,31 @@ class personModel extends Model
     {
         parent::__construct();
     }
-    public function insertPerson(string $person, string $fullname, string $mobile, string $email, string $password)
+
+    public function get_person_info(string $person, int $person_id)
+    {
+        $p = $person;
+        $id = $p . '_id';
+        $query = "SELECT * FROM $p WHERE $p.$id =?";
+
+        $data = [
+            ['type' => 'i', 'value' => $person_id]
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+    }
+
+
+    /**
+     * insert a person(student OR master) to db
+     * @param string $person
+     * @param string $fullname
+     * @param string $mobile
+     * @param string $email
+     * @param string $password
+     * @return array
+     */
+    public function insertPerson(string $person, string $fullname, string $mobile, string $email, string $password): array
     {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $access_token = bin2hex(openssl_random_pseudo_bytes(16));
@@ -20,8 +44,22 @@ class personModel extends Model
             ['type' => 's', 'value' => $password_hash],
             ['type' => 's', 'value' => $access_token],
         ];
-        return $this->exeQuery($query, $data, false);
+        $status = $this->exeQuery($query, $data, false);
+        if ($status) {
+            return ['status' => 1, 'result' => $this->connection->insert_id];
+        } else {
+            return ['status' => 0, 'result' => 'Error'];
+        }
+
     }
+
+    /**
+     * check if person exists in db or not
+     * @param string $person
+     * @param string $email
+     * @param string $password
+     * @return array
+     */
     public function isPersonExists(string $person, string $email, string $password): array
     {
         $query = "SELECT * FROM $person WHERE email=? LIMIT 0,1";
