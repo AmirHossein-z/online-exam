@@ -70,51 +70,38 @@ class student_masterModel extends Model
     }
 
     /**
-     * get students list of ID
-     * @param int $master_id
+     * get lists of ID
+     * @param int $id
+     * @param string $who
      * @return array
      */
-    public function get_students_listID(int $master_id): array
+    public function get_listID(int $id, string $who): array
     {
-        $query = "SELECT student_id FROM student_master WHERE master_id=?";
+        if ($who === MASTER) {
+            $key = 'master_id';
+            $query = "SELECT master_id FROM student_master WHERE student_id=?";
+        } else if ($who === STUDENT) {
+            $key = 'student_id';
+            $query = "SELECT student_id FROM student_master WHERE master_id=?";
+        }
 
         $data = [
-            ['type' => 'i', 'value' => $master_id],
+            ['type' => 'i', 'value' => $id],
         ];
 
-        $result = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+        $result = $this->exeQuery($query, $data, true);
         $ids = [];
         foreach ($result as $item) {
-            array_push($ids, $item['student_id']);
+            if (isset($item[$key])) {
+                array_push($ids, $item[$key]);
+            }
         }
 
         return $ids;
     }
 
     /**
-     * get masters list of ID
-     * @param int $student_id
-     * @return array
-     */
-    public function get_masters_listID(int $student_id): array
-    {
-        $query = "SELECT master_id FROM student_master WHERE student_id=?";
-
-        $data = [
-            ['type' => 'i', 'value' => $student_id],
-        ];
-
-        $result = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
-        $ids = [];
-        foreach ($result as $item) {
-            array_push($ids, $item['master_id']);
-        }
-
-        return $ids;
-    }
-
-    /**
-     * create a uniq token for master and add master_id to student_master table for adding students later
+     * add master id & token to master_student table
      * @param int $master_id
      * @return bool
      */

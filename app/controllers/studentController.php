@@ -7,12 +7,16 @@ class studentController extends Controller
         parent::__construct();
     }
 
+    /**
+     * show masters' list
+     * @return void
+     */
     public function list_masters()
     {
         $student_id = $_SESSION['id'];
 
         $student_master = $this->model('student_master');
-        $masters_IDs = $student_master->get_masters_listID($student_id);
+        $masters_IDs = $student_master->get_listID($student_id, MASTER);
         $all_properties = $student_master->get_all_prop($student_id, STUDENT);
 
         $master = $this->model('master');
@@ -38,16 +42,17 @@ class studentController extends Controller
      */
     public function add_master(int $student_id)
     {
-        $token = filter_var($_POST['token'], FILTER_SANITIZE_STRING);
+        $token = trim(filter_var($_POST['token'], FILTER_SANITIZE_STRING));
         $student_master = $this->model('student_master');
         $result = $student_master->is_token_exists($token);
-        if ($result['status'] === 1234) {
+        if ($result['status'] === 1) {
             $status2 = $student_master->insert_by_studentID($student_id, $token, false, $result['result']['master_id']);
             if ($status2) {
                 // alert waiting for accepting from master
-                header('Location: ' . URL . 'dashboard/list_masters/' . $student_id);
+                header('Location: ' . URL . 'dashboard/list_masters');
             } else {
                 // alert error and 
+                header('Location: ' . URL . 'dashboard/list_masters');
             }
         }
 

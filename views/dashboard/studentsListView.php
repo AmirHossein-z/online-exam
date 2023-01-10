@@ -5,9 +5,10 @@
         <span>
             <?php echo $data['token']; ?>
         </span>
-        <div class="border border-blueGray-100 rounded mr-3 cursor-pointer p-2 flex gap-6">
+        <div class="border border-blueGray-100 rounded mr-3 cursor-pointer p-2 flex items-center justify-center gap-6"
+            id="clipboard_icon">
             کپی
-            <i class="fa-solid fa-copy p-2" id="clipboard_icon"></i>
+            <i class="fa-solid fa-copy"></i>
         </div>
     </div>
     <p class="text-sm text-center text-orange-500">این توکن را در اختیار دانشجویان خود قرار دهید تا بتوانند به شما
@@ -75,7 +76,6 @@
     const clipboard_icon = document.querySelector("#clipboard_icon");
 
     clipboard_icon.addEventListener("click", (e) => {
-        console.log(e.target.previousElementSibling.innerText);
         navigator.clipboard.writeText(e.target.previousElementSibling.innerText);
     })
 </script>

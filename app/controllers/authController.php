@@ -55,7 +55,6 @@ class authController extends Controller
         $mobile = filter_var($_POST['mobile'], FILTER_SANITIZE_NUMBER_INT);
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-        $duplicate_password = filter_var($_POST['duplicate_password'], FILTER_SANITIZE_STRING);
 
         $person = $this->model($this->check_user());
         $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
@@ -68,11 +67,14 @@ class authController extends Controller
             $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
             if ($this->check_user() === MASTER) {
-                // $master = $this->model($this->check_user());
                 $student_master = $this->model('student_master');
-                $status2 = $person->add_student_to_master_students_list($result['result']);
+                $status2 = $student_master->add_student_to_master_students_list($result['result']);
+            } else if ($this->check_user() === STUDENT) {
+                $status2 = true;
             }
 
+            var_dump('result[status]', $result['status']);
+            var_dump($status2);
             if ($result['status'] === 1 && $status2) {
                 // $alert = ['type' => 'SUCCESS', 'title' => 'موفق', 'message' => 'با موفقیت ثبت نام شدید!'];
                 //     $data = [];
@@ -84,6 +86,7 @@ class authController extends Controller
                 //     $data = [];
                 // $data['alert'] = $alert;
                 // $this->view('layout/alert', $data);
+                header('Location: ' . URL . 'auth/register');
             }
         }
     }

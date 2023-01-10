@@ -60,14 +60,6 @@
                                         placeholder="پسورد" autocomplete="on" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">تکرار پسورد</label>
-                                    <input type="password" name="duplicate_password" required
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="تکرار پسورد" autocomplete="on" />
-                                </div>
-
-                                <div class="relative w-full mb-3">
                                     <input type="text" name="type" value="student" hidden>
                                 </div>
                                 <div class="text-center mt-6">
@@ -113,13 +105,6 @@
                                     <input type="password" name="password"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder="پسورد" autocomplete="on" />
-                                </div>
-                                <div class="relative w-full mb-3">
-                                    <label class="block text-blueGray-600 text-xs font-bold mb-2"
-                                        htmlFor="grid-password">تکرار پسورد</label>
-                                    <input type="password" name="duplicate_password"
-                                        class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="تکرار پسورد" autocomplete="on" />
                                 </div>
 
                                 <div class="relative w-full mb-3">

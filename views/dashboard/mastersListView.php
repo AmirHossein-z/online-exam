@@ -45,10 +45,10 @@
                         class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-gray-500">
                         هنوز فعال نشده
                         است</td>
-                    <td
-                        class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 cursor-pointer">
+                    <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4">
                         <form action="" method="POST">
-                            <button type="submit" class="bg-red-500 text-white text-sm px-2 py-1 rounded">حذف</button>
+                            <button type="submit"
+                                class="bg-red-500 text-white text-sm px-2 py-1 rounded cursor-pointer">حذف</button>
                         </form>
                     </td>
                 <?php } else { ?>

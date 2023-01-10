@@ -15,7 +15,7 @@ class masterController extends Controller
     {
         $master_id = $_SESSION['id'];
         $student_master = $this->model('student_master');
-        $students_IDs = $student_master->get_students_listID($master_id);
+        $students_IDs = $student_master->get_listID($master_id, STUDENT);
         $all_properties = $student_master->get_all_prop($master_id, MASTER);
 
         $token = $all_properties[0]['identification_token'];
@@ -23,7 +23,7 @@ class masterController extends Controller
         $students_info = [];
         foreach ($students_IDs as $index => $id) {
             $info = $student->get_person_info('student', $id);
-            array_push($students_info, ['id' => $id, 'name' => $info[0]['name'], 'email' => $info[0]['email'], 'status' => $all_properties[$index]['student_id'] === $id ? $all_properties[$index]['status'] : null]);
+            array_push($students_info, ['id' => $id, 'name' => $info[0]['name'], 'email' => $info[0]['email'], 'status' => $all_properties[$index + 1]['student_id'] === $id ? $all_properties[$index]['status'] : null]);
         }
 
         $data = [
