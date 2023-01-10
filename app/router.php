@@ -7,6 +7,7 @@ class Router
         $request_type = $_SERVER['REQUEST_METHOD'];
 
         $url = '/' . $_GET['url'];
+
         $routes = [
             '404' => [
                 'type' => "GET",
@@ -200,6 +201,14 @@ class Router
                 $page_found = false;
             }
         }
+
+
+        if ($_GET['url'] === null) {
+            require 'app/controllers/indexController.php';
+            $object = new indexController();
+            $object->show_main_page();
+        }
+
         // echo '404 Location ' . $url . ' Not found!'; 
         // header('Location: '. '/online-exam/dashboard/four_four');
         // exit();
