@@ -40,7 +40,11 @@ class authController extends Controller
     public function register(): void
     {
         $this->header('header');
-        // $this->navbar('navbar');
+        $data = [];
+        $data = $this->set_alert_for_show($data);
+        if (isset($data['alert'])) {
+            $this->view('layout/alert', $data['alert']);
+        }
         $this->view('auth/registerView');
         $this->footer('footer');
     }
@@ -59,10 +63,7 @@ class authController extends Controller
         $person = $this->model($this->check_user());
         $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
         if ($status === 1) {
-            // $alert = ['type' => 'ERROR', 'title' => 'خطا', 'message' => 'کاربری با این اطلاعات وجود دارد! '];
-            // $data = [];
-            // $data['alert'] = $alert;
-            // $this->view('layout/alert', $data);
+            $this->set_alert_info('خطا', 'کاربری با این اطلاعات وجود دارد! ', ALERT_ERROR);
         } else {
             $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
@@ -73,19 +74,11 @@ class authController extends Controller
                 $status2 = true;
             }
 
-            var_dump('result[status]', $result['status']);
-            var_dump($status2);
             if ($result['status'] === 1 && $status2) {
-                // $alert = ['type' => 'SUCCESS', 'title' => 'موفق', 'message' => 'با موفقیت ثبت نام شدید!'];
-                //     $data = [];
-                // $data['alert'] = $alert;
-                // $this->view('layout/alert', $data);
+                $this->set_alert_info('موفق', 'با موفقیت ثبت نام شدید!', ALERT_SUCCESS);
                 header('Location: ' . URL . 'auth/login');
             } else {
-                //     $alert = ['type' => 'ERROR', 'title' => 'خطا', 'message' => 'ثبت نام با خطا مواجه شد'];
-                //     $data = [];
-                // $data['alert'] = $alert;
-                // $this->view('layout/alert', $data);
+                $this->set_alert_info('خطا', 'ثبت نام با خطا مواجه شد.دوباره تلاش کنید', ALERT_ERROR);
                 header('Location: ' . URL . 'auth/register');
             }
         }
@@ -97,8 +90,12 @@ class authController extends Controller
      */
     public function login(): void
     {
+        $data = [];
+        $data = $this->set_alert_for_show($data);
+        if (isset($data['alert'])) {
+            $this->view('layout/alert', $data['alert']);
+        }
         $this->header('header');
-        // $this->navbar('navbar');
         $this->view('auth/loginView');
         $this->footer('footer');
     }
@@ -121,11 +118,10 @@ class authController extends Controller
         }
         if ($status === 1) {
             $this->save_user_session($name, $id);
+            $this->set_alert_info('موفق', 'شما با موفقیت وارد شدید!', ALERT_SUCCESS);
             header('Location: ' . URL . 'dashboard/index');
-            exit;
         } else {
-            // echo "login failed";
-            // flash message
+            $this->set_alert_info('خطا', 'مشکلی در ورود پیش آمده است دوباره امتحان کنید', ALERT_ERROR);
             header('Location: ' . URL . 'auth/login');
         }
     }

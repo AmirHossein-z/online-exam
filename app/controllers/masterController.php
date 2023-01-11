@@ -31,6 +31,10 @@ class masterController extends Controller
             'students_info' => $students_info,
         ];
 
+        $data = $this->set_alert_for_show($data);
+        if (isset($data['alert'])) {
+            $this->view('layout/alert', $data['alert']);
+        }
         $this->header('header');
         $this->view('dashboard/studentsListView', $data);
         $this->footer('footer');
@@ -48,10 +52,10 @@ class masterController extends Controller
         $student_master = $this->model('student_master');
         $status = $student_master->update_state($master_id, $student_id);
         if ($status) {
-            // alert success message
+            $this->set_alert_info('موفق', 'کاربر به لیست دانشجویان شما اضافه شد', ALERT_SUCCESS);
             header('Location:' . URL . 'dashboard/list_students');
         } else {
-            // alert failed message
+            $this->set_alert_info('خطا', 'مشکلی پیش آمده است،دوباره تلاش کنید.', ALERT_ERROR);
             header('Location:' . URL . 'dashboard/list_students');
         }
     }
