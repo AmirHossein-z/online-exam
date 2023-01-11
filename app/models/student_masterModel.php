@@ -28,6 +28,31 @@ class student_masterModel extends Model
     }
 
     /**
+     * check if student requested for master before
+     * @param int $student_id
+     * @param string $token
+     * @param int $master_id
+     * @return bool
+     */
+    public function is_student_requested_before(int $student_id, string $token, int $master_id): bool
+    {
+        $query = "SELECT * FROM student_master WHERE student_id = ? AND identification_token = ? AND master_id = ?";
+
+        $data = [
+            ['type' => 'i', 'value' => $student_id],
+            ['type' => 's', 'value' => $token],
+            ['type' => 'i', 'value' => $master_id],
+        ];
+
+        $result = $this->exeQuery($query, $data, true);
+        var_dump('test');
+        if ($result->num_rows > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * update student_master table by student_id
      * @param int $student_id
      * @param string $token

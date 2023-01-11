@@ -140,3 +140,4 @@
         </div>
     </section>
 </main>
+<script src="<?php echo URL ?>public/js/auth.js"></script>
