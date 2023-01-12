@@ -217,7 +217,7 @@ class questionController extends Controller
 
     }
 
-    public function test(int $exam_id = 25)
+    public function questions_exam(int $exam_id)
     {
         $question = $this->model('question');
         $option = $this->model('option');
@@ -239,12 +239,13 @@ class questionController extends Controller
             'questions_info' => $questions_info,
             'options_info' => $options_info,
         ];
+
         $this->header('header');
         $this->view('dashboard/participateExamView', $data);
         $this->footer('footer');
     }
 
-    public function test_action(int $exam_id = 24)
+    public function test_action(int $exam_id)
     {
         var_dump($_POST);
     }

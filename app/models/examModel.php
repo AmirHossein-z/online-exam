@@ -18,8 +18,10 @@ class examModel extends Model
      * @return int
      */
 
-    public function insert(string $title, string $description, int $duration,
-    float $final_grade,int $show_grade) : int
+    public function insert(
+        string $title, string $description, int $duration,
+        float $final_grade, int $show_grade
+    ): int
     {
         $query = "insert into exam
                   (title, description, duration, final_grade, show_grade)
@@ -33,7 +35,7 @@ class examModel extends Model
         ];
 
         // throw error
-        $result = $this->exeQuery($query,$data,false);
+        $result = $this->exeQuery($query, $data, false);
         return $this->connection->insert_id;
     }
 
@@ -42,11 +44,11 @@ class examModel extends Model
      * @return mixed
      */
 
-     public function select_all() : mixed
-     {
-        try{
-        $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam order by exam_id DESC";
-        $result = $this->exeQuery($query, [], true);
+    public function select_all(): mixed
+    {
+        try {
+            $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam order by exam_id DESC";
+            $result = $this->exeQuery($query, [], true);
             if ($result->num_rows > 0) {
                 $exams = [];
                 for ($i = 0; $i < $result->num_rows; $i++) {
@@ -54,10 +56,26 @@ class examModel extends Model
                 }
             }
             return $exams;
-        }
-        catch(customException $e)   {
+        } catch (customException $e) {
             throw new $e;
-        };
-     }
-    
+        }
+        ;
+    }
+
+    /**
+     * get exam information by exam_id
+     * @param int $exam_id
+     * @return array
+     */
+    public function get_info_by_exam_id(int $exam_id): array
+    {
+        $query = "SELECT * FROM exam WHERE exam_id = ?";
+
+        $data = [
+            ['type' => 'i', 'value' => $exam_id]
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+    }
+
 }

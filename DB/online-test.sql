@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 12, 2023 at 02:11 PM
+-- Generation Time: Jan 12, 2023 at 04:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -76,7 +76,29 @@ INSERT INTO `exam` (`exam_id`, `title`, `description`, `duration`, `final_grade`
 (22, 'آزمون تستی', 'توضیحات ', 2, 20.5, 0, '2023-01-05 07:20:46', '0000-00-00 00:00:00'),
 (23, 'آزمون جدید', 'این یک آزمون جدید است', 22, 20.5, 0, '2023-01-05 07:45:55', '0000-00-00 00:00:00'),
 (24, 'عنوانی', 'خوبه', 2, 20.5, 0, '2023-01-05 07:48:15', '0000-00-00 00:00:00'),
-(25, 'عنوان', 'توضیح', 22, 20.5, 0, '2023-01-05 15:47:18', '0000-00-00 00:00:00');
+(25, 'عنوان', 'توضیح', 22, 20.5, 0, '2023-01-05 15:47:18', '0000-00-00 00:00:00'),
+(26, 'ازمون امیرحسین', 'توضیحات', 90, 20.5, 0, '2023-01-12 14:40:42', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_master`
+--
+
+CREATE TABLE `exam_master` (
+  `exam_id` int(11) NOT NULL,
+  `master_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_master`
+--
+
+INSERT INTO `exam_master` (`exam_id`, `master_id`) VALUES
+(1, 39),
+(2, 39),
+(3, 40),
+(26, 39);
 
 -- --------------------------------------------------------
 
@@ -88,6 +110,13 @@ CREATE TABLE `exam_question` (
   `exam_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_question`
+--
+
+INSERT INTO `exam_question` (`exam_id`, `question_id`) VALUES
+(26, 64);
 
 -- --------------------------------------------------------
 
@@ -111,7 +140,8 @@ CREATE TABLE `master` (
 --
 
 INSERT INTO `master` (`master_id`, `name`, `mobile`, `email`, `password`, `identification_token`, `created_at`, `updated_at`) VALUES
-(39, 'امیرحسین زارعیان', '09105020429', 'amir@gmail.com', '$2y$10$eDoKVMXr4Xs1GKUYobKegOa2fmF/gAJAzqPteugK.RqnPabxic1um', 'c602f20175421c5a3e8c27e7974ff608ba3aaebb24af0538b4a88c047cb00f9f', '2023-01-12 12:58:07', '0000-00-00 00:00:00');
+(39, 'امیرحسین زارعیان', '09105020429', 'amir@gmail.com', '$2y$10$eDoKVMXr4Xs1GKUYobKegOa2fmF/gAJAzqPteugK.RqnPabxic1um', 'c602f20175421c5a3e8c27e7974ff608ba3aaebb24af0538b4a88c047cb00f9f', '2023-01-12 12:58:07', '0000-00-00 00:00:00'),
+(40, 'رضا دهقانی', '09105029431', 'reza@gmail.com', '$2y$10$eDoKVMXr4Xs1GKUYobKegOa2fmF/gAJAzqPteugK.RqnPabxic1um', 'c602q20175421c5a3e8c27e7974ff608ba3aaebb24af0538b4a88c047sb00f9f', '2023-01-12 14:01:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -124,6 +154,14 @@ CREATE TABLE `optionn` (
   `info` varchar(100) NOT NULL,
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `optionn`
+--
+
+INSERT INTO `optionn` (`option_id`, `info`, `question_id`) VALUES
+(66, 'ok', 64),
+(67, 'ok2', 64);
 
 -- --------------------------------------------------------
 
@@ -141,6 +179,13 @@ CREATE TABLE `question` (
   `master_id` int(11) NOT NULL,
   `option_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`question_id`, `q_info`, `type`, `grade`, `created_at`, `updated_at`, `master_id`, `option_id`) VALUES
+(64, 'سوال جدید', 1, 2.000, '2023-01-12 14:40:11', NULL, 39, 66);
 
 -- --------------------------------------------------------
 
@@ -183,7 +228,8 @@ CREATE TABLE `student_master` (
 --
 
 INSERT INTO `student_master` (`student_id`, `master_id`, `status`) VALUES
-(22, 39, 1);
+(22, 39, 1),
+(22, 40, 1);
 
 --
 -- Indexes for dumped tables
@@ -202,6 +248,13 @@ ALTER TABLE `answer`
 --
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`exam_id`);
+
+--
+-- Indexes for table `exam_master`
+--
+ALTER TABLE `exam_master`
+  ADD KEY `exam_id` (`exam_id`),
+  ADD KEY `master_id` (`master_id`);
 
 --
 -- Indexes for table `exam_question`
@@ -257,25 +310,25 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `master_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `master_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `optionn`
 --
 ALTER TABLE `optionn`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -293,6 +346,13 @@ ALTER TABLE `student`
 ALTER TABLE `answer`
   ADD CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`option_id`) REFERENCES `optionn` (`option_id`),
   ADD CONSTRAINT `answer_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
+
+--
+-- Constraints for table `exam_master`
+--
+ALTER TABLE `exam_master`
+  ADD CONSTRAINT `exam_master_ibfk_1` FOREIGN KEY (`exam_id`) REFERENCES `exam` (`exam_id`),
+  ADD CONSTRAINT `exam_master_ibfk_2` FOREIGN KEY (`master_id`) REFERENCES `master` (`master_id`);
 
 --
 -- Constraints for table `exam_question`

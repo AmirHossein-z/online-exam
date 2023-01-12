@@ -63,4 +63,9 @@
                 type="submit">اتمام آزمون </button>
         </div>
     </form>
+<?php } else { ?>
+<h2
+    class="block text-blueGray-600 text-base text-center text-center my-4 transition-all duration-300 cursor-pointer p-4 max-w-4xl mx-auto">
+    سوالی در این آزمون وجود ندارد
+</h2>
 <?php } ?>

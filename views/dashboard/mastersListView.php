@@ -59,11 +59,6 @@
                         <div class="flex items-center justify-center">
                             <form action="" method="POST">
                                 <button type="submit"
-                                    class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded cursor-pointer ml-3">لیست آزمون
-                                    ها</button>
-                            </form>
-                            <form action="" method="POST">
-                                <button type="submit"
                                     class="bg-red-500 text-white text-sm px-2 py-1 rounded cursor-pointer">حذف</button>
                             </form>
                         </div>

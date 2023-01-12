@@ -116,11 +116,18 @@ class Router
                 'action' => 'store',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
             ],
+            'list_exams' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/list_exams$/',
+                'controller' => 'examController',
+                'action' => 'list_exams',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
+            ],
             'test' => [
                 'type' => 'GET',
-                'pattern_url' => '/^\/dashboard\/test$/',
+                'pattern_url' => '/^\/dashboard\/participate\/\d{1,10}$/',
                 'controller' => 'questionController',
-                'action' => 'test',
+                'action' => 'questions_exam',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_student']
             ],
             'test_action' => [
