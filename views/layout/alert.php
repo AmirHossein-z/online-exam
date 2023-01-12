@@ -1,11 +1,14 @@
-<div class="flex items-center justify-center gap-6 m-4 p-8 max-w-580-px max-h-860-px z-50 fixed right-0 top-0 bg-lightBlue-200 rounded-md"
-    id="alert">
+<div class="grid items-center justify-center gap-6 m-4 p-4 max-w-580-px max-h-860-px z-50 fixed right-0 top-0 rounded-md cursor-pointer <?php if ($data['type'] === ALERT_SUCCESS) {
+    echo 'bg-emerald-400';
+} else {
+    echo 'bg-red-500';
+} ?>" id="alert">
     <?php if ($data['type'] === ALERT_ERROR) { ?>
         <i class="fa-solid fa-circle-exclamation text-5xl text-red-500"></i>
     <?php } else if ($data['type'] === ALERT_SUCCESS) { ?>
             <i class="fa-solid fa-circle-check text-5xl text-emerald-500"></i>
     <?php } ?>
-    <div class="grid items-center text-center">
+    <div class="grid items-center text-center mx-auto p-3">
         <h2 class="font-semibold text-xl">
             <?php echo $data['title'] ?>
         </h2>
