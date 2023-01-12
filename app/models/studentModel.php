@@ -1,6 +1,6 @@
 <?php
 
-require "app/models/personModel.php";
+require_once "app/models/personModel.php";
 class studentModel extends personModel
 {
     public function __construct()

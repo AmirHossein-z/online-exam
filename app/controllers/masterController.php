@@ -18,14 +18,17 @@ class masterController extends Controller
         $students_IDs = $student_master->get_listID($master_id, STUDENT);
         $all_properties = $student_master->get_all_prop($master_id, MASTER);
 
-        $token = $all_properties[0]['identification_token'];
-        $student = $this->model('student');
-        $students_info = [];
-        foreach ($students_IDs as $index => $id) {
-            $info = $student->get_person_info('student', $id);
-            array_push($students_info, ['id' => $id, 'name' => $info[0]['name'], 'email' => $info[0]['email'], 'status' => $all_properties[$index + 1]['student_id'] === $id ? $all_properties[$index]['status'] : null]);
-        }
+        $master = $this->model('master');
+        $token = $master->get_person_info(MASTER, $master_id)[0]['identification_token'];
 
+        $students_info = [];
+        if (count($all_properties) > 0) {
+            $student = $this->model('student');
+            foreach ($students_IDs as $index => $id) {
+                $info = $student->get_person_info('student', $id);
+                array_push($students_info, ['id' => $id, 'name' => $info[0]['name'], 'email' => $info[0]['email'], 'status' => $all_properties[$index]['student_id'] === $id ? $all_properties[$index]['status'] : null]);
+            }
+        }
         $data = [
             'token' => $token,
             'students_info' => $students_info,

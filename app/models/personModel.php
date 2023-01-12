@@ -7,7 +7,13 @@ class personModel extends Model
         parent::__construct();
     }
 
-    public function get_person_info(string $person, int $person_id)
+    /**
+     * get person information
+     * @param string $person
+     * @param int $person_id
+     * @return array
+     */
+    public function get_person_info(string $person, int $person_id): array
     {
         $p = $person;
         $id = $p . '_id';
@@ -19,7 +25,6 @@ class personModel extends Model
 
         return $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
     }
-
 
     /**
      * insert a person(student OR master) to db
@@ -33,16 +38,16 @@ class personModel extends Model
     public function insertPerson(string $person, string $fullname, string $mobile, string $email, string $password): array
     {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $access_token = bin2hex(openssl_random_pseudo_bytes(16));
+        $token = bin2hex(openssl_random_pseudo_bytes(32));
 
-        $query = "INSERT INTO $person (name,mobile,email,password,access_token)
+        $query = "INSERT INTO $person (name,mobile,email,password,identification_token)
          VALUES (?,?,?,?,?)";
         $data = [
             ['type' => 's', 'value' => $fullname],
             ['type' => 's', 'value' => $mobile],
             ['type' => 's', 'value' => $email],
             ['type' => 's', 'value' => $password_hash],
-            ['type' => 's', 'value' => $access_token],
+            ['type' => 's', 'value' => $token],
         ];
         $status = $this->exeQuery($query, $data, false);
         if ($status) {
