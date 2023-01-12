@@ -58,7 +58,7 @@ class Controller
     public function model($model_name)
     {
         $filename = $model_name . 'Model';
-        require 'app/models/' . $filename . '.php';
+        require_once 'app/models/' . $filename . '.php';
         return new $filename;
 
         // return new $model_name . 'Model';
