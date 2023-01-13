@@ -20,12 +20,14 @@ class Router
                 'pattern_url' => '/^\/auth\/login$/',
                 'controller' => 'authController',
                 'action' => 'login',
+                'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
             'loggedIn' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/auth\/login_user$/',
                 'controller' => 'authController',
                 'action' => 'login_user',
+                'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
             'logout' => [
                 'type' => 'GET',
@@ -37,13 +39,15 @@ class Router
                 'type' => "GET",
                 'pattern_url' => '/^\/auth\/register$/',
                 'controller' => 'authController',
-                'action' => 'register'
+                'action' => 'register',
+                'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
             'registered' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/auth\/register_user$/',
                 'controller' => 'authController',
-                'action' => 'register_user'
+                'action' => 'register_user',
+                'middleware' => ['personPolicy:is_login:dashboard/index'],
             ],
             'dashboard' => [
                 'type' => "GET",
