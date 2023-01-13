@@ -49,7 +49,7 @@ class examController extends Controller
         }
 
         // redirect after insert
-        header('Location: ' . URL . 'dashboard/exam/index');
+        $this->redirect('dashboard/exam/index');
         exit;
     }
 

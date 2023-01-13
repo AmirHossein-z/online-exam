@@ -59,14 +59,14 @@ class studentController extends Controller
 
                 if ($status3) {
                     $this->set_alert_info('موفق', 'منتظر تایید استاد باشید', ALERT_SUCCESS);
-                    header('Location: ' . URL . 'dashboard/list_masters');
+                    $this->redirect('dashboard/list_masters');
                 } else {
                     $this->set_alert_info('خطا', 'مشکلی پیش آمده است.دوباره تلاش کنید', ALERT_ERROR);
-                    header('Location: ' . URL . 'dashboard/list_masters');
+                    $this->redirect('dashboard/list_masters');
                 }
             } else {
                 $this->set_alert_info('خطا', 'شما قبلا درخواست داده اید٬', ALERT_ERROR);
-                header('Location: ' . URL . 'dashboard/list_masters');
+                $this->redirect('dashboard/list_masters');
             }
         }
 

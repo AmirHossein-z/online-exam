@@ -8,6 +8,16 @@ class Controller
     }
 
     /**
+     * redirect to desired path
+     * @param string $relative_path
+     * @return void
+     */
+    public function redirect(string $relative_path): void
+    {
+        header('Location: ' . URL . $relative_path);
+    }
+
+    /**
      * set alert info in session
      * @param string $title
      * @param string $message
