@@ -59,7 +59,8 @@
               <?= $d['final_grade']; ?>
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?= $d['show_grade']; ?>
+              <?php if ($d['show_grade'] == 1)
+                echo 'نمایش'; else echo 'عدم نمایش'; ?>
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               <a href="<?= URL . 'exam/edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>

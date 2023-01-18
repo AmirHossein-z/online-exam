@@ -116,6 +116,20 @@ class Router
                 'action' => 'store',
                 'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
             ],
+            'edit_exam' => [
+                'type' => "GET",
+                'pattern_url' => '/^\/dashboard\/exam\/edit$/',
+                'controller' => 'examController',
+                'action' => 'edit2',
+                'middleware' => ['personPolicy:is_login', 'personPolicy:is_master']
+            ],
+            'delete_exam' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/exam\/delete$/',
+                'controller' => 'examController',
+                'action' => 'delete',
+                'middleware' => []
+            ],
             'test' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/test$/',
@@ -169,13 +183,13 @@ class Router
                     $matches
                 ) && $request_type == $route['type']
             ) {
-
+                
                 //middleware check
                 if (isset($route['middleware']) && $route['middleware'] != '') {
                     foreach ($route['middleware'] as $middleware) {
                         $middleware_class = explode(':', $middleware)[0];
                         $middleware_action = explode(':', $middleware)[1];
-
+                        
                         require_once 'app/middleware/' . $middleware_class . '.php';
                         $new_middleware = new $middleware_class();
                         $new_middleware->$middleware_action();
@@ -193,12 +207,12 @@ class Router
                 //     }
                 // }
 
-
                 $params = (array) explode('/', $matches[0])[3];
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
+
                 call_user_func_array([$object, $route['action']], $params);
-                $page_found = false;
+                // $page_found = false;
             }
         }
 
@@ -211,6 +225,6 @@ class Router
 
         // echo '404 Location ' . $url . ' Not found!'; 
         // header('Location: '. '/online-exam/dashboard/four_four');
-        // exit();
+
     }
 }
