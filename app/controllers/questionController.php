@@ -52,10 +52,10 @@ class questionController extends Controller
                 $status = $question->update_optionID($question_id, $option_id);
                 if ($status) {
                     $this->set_alert_info('موفق', 'سوال اضافه شد!', ALERT_SUCCESS);
-                    header('Location: ' . URL . 'dashboard/add_question');
+                    $this->redirect('dashboard/add_question');
                 } else {
                     $this->set_alert_info('خطا', 'دوباره تلاش کنید', ALERT_ERROR);
-                    header('Location: ' . URL . 'dashboard/add_question');
+                    $this->redirect('dashboard/add_question');
                 }
             }
         }
@@ -176,10 +176,10 @@ class questionController extends Controller
 
         if ($status1 && $status2) {
             $this->set_alert_info('موفق', 'سوال مورد نظر ویرایش شد.', ALERT_SUCCESS);
-            header('Location: ' . URL . 'dashboard/questions');
+            $this->redirect('dashboard/questions');
         } else {
             $this->set_alert_info('خطا', 'دوباره تلاش کنید.', ALERT_ERROR);
-            header('Location: ' . URL . 'dashboard/edit_question/' . $question_id);
+            $this->redirect('dashboard/edit_question/' . $question_id);
         }
 
     }
@@ -204,20 +204,20 @@ class questionController extends Controller
 
             if ($status1 && $status2) {
                 $this->set_alert_info('موفق', 'سوال حذف شد', ALERT_SUCCESS);
-                header('Location: ' . URL . 'dashboard/questions');
+                $this->redirect('dashboard/questions');
             } else {
                 $this->set_alert_info('خطا', 'مشکلی پیش آمده است،دوباره تلاش کنید', ALERT_ERROR);
-                header('Location: ' . URL . 'dashboard/questions');
+                $this->redirect('dashboard/questions');
             }
 
         } else {
             $this->set_alert_info('خطا', 'سوال نمی تواند حذف شود،چون در آزمون استاد انتخاب شده است٬', ALERT_ERROR);
-            header('Location: ' . URL . 'dashboard/questions');
+            $this->redirect('dashboard/questions');
         }
 
     }
 
-    public function test(int $exam_id = 25)
+    public function questions_exam(int $exam_id)
     {
         $question = $this->model('question');
         $option = $this->model('option');
@@ -239,12 +239,13 @@ class questionController extends Controller
             'questions_info' => $questions_info,
             'options_info' => $options_info,
         ];
+
         $this->header('header');
         $this->view('dashboard/participateExamView', $data);
         $this->footer('footer');
     }
 
-    public function test_action(int $exam_id = 24)
+    public function test_action(int $exam_id)
     {
         var_dump($_POST);
     }

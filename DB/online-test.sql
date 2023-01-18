@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2023 at 04:10 PM
+-- Generation Time: Jan 12, 2023 at 04:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -75,7 +75,30 @@ INSERT INTO `exam` (`exam_id`, `title`, `description`, `duration`, `final_grade`
 (21, 'Qui ipsa reprehende', 'Suscipit sequi volup', 2, 20.5, 0, '2022-12-29 12:02:40', '0000-00-00 00:00:00'),
 (22, 'آزمون تستی', 'توضیحات ', 2, 20.5, 0, '2023-01-05 07:20:46', '0000-00-00 00:00:00'),
 (23, 'آزمون جدید', 'این یک آزمون جدید است', 22, 20.5, 0, '2023-01-05 07:45:55', '0000-00-00 00:00:00'),
-(24, 'عنوانی', 'خوبه', 2, 20.5, 0, '2023-01-05 07:48:15', '0000-00-00 00:00:00');
+(24, 'عنوانی', 'خوبه', 2, 20.5, 0, '2023-01-05 07:48:15', '0000-00-00 00:00:00'),
+(25, 'عنوان', 'توضیح', 22, 20.5, 0, '2023-01-05 15:47:18', '0000-00-00 00:00:00'),
+(26, 'ازمون امیرحسین', 'توضیحات', 90, 20.5, 0, '2023-01-12 14:40:42', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_master`
+--
+
+CREATE TABLE `exam_master` (
+  `exam_id` int(11) NOT NULL,
+  `master_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exam_master`
+--
+
+INSERT INTO `exam_master` (`exam_id`, `master_id`) VALUES
+(1, 39),
+(2, 39),
+(3, 40),
+(26, 39);
 
 -- --------------------------------------------------------
 
@@ -93,7 +116,7 @@ CREATE TABLE `exam_question` (
 --
 
 INSERT INTO `exam_question` (`exam_id`, `question_id`) VALUES
-(24, 63);
+(26, 64);
 
 -- --------------------------------------------------------
 
@@ -107,7 +130,7 @@ CREATE TABLE `master` (
   `mobile` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `access_token` varchar(100) NOT NULL,
+  `identification_token` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -116,9 +139,9 @@ CREATE TABLE `master` (
 -- Dumping data for table `master`
 --
 
-INSERT INTO `master` (`master_id`, `name`, `mobile`, `email`, `password`, `access_token`, `created_at`, `updated_at`) VALUES
-(3, 'Amirhossein Zareian', '09105020429', 'amir@gmail.com', '$2y$10$ytJhDUyRoKl8AaIKbIY5FeOL0cp3tl8PJcyJM3GR3lX/8B0YiKbMW', '364f1d204129479c8af5c846de23f998', '2022-12-21 13:31:29', '0000-00-00 00:00:00'),
-(4, 'رضا دهقانی', '09001234567', 'hi@hireza.ir', '$2y$10$a2qgCdB958kjTpAzJVjewOMQ0ETDWqnmFep6hZTr8vGuaA4AYtVTi', '62aa54099a6bbe8e59a037b9cc11ba4a', '2022-12-28 08:40:27', '0000-00-00 00:00:00');
+INSERT INTO `master` (`master_id`, `name`, `mobile`, `email`, `password`, `identification_token`, `created_at`, `updated_at`) VALUES
+(39, 'امیرحسین زارعیان', '09105020429', 'amir@gmail.com', '$2y$10$eDoKVMXr4Xs1GKUYobKegOa2fmF/gAJAzqPteugK.RqnPabxic1um', 'c602f20175421c5a3e8c27e7974ff608ba3aaebb24af0538b4a88c047cb00f9f', '2023-01-12 12:58:07', '0000-00-00 00:00:00'),
+(40, 'رضا دهقانی', '09105029431', 'reza@gmail.com', '$2y$10$eDoKVMXr4Xs1GKUYobKegOa2fmF/gAJAzqPteugK.RqnPabxic1um', 'c602q20175421c5a3e8c27e7974ff608ba3aaebb24af0538b4a88c047sb00f9f', '2023-01-12 14:01:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -137,15 +160,8 @@ CREATE TABLE `optionn` (
 --
 
 INSERT INTO `optionn` (`option_id`, `info`, `question_id`) VALUES
-(52, 'ماهی', 59),
-(53, 'مارمولک', 59),
-(54, 'اژدها', 59),
-(55, 'مار', 59),
-(56, '۱', 60),
-(57, '۲', 60),
-(58, '', 60),
-(59, '۳', 60),
-(65, 'پاسخی بس تشریحی', 63);
+(66, 'ok', 64),
+(67, 'ok2', 64);
 
 -- --------------------------------------------------------
 
@@ -169,11 +185,7 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`question_id`, `q_info`, `type`, `grade`, `created_at`, `updated_at`, `master_id`, `option_id`) VALUES
-(56, 'کدام دانشمند نظریه نسبیت عام را مطرح کرد؟', 1, 1.500, '2022-12-27 12:44:58', NULL, 3, 49),
-(59, 'کدام یک از موجودات زیر آبزی است؟', 1, 0.000, '2022-12-28 09:43:39', NULL, 4, 52),
-(60, 'تست ۴ گزینه ای', 1, 0.000, '2022-12-28 09:58:42', NULL, 4, 56),
-(62, 'سوالی جدید', 1, 5.000, '2023-01-05 07:39:40', NULL, 3, 61),
-(63, 'سوال خوب', 0, 2.000, '2023-01-05 07:47:47', NULL, 3, 65);
+(64, 'سوال جدید', 1, 2.000, '2023-01-12 14:40:11', NULL, 39, 66);
 
 -- --------------------------------------------------------
 
@@ -187,7 +199,7 @@ CREATE TABLE `student` (
   `mobile` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `access_token` varchar(100) NOT NULL,
+  `identification_token` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -196,8 +208,8 @@ CREATE TABLE `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`student_id`, `name`, `mobile`, `email`, `password`, `access_token`, `created_at`, `updated_at`) VALUES
-(15, 'amir', '09105020429', 'amir@gmail.com', '$2y$10$vjQaWb.d0RfO7V0KvGZSE.nF4CcQF3d8rOjJyu1R6NcJj/D2GhPAW', '70b7119710fdd457a4f7fe8ecaa6ba70', '2022-12-22 11:17:25', '0000-00-00 00:00:00');
+INSERT INTO `student` (`student_id`, `name`, `mobile`, `email`, `password`, `identification_token`, `created_at`, `updated_at`) VALUES
+(22, 'یک دانشجو', '09304568329', 'ali@gmail.com', '$2y$10$YuJDQJQ89V.Wb2o9G6dvF.AkHmndUmzErgo3TBiWgJs7NFG2Lkcky', '1f5b34df59b6acc311c5aac366bd9e7b4c244f79b421f446111db80ff562e9e3', '2023-01-12 13:03:46', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -208,9 +220,16 @@ INSERT INTO `student` (`student_id`, `name`, `mobile`, `email`, `password`, `acc
 CREATE TABLE `student_master` (
   `student_id` int(11) DEFAULT NULL,
   `master_id` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `identification_token` varchar(255) DEFAULT NULL
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_master`
+--
+
+INSERT INTO `student_master` (`student_id`, `master_id`, `status`) VALUES
+(22, 39, 1),
+(22, 40, 1);
 
 --
 -- Indexes for dumped tables
@@ -229,6 +248,13 @@ ALTER TABLE `answer`
 --
 ALTER TABLE `exam`
   ADD PRIMARY KEY (`exam_id`);
+
+--
+-- Indexes for table `exam_master`
+--
+ALTER TABLE `exam_master`
+  ADD KEY `exam_id` (`exam_id`),
+  ADD KEY `master_id` (`master_id`);
 
 --
 -- Indexes for table `exam_question`
@@ -284,31 +310,31 @@ ALTER TABLE `answer`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `master_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `master_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `optionn`
 --
 ALTER TABLE `optionn`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -320,6 +346,13 @@ ALTER TABLE `student`
 ALTER TABLE `answer`
   ADD CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`option_id`) REFERENCES `optionn` (`option_id`),
   ADD CONSTRAINT `answer_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
+
+--
+-- Constraints for table `exam_master`
+--
+ALTER TABLE `exam_master`
+  ADD CONSTRAINT `exam_master_ibfk_1` FOREIGN KEY (`exam_id`) REFERENCES `exam` (`exam_id`),
+  ADD CONSTRAINT `exam_master_ibfk_2` FOREIGN KEY (`master_id`) REFERENCES `master` (`master_id`);
 
 --
 -- Constraints for table `exam_question`

@@ -48,23 +48,25 @@ class studentController extends Controller
     public function add_master(int $student_id)
     {
         $token = trim(filter_var($_POST['token'], FILTER_SANITIZE_STRING));
+        $master = $this->model('master');
+        $result = $master->is_token_exists($token);
+
         $student_master = $this->model('student_master');
-        $result = $student_master->is_token_exists($token);
         if ($result['status'] === 1) {
-            $status2 = $student_master->is_student_requested_before($student_id, $token, $result['result']['master_id']);
+            $status2 = $student_master->is_student_requested_before($student_id, $result['result']['master_id']);
             if (!$status2) {
-                $status3 = $student_master->insert_by_studentID($student_id, $token, false, $result['result']['master_id']);
+                $status3 = $student_master->insert_by_studentID($student_id, false, $result['result']['master_id']);
 
                 if ($status3) {
                     $this->set_alert_info('موفق', 'منتظر تایید استاد باشید', ALERT_SUCCESS);
-                    header('Location: ' . URL . 'dashboard/list_masters');
+                    $this->redirect('dashboard/list_masters');
                 } else {
                     $this->set_alert_info('خطا', 'مشکلی پیش آمده است.دوباره تلاش کنید', ALERT_ERROR);
-                    header('Location: ' . URL . 'dashboard/list_masters');
+                    $this->redirect('dashboard/list_masters');
                 }
             } else {
                 $this->set_alert_info('خطا', 'شما قبلا درخواست داده اید٬', ALERT_ERROR);
-                header('Location: ' . URL . 'dashboard/list_masters');
+                $this->redirect('dashboard/list_masters');
             }
         }
 

@@ -67,19 +67,12 @@ class authController extends Controller
         } else {
             $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
-            if ($this->check_user() === MASTER) {
-                $student_master = $this->model('student_master');
-                $status2 = $student_master->add_student_to_master_students_list($result['result']);
-            } else if ($this->check_user() === STUDENT) {
-                $status2 = true;
-            }
-
-            if ($result['status'] === 1 && $status2) {
+            if ($result['status'] === 1) {
                 $this->set_alert_info('موفق', 'با موفقیت ثبت نام شدید!', ALERT_SUCCESS);
-                header('Location: ' . URL . 'auth/login');
+                $this->redirect('auth/login');
             } else {
                 $this->set_alert_info('خطا', 'ثبت نام با خطا مواجه شد.دوباره تلاش کنید', ALERT_ERROR);
-                header('Location: ' . URL . 'auth/register');
+                $this->redirect('auth/register');
             }
         }
     }
@@ -119,10 +112,10 @@ class authController extends Controller
         if ($status === 1) {
             $this->save_user_session($name, $id);
             $this->set_alert_info('موفق', 'شما با موفقیت وارد شدید!', ALERT_SUCCESS);
-            header('Location: ' . URL . 'dashboard/index');
+            $this->redirect('dashboard/index');
         } else {
             $this->set_alert_info('خطا', 'مشکلی در ورود پیش آمده است دوباره امتحان کنید', ALERT_ERROR);
-            header('Location: ' . URL . 'auth/login');
+            $this->redirect('auth/login');
         }
     }
 

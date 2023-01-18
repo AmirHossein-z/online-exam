@@ -1,3 +1,6 @@
+<a href="<?php echo URL . 'auth/logout' ?>"
+  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">خروج</a>
+
 <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
   <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
     <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
@@ -195,7 +198,7 @@
               </li>
             <?php } else if ($data['type'] === STUDENT) { ?>
                 <li class="items-center">
-                  <a href="./settings.html"
+                  <a href="<?php echo URL . 'dashboard/list_exams' ?>"
                     class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
                     <i class="fa-solid fa-clipboard-list text-sm ml-2 opacity-75"></i>
                     لیست آزمون ها
@@ -208,21 +211,21 @@
             <!-- Divider -->
             <hr class="my-4 md:min-w-full" />
             <!-- Heading -->
-            <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">تست</h6>
+            <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">سوال</h6>
 
             <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li class="items-center">
                 <a href="<?php echo URL . 'dashboard/add_question' ?>"
                   class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                   <i class="fa-solid fa-plus ml-2 text-sm opacity-75"></i>
-                  افزودن تست
+                  افزودن سوال
                 </a>
               </li>
               <li class="items-center">
                 <a href="<?php echo URL . 'dashboard/questions' ?>"
                   class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
                   <i class="fa-solid fa-list-ul ml-2 text-sm opacity-75"></i>
-                  لیست تست ها
+                  لیست سوالات
                 </a>
               </li>
             </ul>
