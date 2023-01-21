@@ -120,6 +120,27 @@ class Router
                 'action' => 'store',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
             ],
+            'edit_exam' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/exam_edit\/\d{1,10}$/',
+                'controller' => 'examController',
+                'action' => 'edit',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
+            'update_exam' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/exam_update$/',
+                'controller' => 'examController',
+                'action' => 'update',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
+            'delete_exam' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/exam_delete\/\d{1,10}$/',
+                'controller' => 'examController',
+                'action' => 'delete',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
             'list_exams' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/list_exams$/',
@@ -197,7 +218,6 @@ class Router
                 $params = (array) explode('/', $matches[0])[3];
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
-
                 call_user_func_array([$object, $route['action']], $params);
                 // $page_found = false;
             }

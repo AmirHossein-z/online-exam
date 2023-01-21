@@ -29,4 +29,13 @@ class Model
         }
         return $prepare->execute();
     }
+    /**
+     * a function for detect that a record exists
+     * there is a bug in the exeQuery, I can't solve it! 
+     */
+    // public function existsColumn($model_name, $column, $key)
+    // {
+    //     $query = "SELECT * FROM $model_name where $column = ?";
+    //     return $this->exeQuery($query, [$key] , false);
+    // }
 }

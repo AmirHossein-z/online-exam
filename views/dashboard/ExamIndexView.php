@@ -37,6 +37,10 @@
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 جزئیات آزمون
               </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                حذف
+              </th>
+              
             </tr>
           </thead>
           <tbody>
@@ -63,8 +67,14 @@
                 echo 'نمایش'; else echo 'عدم نمایش'; ?>
               </td>
               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <a href="<?= URL . 'exam/edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
+              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
               </td>
+              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <form action="<?= URL . 'dashboard/exam_delete/' . $d['exam_id'] ?>"
+                    method="post">
+                    <input type="hidden" name="exam_id" value="<?= $d['exam_id']?>">
+                <button type="submit">حذف</button>
+              </form>
             </tr>
             <?php } ?>
 
