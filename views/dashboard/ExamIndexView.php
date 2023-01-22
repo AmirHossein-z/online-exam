@@ -5,7 +5,8 @@
     <h2
         class="block text-right text-blueGray-600 text-base text-center my-4 transition-all duration-300 cursor-pointer p-4">
         تعداد کل آزمون ها: <span>
-            <?php echo count($data); ?>
+            <?php 
+            echo count($data); ?>
         </span>
     </h2>
     <!-- Table of exam properties -->
@@ -23,6 +24,9 @@
                 عنوان
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                استاد
+              </th>
+              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 توضیحات
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -34,13 +38,19 @@
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 نمایش نمره به دانشجویان
               </th>
+              <?php if ($_SESSION['type'] === MASTER) { ?>
+
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                جزئیات آزمون
+                ویرایش آزمون
               </th>
               <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                 حذف
               </th>
-              
+              <?php }
+              else if ($_SESSION['type'] === STUDENT) {
+                ?>
+              <p>ss</p>
+              <? } ?>
             </tr>
           </thead>
           <tbody>

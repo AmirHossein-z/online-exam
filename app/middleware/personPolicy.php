@@ -16,8 +16,10 @@ class personPolicy extends Controller
         if (isset($_SESSION) && $_SESSION['id']) {
             return true;
         }
-        $this->redirect($relative_path);
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     /**
