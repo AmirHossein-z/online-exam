@@ -7,6 +7,16 @@ class exam_masterModel extends Model
         parent::__construct();
     }
 
+    public function insert(int $exam_id, int $master_id): void
+    {
+        $query = "insert into exam_master (exam_id, master_id) values (?,?)";
+        $data = [
+            ['type' => 'i', 'value' => $exam_id],
+            ['type' => 'i', 'value' => $master_id],
+        ];
+        $this->exeQuery($query,$data,false);
+    }
+
     /**
      * return all exams that must be shown to special a student
      * @param int $master_id

@@ -44,11 +44,19 @@ class examModel extends Model
      * @return mixed
      */
 
-    public function select_all(): mixed
+    public function select_all_master_exams(int $master_id): mixed
     {
         try {
-            $query = "SELECT exam_id, title,description, duration, final_grade, show_grade FROM exam order by exam_id DESC";
-            $result = $this->exeQuery($query, [], true);
+            $query = "SELECT exam.exam_id, exam.title, exam.description, exam.duration, exam.final_grade, exam.show_grade, master.name
+            from exam
+            join exam_master on exam.exam_id = exam_master.exam_id 
+            join master on exam_master.master_id = master.master_id
+            WHERE exam_master.master_id = ?";
+            $data = [
+                ['type' => 'i',
+                'value' => $master_id],
+            ];
+            $result = $this->exeQuery($query, $data, true);
             if ($result->num_rows > 0) {
                 $exams = [];
                 for ($i = 0; $i < $result->num_rows; $i++) {
@@ -141,5 +149,12 @@ class examModel extends Model
             return true;
         }
         return false;
+    }
+
+    public function get_last_id()
+    {
+        $query = "select * from exam limit 1 desc";
+        return $this->exeQuery($query, [], true)->fetch_all();
+        
     }
 }

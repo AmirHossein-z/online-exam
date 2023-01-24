@@ -1,3 +1,7 @@
+<?php
+var_dump($data);
+exit;
+?>
 <div class="flex-auto px-4 lg:px-10 py-10 pt-0 w-full bg-blueGray-800">
     <form action="<?php
     if (isset($data[0]['exam_id']))

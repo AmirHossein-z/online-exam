@@ -5,9 +5,9 @@
             <?php echo count($data['questions_info']); ?>
         </span>
     </h2>
-
     <form class="max-w-4xl mx-auto" method="POST" action="<?php echo URL . 'dashboard/test_action' ?>">
-        <div class="grid grid-cols-2 gap-6 p-2">
+    <input type="hidden" name="exam_id" value="<?= $data['exam_id']; ?>">    
+    <div class="grid grid-cols-2 gap-6 p-2">
             <?php foreach ($data['questions_info'] as $question) { ?>
                 <div class="grid items-center border border-blueGray-200 rounded p-4 shadow-md">
                     <div class="flex justify-between items-center my-2">

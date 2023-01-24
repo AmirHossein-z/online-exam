@@ -1,90 +1,115 @@
 <div>
     <h1 class="block text-blueGray-800 text-2xl text-center my-4 transition-all duration-300 cursor-pointer">لیست آزمون های شما</h1>
 </div>
-<?php if (count($data) > 0) { ?>
-    <h2
-        class="block text-right text-blueGray-600 text-base text-center my-4 transition-all duration-300 cursor-pointer p-4">
-        تعداد کل آزمون ها: <span>
-            <?php 
-            echo count($data); ?>
-        </span>
-    </h2>
     <!-- Table of exam properties -->
-            <div class="flex flex-col">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-x-auto">
-        <table class="min-w-full">
-          <thead class="border-b">
+        <table class="items-center w-full bg-transparent border-collapse">
+          <thead class="text-center">
             <tr>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 #
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 عنوان
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 استاد
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 توضیحات
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 مدت زمان آزمون
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 نمره نهایی
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <!-- <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 نمایش نمره به دانشجویان
-              </th>
-              <?php if ($_SESSION['type'] === MASTER) { ?>
+              </th> -->
+              <?php
+              if ($_SESSION['type'] === STUDENT) {
+                ?>
+                   <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
+                      زمان شروع آزمون
+                   </th>
+                   <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
+                    شرکت در آزمون
+                    </th>
+              <?php } 
+              if ($_SESSION['type'] === MASTER) { ?>
 
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 ویرایش آزمون
               </th>
-              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 حذف
               </th>
-              <?php }
-              else if ($_SESSION['type'] === STUDENT) {
-                ?>
-              <p>ss</p>
-              <? } ?>
+              <?php } ?>
             </tr>
           </thead>
           <tbody>
               <!-- print every row of table -->
-            <?php foreach($data as $d) {?>
-
-            <tr class="bg-white border-b">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><?= $d['exam_id']; ?></td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+            <?php
+            $i = 1;
+            foreach ($data as $d) {
+              ?>
+              ‌‌‌
+            <tr class="bg-white">
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800"><?= $i++; ?></td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                 <?= $d['title']; ?>
 
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
+                <?= $d['name'] ?>
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                 <?= $d['description']; ?>
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                 <?= $d['duration']; ?>
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
               <?= $d['final_grade']; ?>
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <?php if ($d['show_grade'] == 1)
-                echo 'نمایش'; else echo 'عدم نمایش'; ?>
+              <!-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
+              <?php /*if ($d['show_grade'] == 1)
+                echo 'نمایش';
+              else
+                echo 'عدم نمایش'; */?>
+              </td> -->
+
+              <?php
+              if ($_SESSION['type'] === MASTER) { ?>
+  
+              <td>
+              <a class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer" href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
               </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
-              </td>
-              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+              
+              <td>
               <form action="<?= URL . 'dashboard/exam_delete/' . $d['exam_id'] ?>"
                     method="post">
-                    <input type="hidden" name="exam_id" value="<?= $d['exam_id']?>">
-                <button type="submit">حذف</button>
+                    <input type="hidden" name="exam_id" value="<?= $d['exam_id'] ?>">
+                <button type="submit">
+                  <a class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">حذف</a>
+                </button>
               </form>
+              </td>
+            <?php } ?>
+
+            <?php
+              if ($_SESSION['type'] === STUDENT) { ?>
+  
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
+              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank"><?= $d['']?> دقیقه</a>
+              </td>
+
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
+              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">شرکت در آزمون</a>
+              </td>
+              
+              <?php } ?>
+              
             </tr>
             <?php } ?>
 
@@ -94,5 +119,3 @@
     </div>
   </div>
 </div>
-
-    <?php } ?>

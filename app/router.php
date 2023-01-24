@@ -214,8 +214,9 @@ class Router
                         call_user_func_array([$object, $middleware_action], $param);
                     }
                 }
-
-                $params = (array) explode('/', $matches[0])[3];
+                $params = (array) explode('/', $matches[0]);
+                if(isset($params[3]))
+                    $params = (array) explode('/', $matches[0])[3];
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
                 call_user_func_array([$object, $route['action']], $params);

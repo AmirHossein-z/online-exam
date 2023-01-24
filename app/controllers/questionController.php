@@ -236,6 +236,7 @@ class questionController extends Controller
         }
 
         $data = [
+            'exam_id' => $exam_id,
             'questions_info' => $questions_info,
             'options_info' => $options_info,
         ];
@@ -245,8 +246,15 @@ class questionController extends Controller
         $this->footer('footer');
     }
 
-    public function test_action(int $exam_id)
+     /**
+      * Summary of test_action
+      * @param int $exam_id
+      * @return void
+      */
+
+    public function test_action()
     {
+
         var_dump($_POST);
     }
 }

@@ -16,6 +16,12 @@ class examController extends Controller
         $questions = $this->model('question');
         $questions = $questions->get_all($_SESSION['id']);
         $data = $questions;
+        $exam_model = $this->model('exam');
+
+        $get_last_exam_id = $exam_model->get_last_id();
+        var_dump($get_last_exam_id);
+        exit;
+
         $this->header('header');
         // $this->navbar('navbar');
         $this->view('dashboard/addExamView', $data);
@@ -43,9 +49,16 @@ class examController extends Controller
         $show_grade = filter_var($_POST['show_grade'], FILTER_VALIDATE_BOOL) === "on" ? 1 : 0;
         $question_ids = array_map('strip_tags', $_POST['questions']);
 
+        //information for exam_master table
+        $master_id = $_SESSION['id'];
+
         //  insert exam information into exam table and fetch it's ID
         $exam_model = $this->model('exam');
         $exam_id = $exam_model->insert($title, $description, $duration, $final_grade, $show_grade);
+
+        // insert exam and master id's into exam_master
+        $exam_master_model = $this->model('exam_master');
+        $exam_model->insert($exam_id, $master_id);
 
         // insert exam questions in exam_question table
         $exam_question_model = $this->model('exam_question');
@@ -68,12 +81,9 @@ class examController extends Controller
     {
         $exam_model = $this->model('exam');
         $exam_model = new examModel;
-        $exams = $exam_model->select_all();
-        //  foreach ($exams as $exam) {
-        //      var_dump($exam);
-        //  }
+        $exams = $exam_model->select_all_master_exams($_SESSION['id']);
         $data = $exams;
-
+        
         $this->header('header');
         // $this->navbar('navbar');
         $this->view('dashboard/ExamIndexView', $data);
