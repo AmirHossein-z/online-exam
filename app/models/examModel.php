@@ -153,8 +153,7 @@ class examModel extends Model
 
     public function get_last_id()
     {
-        $query = "select * from exam limit 1 desc";
-        return $this->exeQuery($query, [], true)->fetch_all();
-        
+        $query = "select exam_id from exam ORDER by exam_id DESC limit 1";
+        return $this->exeQuery($query, [], true)->fetch_assoc();
     }
 }

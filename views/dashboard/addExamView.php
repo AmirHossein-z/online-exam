@@ -1,6 +1,6 @@
 <?php
-var_dump($data);
-exit;
+// var_dump($data);
+// exit;
 ?>
 <div class="flex-auto px-4 lg:px-10 py-10 pt-0 w-full bg-blueGray-800">
     <form action="<?php
@@ -10,7 +10,7 @@ exit;
     echo URL . 'dashboard/exam/store' ?>" method="POST"
         class="max-w-xl grid mx-auto bg-blueGray-200 p-5">
         <div class="relative w-full my-4">
-            <input type="hidden" name="exam_id" value="<?php echo $data[0]['exam_id']; ?>">
+            <input type="hidden" name="exam_id" value="<?php echo ++$data[3]['exam_id']; ?>">
             <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="title">
                 عنوان آزمون:
             </label>

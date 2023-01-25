@@ -246,15 +246,5 @@ class questionController extends Controller
         $this->footer('footer');
     }
 
-     /**
-      * Summary of test_action
-      * @param int $exam_id
-      * @return void
-      */
-
-    public function test_action()
-    {
-
-        var_dump($_POST);
-    }
+    
 }

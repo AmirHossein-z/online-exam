@@ -158,7 +158,7 @@ class Router
             'test_action' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/test_action$/',
-                'controller' => 'questionController',
+                'controller' => 'participateController',
                 'action' => 'test_action',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
             ],

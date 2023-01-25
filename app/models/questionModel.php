@@ -188,4 +188,47 @@ class questionModel extends Model
         }
         return $questions_id;
     }
+
+    /**
+     * Summary of selectCorrectOptions
+     * @param mixed $exam_id
+     * @return array
+     */
+    public function selectCorrectOptions($exam_id): array
+    {
+        $query = "SELECT * from exam_question join question
+        on
+        exam_question.question_id = question.question_id
+        WHERE exam_id = ?";
+
+        $data = [
+            ['type' => 'i', 'value' => $exam_id]
+        ];
+
+        $result = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+
+        $question_answer = [];
+        foreach ($result as $item) {
+            $question_answer[$item['question_id']] = $item['option_id'];
+        }
+        return $question_answer;
+    }
+
+    /**
+     * Summary of getGrade
+     * @param int $question_id
+     * @return float
+     */
+    public function getGrade(int $question_id): float
+    {
+        $query = "select grade from question
+                where question_id = ?";
+
+        $data = [
+            ['type' => 'i', 'value' => $question_id]
+        ];
+
+        $result = $this->exeQuery($query, $data, true)->fetch_assoc();
+        return $result['grade'];
+    }
 }

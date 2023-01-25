@@ -17,6 +17,9 @@
             <th
                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 نمره کل آزمون</th>
+                <th
+                    class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
+                    نمره شما</th>
             <th
                 class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 استاد</th>
@@ -42,6 +45,16 @@
                 <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                     <?php echo $exam['final_grade'] ?>
+                </td>
+                <td
+                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
+                    <?php
+                    if ($exam['show_grade'] === 1)
+                        echo $data['student_grade'] . ' از ' . $exam['final_grade'];
+                    else
+                        echo 'مخفی';    
+                    ?>
+                    
                 </td>
                 <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">

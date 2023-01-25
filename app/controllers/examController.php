@@ -17,13 +17,11 @@ class examController extends Controller
         $questions = $questions->get_all($_SESSION['id']);
         $data = $questions;
         $exam_model = $this->model('exam');
-
+        $get_last_exam_id = [];
         $get_last_exam_id = $exam_model->get_last_id();
-        var_dump($get_last_exam_id);
-        exit;
-
+        
+        array_push($data, $get_last_exam_id);
         $this->header('header');
-        // $this->navbar('navbar');
         $this->view('dashboard/addExamView', $data);
         $this->footer('footer');
     }
@@ -113,13 +111,16 @@ class examController extends Controller
             // status should be set for every exam that student can participate in exam or not
             foreach ($result as $index => $item) {
                 $info = $exam->get_info_by_exam_id($item['exam_id'])[0];
-                array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'final_grade' => $info['final_grade'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null]);
+                array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'final_grade' => $info['final_grade'], 'show_grade' => $info['show_grade'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null]);
             }
-
         }
-        // var_dump($master_info[0]['master_id']);
+
+        $participate_model = $this->model('participate');
+        $student_grade = $participate_model->getStudentGrade($_SESSION['id']);
+        
         $data = [
             'exams_info' => $exams_info,
+            'student_grade' => $student_grade
         ];
 
         $this->header('header');

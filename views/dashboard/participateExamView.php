@@ -28,7 +28,7 @@
                             <?php foreach ($data['options_info'] as $option) { ?>
                                 <?php if ($option['question_id'] === $question['id']) { ?>
                                     <div class="flex">
-                                        <label class="inline-flex items-center cursor-pointer"><input type="radio" name="option_multi_answer[<?php echo $question['id']; ?>]" value="<?php echo $option['id'] ?>"
+                                        <label class="inline-flex items-center cursor-pointer"><input type="radio" name="option_multi_answer[<?php echo intval($question['id']); ?>]" value="<?php echo intval($option['id']) ?>"
                                                 class="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 border border-gray-300" /><span
                                                 class="ml-2 text-sm font-semibold text-blueGray-600"><?php echo $option['info'] ?></span></label>
                                         <!-- <p class="block text-gray-900 text-sm transition-all duration-300 cursor-pointer">
