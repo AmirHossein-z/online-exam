@@ -27,17 +27,11 @@
                 نمایش نمره به دانشجویان
               </th> -->
               <?php
-              if ($_SESSION['type'] === STUDENT) {
-                ?>
-                   <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
-                      زمان شروع آزمون
-                   </th>
-                   <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
-                    شرکت در آزمون
-                    </th>
-              <?php } 
               if ($_SESSION['type'] === MASTER) { ?>
 
+              <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
+                افزودن سوال
+              </th>
               <th scope="col" class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold">
                 ویرایش آزمون
               </th>
@@ -72,15 +66,14 @@
               <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
               <?= $d['final_grade']; ?>
               </td>
-              <!-- <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
-              <?php /*if ($d['show_grade'] == 1)
-                echo 'نمایش';
-              else
-                echo 'عدم نمایش'; */?>
-              </td> -->
 
               <?php
               if ($_SESSION['type'] === MASTER) { ?>
+
+              <td>
+              <a class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer" href="<?= URL . 'dashboard/exam_createQuestion/' . $d['exam_id'] ?>" target="_blank"> افزودن سوال</a>
+              </td>
+              
   
               <td>
               <a class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer" href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">جزئیات آزمون</a>
@@ -95,20 +88,9 @@
                 </button>
               </form>
               </td>
+
+
             <?php } ?>
-
-            <?php
-              if ($_SESSION['type'] === STUDENT) { ?>
-  
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
-              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank"><?= $d['']?> دقیقه</a>
-              </td>
-
-              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
-              <a href="<?= URL . 'dashboard/exam_edit/' . $d['exam_id']; ?>" target="_blank">شرکت در آزمون</a>
-              </td>
-              
-              <?php } ?>
               
             </tr>
             <?php } ?>

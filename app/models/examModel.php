@@ -20,18 +20,19 @@ class examModel extends Model
 
     public function insert(
         string $title, string $description, int $duration,
-        float $final_grade, int $show_grade
+        float $final_grade, int $show_grade, string $date
     ): int
     {
         $query = "insert into exam
-                  (title, description, duration, final_grade, show_grade)
-                  values (?,?,?,?,?)";
+                  (title, description, duration, final_grade, show_grade, date)
+                  values (?,?,?,?,?,?)";
         $data = [
             ['type' => 's', 'value' => $title],
             ['type' => 's', 'value' => $description],
             ['type' => 'i', 'value' => $duration],
             ['type' => 'd', 'value' => 20.5],
             ['type' => 'i', 'value' => $show_grade],
+            ['type' => 's', 'value' => $date],
         ];
 
         // throw error
@@ -97,10 +98,10 @@ class examModel extends Model
      */
 
      public function update(int $exam_id, string $title, string $description, int $duration,
-     float $final_grade, int $show_grade): void
+     float $final_grade, int $show_grade, string $date): void
      {
         $query = "update exam
-                  set title=?, description=? , duration=?, final_grade=?, show_grade=?
+                  set title=?, description=? , duration=?, final_grade=?, show_grade=?, date=?
                   where exam_id = $exam_id";
         $data = [
             ['type' => 's', 'value' => $title],
@@ -108,6 +109,7 @@ class examModel extends Model
             ['type' => 'i', 'value' => $duration],
             ['type' => 'd', 'value' => 20.5],
             ['type' => 'i', 'value' => $show_grade],
+            ['type' => 's', 'value' => $date],
         ];
 
         // throw error

@@ -67,7 +67,11 @@
                         شرکت در آزمون
                     </a>
                     <span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">
-                        تمام شده
+                        <?php 
+                        echo time();
+                        if($exam['created_at'] < time())
+                        ?>
+
                     </span>
                 </td>
             </tr>

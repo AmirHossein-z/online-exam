@@ -1,6 +1,6 @@
 </div>
 
-<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="<?php echo URL ?>public/js/popper.js"></script>
 <script>
     /* Make dynamic date appear */
     (function () {

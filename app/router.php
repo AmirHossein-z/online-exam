@@ -141,6 +141,20 @@ class Router
                 'action' => 'delete',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
             ],
+            'exam_createQuestion' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/exam_createQuestion\/\d{1,10}$/',
+                'controller' => 'examController',
+                'action' => 'createQuestion',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
+            'exam_storeQuestion' => [
+                'type' => 'POST',
+                'pattern_url' => '/^\/dashboard\/exam_delete\/\d{1,10}$/',
+                'controller' => 'examController',
+                'action' => 'delete',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
             'list_exams' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/list_exams$/',

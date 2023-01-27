@@ -45,25 +45,29 @@ class examController extends Controller
             $this->redirect('dashboard/exam/create');
         }
         $show_grade = filter_var($_POST['show_grade'], FILTER_VALIDATE_BOOL) === "on" ? 1 : 0;
-        $question_ids = array_map('strip_tags', $_POST['questions']);
+        
+        // time and date info
+        $date = strip_tags($_POST['date_submit']);
+        $time = strip_tags($_POST['time_submit']);
+        $date = $date . ' ' . $time;
 
         //information for exam_master table
         $master_id = $_SESSION['id'];
 
         //  insert exam information into exam table and fetch it's ID
         $exam_model = $this->model('exam');
-        $exam_id = $exam_model->insert($title, $description, $duration, $final_grade, $show_grade);
+        $exam_id = $exam_model->insert($title, $description, $duration, $final_grade, $show_grade, $date);
 
         // insert exam and master id's into exam_master
         $exam_master_model = $this->model('exam_master');
-        $exam_model->insert($exam_id, $master_id);
+        $exam_master_model->insert($exam_id, $master_id);
 
         // insert exam questions in exam_question table
-        $exam_question_model = $this->model('exam_question');
-        foreach ($question_ids as $question_id) {
-            // each question and one exam has it's own ID
-            $exam_question_model->insert($exam_id, $question_id);
-        }
+        // $exam_question_model = $this->model('exam_question');
+        // foreach ($question_ids as $question_id) {
+        //     // each question and one exam has it's own ID
+        //     $exam_question_model->insert($exam_id, $question_id);
+        // }
 
         // redirect after insert
         $this->redirect('dashboard/exam/index');
@@ -156,10 +160,14 @@ class examController extends Controller
         $duration = intval(filter_var($_POST['duration'], FILTER_SANITIZE_NUMBER_INT));
         $grade = floatval(filter_var($_POST['grade'], FILTER_SANITIZE_NUMBER_FLOAT));
         $show_grade = filter_var($_POST['show_grade'], FILTER_VALIDATE_BOOL) === "on" ? 1 : 0;
+        // time and date info
+        $date = strip_tags($_POST['date_submit']);
+        $time = strip_tags($_POST['time_submit']);
+        $date = $date . ' ' . $time;
 
         //  update exam information into exam table and fetch it's ID
         $exam_model = $this->model('exam');
-        $exam_model->update($exam_id, $title, $description, $duration, $grade, $show_grade);
+        $exam_model->update($exam_id, $title, $description, $duration, $grade, $show_grade, $date);
 
         header('Location: ' . 'exam/index', 200);
     }
@@ -186,5 +194,19 @@ class examController extends Controller
             } else
                 $this->set_alert_info('خطا', 'لطفا ابتدا سوال آزمون مورد نظر را از بخش لیست سوالات حذف کنید!', ALERT_ERROR);
         }
+    }
+
+    /**
+     * Summary of createQuestion
+     * @return void
+     */
+    public function createQuestion(): void
+    {
+        $questions = $this->model('question');
+        $questions = $questions->get_all($_SESSION['id']);
+        
+        $this->header('header');
+        $this->view('dashboard/addExamQuestionView', $questions);
+        $this->footer('footer');
     }
 }

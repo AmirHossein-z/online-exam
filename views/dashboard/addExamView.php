@@ -10,7 +10,7 @@
     echo URL . 'dashboard/exam/store' ?>" method="POST"
         class="max-w-xl grid mx-auto bg-blueGray-200 p-5">
         <div class="relative w-full my-4">
-            <input type="hidden" name="exam_id" value="<?php echo ++$data[3]['exam_id']; ?>">
+            <input type="hidden" name="exam_id" value="<?php if(isset($data['exam_id'])) $exam_id = ++$data[3]['exam_id']; echo $exam_id ?>">
             <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="title">
                 عنوان آزمون:
             </label>
@@ -50,20 +50,35 @@
                     class="ml-2 text-sm font-semibold text-blueGray-600">نمایش نمره به دانشجویان در پایان
                     آزمون</span></label>
         </div>
-        <div>
-            <select name="questions[]" multiple>
-                <?php
-                $questions = $data;
-                foreach ($questions as $question) {
-                    ?>
-                    <option value="<?= $question['question_id']; ?>">
-                        <?= $question['q_info'] ?>
-                    </option>
-                    <?php } ?>
-            </select>
+
+        <link rel="stylesheet" href="<?php echo URL ?>public/plugin/pickdate/themes/classic.css">
+                <!-- Add the stylings *after* the pickadate theme files -->
+<link rel="stylesheet" href="<?php echo URL ?>public/plugin/pickdate/themes/rtl.css">
+
+<div class="relative w-full my-4">
+            <div>
+                <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="final_grade"> ساعت آزمون
+                </label>
+
+            </div>
+            <input required name="time" class="timepicker" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], 11, null); ?>" />
+
         </div>
-        <div class="text-center mt-2">
-            <button
+
+        <div class="relative w-full my-4">
+            <div>
+                <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="final_grade">تاریخ آزمون
+                </label>
+
+            </div>
+            <input name="date" class="datepicker" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], null, 10); ?>" />
+        </div>
+
+
+
+        <span class="text-black bg-blueGray-400 active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">لطفا پس از افزودن آزمون سوالات را به آزمون اضافه نمایید.</span>
+
+        <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                 type="submit">
                 افزودن آزمون
@@ -71,3 +86,23 @@
         </div>
     </form>
 </div>
+
+<!-- scripts -->
+        <!-- add exam starting date and time -->
+        <script src="<?php echo URL ?>public/js/jquery-3.6.3.min.js"></script>
+        <script src="<?php echo URL ?>public/plugin/pickdate/picker.js"></script>
+        <script src="<?php echo URL ?>public/plugin/pickdate/picker.date.js"></script>
+        <script src="<?php echo URL ?>public/plugin/pickdate/picker.time.js"></script>
+        <script src="<?php echo URL ?>public/plugin/pickdate/legacy.js"></script>
+<!-- Add the language *after* the pickadate script files -->
+<!-- <script src="<?php echo URL ?>public/plugin/pickdate/translations/fa_IR.js"></script> -->
+
+<script>
+    $('.datepicker').pickadate({
+        formatSubmit: 'yyyy-mm-dd',
+    });
+
+    $('.timepicker').pickatime({
+        formatSubmit: 'HH:i',
+    });
+</script>
