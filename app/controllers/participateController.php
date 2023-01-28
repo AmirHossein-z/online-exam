@@ -9,6 +9,8 @@ class participateController extends Controller
 
     public function test_action(): void
     {
+        //prerequirement: checking date and time of exam
+
         //first of all create answers in answer table
         $exam_id = $_POST['exam_id'];
         $student_answers = $_POST['option_multi_answer'];
@@ -28,8 +30,6 @@ class participateController extends Controller
         foreach ($student_answers as $key => $value) {
             $student_answers[$key] = intval($value);
         }
-        // var_dump($student_answers);
-        // var_dump($answer_questions);
 
         foreach($answer_questions as $question_id => $correct_answer)
         {
@@ -42,11 +42,6 @@ class participateController extends Controller
                     $question_grade = $question_model->getGrade($question_id);
                     $grade += $question_grade;
                 }
-                // foreach($student_answers as $student_answer)
-                // {
-                //         $student_option = $student_answer[$question_id];
-                //         var_dump($student_option); 
-                //     }
                 }
             }
 

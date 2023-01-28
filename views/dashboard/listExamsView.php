@@ -29,7 +29,8 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($data['exams_info'] as $exam) { ?>
+        <?php 
+        foreach ($data['exams_info'] as $exam) { ?>
             <tr>
                 <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
@@ -67,9 +68,11 @@
                         شرکت در آزمون
                     </a>
                     <span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">
+                        <input type="time" class="date">
                         <?php 
-                        echo time();
-                        if($exam['created_at'] < time())
+
+                        echo($exam['date']);
+                        if($exam['date'] < time())
                         ?>
 
                     </span>

@@ -61,7 +61,7 @@
                 </label>
 
             </div>
-            <input required name="time" class="timepicker" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], 11, null); ?>" />
+            <input required type="time" name="time_submit" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], 11, null); ?>" />
 
         </div>
 
@@ -71,7 +71,7 @@
                 </label>
 
             </div>
-            <input name="date" class="datepicker" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], null, 10); ?>" />
+            <input required type="date" name="date_submit" value="<?php if(isset($data[0]['date'])) echo substr($data[0]['date'], 0, 10); ?>" />
         </div>
 
 
@@ -86,23 +86,3 @@
         </div>
     </form>
 </div>
-
-<!-- scripts -->
-        <!-- add exam starting date and time -->
-        <script src="<?php echo URL ?>public/js/jquery-3.6.3.min.js"></script>
-        <script src="<?php echo URL ?>public/plugin/pickdate/picker.js"></script>
-        <script src="<?php echo URL ?>public/plugin/pickdate/picker.date.js"></script>
-        <script src="<?php echo URL ?>public/plugin/pickdate/picker.time.js"></script>
-        <script src="<?php echo URL ?>public/plugin/pickdate/legacy.js"></script>
-<!-- Add the language *after* the pickadate script files -->
-<!-- <script src="<?php echo URL ?>public/plugin/pickdate/translations/fa_IR.js"></script> -->
-
-<script>
-    $('.datepicker').pickadate({
-        formatSubmit: 'yyyy-mm-dd',
-    });
-
-    $('.timepicker').pickatime({
-        formatSubmit: 'HH:i',
-    });
-</script>
