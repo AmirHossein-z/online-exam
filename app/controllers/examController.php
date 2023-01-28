@@ -106,16 +106,19 @@ class examController extends Controller
         $exam_master = $this->model('exam_master');
         $exams_info = [];
         foreach ($all_properties as $index => $prop) {
+        // checking the status of exam should be 1 to show
+            if($all_properties[$index]['status'] == 1)
+            {
             $master_id = $all_properties[$index]['master_id'];
             $result = $exam_master->exams_for_student($master_id, $student_id);
 
             $master = $this->model('master');
             $master_info = $master->get_person_info(MASTER, $master_id)[0];
             $exam = $this->model('exam');
-            // status should be set for every exam that student can participate in exam or not
-            foreach ($result as $index => $item) {
-                $info = $exam->get_info_by_exam_id($item['exam_id'])[0];
-                array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'final_grade' => $info['final_grade'], 'show_grade' => $info['show_grade'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null]);
+                foreach ($result as $index => $item) {
+                    $info = $exam->get_info_by_exam_id($item['exam_id'])[0];
+                    array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'final_grade' => $info['final_grade'], 'show_grade' => $info['show_grade'], 'date' => $info['date'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null]);
+                }
             }
         }
 
