@@ -123,7 +123,7 @@ class authController extends Controller
     {
         session_destroy();
         session_start();
-        header('Location:' . URL . 'auth/login');
+        $this->redirect('auth/login');
         exit();
     }
 }

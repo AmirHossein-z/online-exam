@@ -6,13 +6,26 @@ class Model
     public function __construct()
     {
         $this->connection = new mysqli('localhost', 'root', '123456', 'online-test');
+        // $this->connection = new mysqli('localhost', 'root', '', 'online-test');
     }
 
+    /**
+     * automate execute query to mysql database
+     * @param string $query
+     * @param array $data
+     * @param bool $returnData
+     * @return bool|mysqli_result
+     */
     public function exeQuery(string $query, array $data = [], bool $returnData)
-    { // $data = [
-        //     ['type' => 's', 'value' => 'string'],
-        //     ['type' => 'i', 'value' => 'int']
-        // ];
+    { 
+        /*
+            data should be like
+            $data = [
+                ['type' => 's', 'value' => 'string'],
+                ['type' => 'i', 'value' => 'int'],
+                ['type' => 'd', 'value' => 'float'],
+            ];
+        */
         $prepare = $this->connection->prepare($query);
         $type = '';
         $values = [];
@@ -29,6 +42,7 @@ class Model
         }
         return $prepare->execute();
     }
+
     /**
      * a function for detect that a record exists
      * there is a bug in the exeQuery, I can't solve it! 

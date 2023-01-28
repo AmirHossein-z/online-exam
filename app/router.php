@@ -234,7 +234,6 @@ class Router
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
                 call_user_func_array([$object, $route['action']], $params);
-                // $page_found = false;
             }
         }
 
@@ -244,9 +243,5 @@ class Router
             $object = new indexController();
             $object->show_main_page();
         }
-
-        // echo '404 Location ' . $url . ' Not found!'; 
-        // header('Location: '. '/online-exam/dashboard/four_four');
-
     }
 }

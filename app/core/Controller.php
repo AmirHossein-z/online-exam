@@ -42,35 +42,62 @@ class Controller
         if (isset($_SESSION['alert'])) {
             $alert = ['type' => $_SESSION['alert']['type'], 'title' => $_SESSION['alert']['title'], 'message' => $_SESSION['alert']['message']];
             $data['alert'] = $alert;
+            // alert should be shown to user only once
             $_SESSION['alert'] = null;
         }
         return $data;
     }
-    public function view($view_path, $data = []): void
+
+    /**
+     * require desired view
+     * @param string $view_path
+     * @param array $data
+     * @return void
+     */
+    public function view(string $view_path, array $data = []): void
     {
         require 'views/' . $view_path . '.php';
     }
 
-    public function header($header_path): void
+    /**
+     * require desired header
+     * @param string $header_path
+     * @return void
+     */
+    public function header(string $header_path): void
     {
         require "views/layout/" . $header_path . ".php";
     }
 
-    public function footer($footer_path): void
+    /**
+     * require desired footer
+     * @param string $footer_path
+     * @return void
+     */
+    public function footer(string $footer_path): void
     {
         require "views/layout/" . $footer_path . ".php";
     }
 
-    public function navbar($nav_path): void
+    /**
+     * require desired navbar
+     * @param string $nav_path
+     * @return void
+     */
+    public function navbar(string $nav_path): void
     {
         require 'views/layout/' . $nav_path . '.php';
     }
-    public function model($model_name)
+    
+    /**
+     * required desired DB model
+     * @param string $model_name
+     * @return object
+     */
+    public function model(string $model_name):object
     {
         $filename = $model_name . 'Model';
         require_once 'app/models/' . $filename . '.php';
         return new $filename;
-
-        // return new $model_name . 'Model';
     }
 }
