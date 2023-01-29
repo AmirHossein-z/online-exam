@@ -20,14 +20,14 @@ class Router
                 'pattern_url' => '/^\/auth\/login$/',
                 'controller' => 'authController',
                 'action' => 'login',
-                'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ["personPolicy:is_login:dashboard/index,".NOWHERE],
             ],
             'loggedIn' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/auth\/login_user$/',
                 'controller' => 'authController',
                 'action' => 'login_user',
-                'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:dashboard/index,'.NOWHERE],
             ],
             'logout' => [
                 'type' => 'GET',
@@ -40,63 +40,63 @@ class Router
                 'pattern_url' => '/^\/auth\/register$/',
                 'controller' => 'authController',
                 'action' => 'register',
-                'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:dashboard/index,'.NOWHERE],
             ],
             'registered' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/auth\/register_user$/',
                 'controller' => 'authController',
                 'action' => 'register_user',
-                'middleware' => ['personPolicy:is_login:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:dashboard/index,'.NOWHERE],
             ],
             'dashboard' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/index$/',
                 'controller' => 'dashboardController',
                 'action' => 'index',
-                'middleware' => ['personPolicy:is_login:auth/login'],
+                'middleware' => ["personPolicy:is_login:" . NOWHERE . ",auth/login"],
             ],
             'list_questions' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/questions$/',
                 'controller' => 'questionController',
                 'action' => 'show_questions',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'add_question' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/add_question$/',
                 'controller' => 'questionController',
                 'action' => 'add_question',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'add_one_question' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/add_one_question$/',
                 'controller' => 'questionController',
                 'action' => 'add_one_question',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'edit_question' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/edit_question\/\d{1,10}$/',
                 'controller' => 'questionController',
                 'action' => 'edit_question',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'edit_one_question' => [
                 'type' => "POST",
                 'pattern_url' => '/^\/dashboard\/edit_one_question\/\d{1,10}$/',
                 'controller' => 'questionController',
                 'action' => 'edit_one_question',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'delete_question' => [
                 'type' => "GET",
                 'pattern_url' => '/^\/dashboard\/delete_question\/\d{1,10}$/',
                 'controller' => 'questionController',
                 'action' => 'delete_question',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index'],
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             // exam Routing
             'index_exam' => [
@@ -104,105 +104,105 @@ class Router
                 'pattern_url' => '/^\/dashboard\/exam\/index$/',
                 'controller' => 'examController',
                 'action' => 'index',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'create_exam' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/exam\/create$/',
                 'controller' => 'examController',
                 'action' => 'create',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'store_exam' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/exam\/store$/',
                 'controller' => 'examController',
                 'action' => 'store',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'edit_exam' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/exam_edit\/\d{1,10}$/',
                 'controller' => 'examController',
                 'action' => 'edit',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'update_exam' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/exam_update$/',
                 'controller' => 'examController',
                 'action' => 'update',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'delete_exam' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/exam_delete\/\d{1,10}$/',
                 'controller' => 'examController',
                 'action' => 'delete',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'exam_createQuestion' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/exam_createQuestion\/\d{1,10}$/',
                 'controller' => 'examController',
                 'action' => 'createQuestion',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'exam_storeQuestion' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/exam_delete\/\d{1,10}$/',
                 'controller' => 'examController',
                 'action' => 'delete',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'list_exams' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/list_exams$/',
                 'controller' => 'examController',
                 'action' => 'list_exams',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_student:'.NOWHERE.',dashboard/index'],
             ],
             'test' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/participate\/\d{1,10}$/',
                 'controller' => 'questionController',
                 'action' => 'questions_exam',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_student:'.NOWHERE.',dashboard/index'],
             ],
             'test_action' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/test_action$/',
                 'controller' => 'participateController',
                 'action' => 'test_action',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_student:'.NOWHERE.',dashboard/index'],
             ],
             'list_students' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/list_students$/',
                 'controller' => 'masterController',
                 'action' => 'list_students',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'enable_student' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/enable_student\/\d{1,10}$/',
                 'controller' => 'masterController',
                 'action' => 'enable_student',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_master:'.NOWHERE.',dashboard/index'],
             ],
             'list_masters' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/list_masters$/',
                 'controller' => 'studentController',
                 'action' => 'list_masters',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_student:'.NOWHERE.',dashboard/index'],
             ],
             'add_master' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/add_master\/\d{1,10}$/',
                 'controller' => 'studentController',
                 'action' => 'add_master',
-                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+                'middleware' => ['personPolicy:is_login:'.NOWHERE.',auth/login', 'personPolicy:is_student:'.NOWHERE.',dashboard/index'],
             ],
         ];
 
@@ -221,7 +221,7 @@ class Router
                         $result = explode(':', $middleware);
                         $middleware_class = $result[0];
                         $middleware_action = $result[1];
-                        $param = (array) $result[2];
+                        $param = explode(',', $result[2]);
 
                         require_once 'app/middleware/' . $middleware_class . '.php';
                         $object = new $middleware_class();
@@ -236,7 +236,6 @@ class Router
                 call_user_func_array([$object, $route['action']], $params);
             }
         }
-
 
         if ($_GET['url'] === null) {
             require 'app/controllers/indexController.php';
