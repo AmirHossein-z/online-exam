@@ -162,6 +162,8 @@ class Router
                 'action' => 'list_exams',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
             ],
+
+            // participate routes
             'test' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/participate\/\d{1,10}$/',
@@ -175,6 +177,20 @@ class Router
                 'controller' => 'participateController',
                 'action' => 'store',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
+            ],
+            'participate_index' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate\/index$/',
+                'controller' => 'participateController',
+                'action' => 'index',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
+            ],
+            'participate_show' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate_show\/\d{1,10}$/',
+                'controller' => 'participateController',
+                'action' => 'show',
+                'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
             ],
             'list_students' => [
                 'type' => 'GET',

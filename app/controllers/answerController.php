@@ -14,7 +14,7 @@ class answerController extends Controller
        * @param int $student_id
        * @return void
        */
-      public function create(int $exam_id,array $answers, int $student_id) : void
+      public function create(int $exam_id, array $answers, int $student_id) : void
       {
           $answer_model = $this->model('answer');
           $answer_model->insert($exam_id, $answers, $student_id);

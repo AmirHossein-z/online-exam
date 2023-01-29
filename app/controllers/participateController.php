@@ -7,6 +7,12 @@ class participateController extends Controller
         parent::__construct();
     }
 
+
+    /**
+     * Summary of create
+     * @param int $exam_id
+     * @return void
+     */
     public function create(int $exam_id)
     {
         $student_id = $_SESSION['id'];
@@ -45,6 +51,7 @@ class participateController extends Controller
 
         $data = [
             'exam_id' => $exam_id,
+            'exam_duration' => $exam_info[0]['duration'],
             'questions_info' => $questions_info,
             'options_info' => $options_info,
         ];
@@ -54,14 +61,19 @@ class participateController extends Controller
         $this->footer('footer');
     }
 
+    /**
+     * Summary of store
+     * @return void
+     */
     public function store(): void
     {
+        var_dump($_POST); exit;
         //first of all create answers in answer table
         $student_id = $_SESSION['id'];
         $exam_id = $_POST['exam_id'];
 
         $student_answers = $_POST['option_multi_answer'];
-
+        
         include_once('answerController.php');
         $answerController = new answerController;
         $answerController->create($exam_id, $student_answers, $student_id);
@@ -96,6 +108,31 @@ class participateController extends Controller
         $participate_model->insert($exam_id, $student_id, $grade);
 
         $this->redirect('dashboard/list_exams');
+    }
+
+    public function index(): void
+    {
+        // var_dump($_SESSION); exit;
+        $participate_model = $this->model('participate');
+        $data = $participate_model->getParticipates($_SESSION['id']);
+
+        $person_model = $this->model('person');
+
+        foreach ($data as $index => $item) {
+            $person_name = $person_model->get_person_name(STUDENT, $data[$index]['student_id'])['name'];
+            $data[$index] += ['student_name' => $person_name];
+        }
+
+        $exam_model = $this->model('exam');
+
+        foreach ($data as $index => $item) {
+            $exam_title = $exam_model->get_info_by_exam_id($data[$index]['exam_id'])[0]['title'];
+            $data[$index] += ['exam_title' => $exam_title];
+        }
+
+        $this->header('header');
+        $this->view('dashboard/participate/ParticipateIndexView', $data);
+        $this->footer('footer');
     }
 }
 ?>

@@ -1,4 +1,4 @@
-<!-- <div class="grid items-center justify-center gap-6 m-4 p-4 max-w-580-px max-h-860-px z-50 fixed right-0 top-0 rounded-md cursor-pointer <?php if ($data['type'] === ALERT_SUCCESS) {
+<div class="grid items-center justify-center gap-6 m-4 p-4 max-w-580-px max-h-860-px z-50 fixed right-0 top-0 rounded-md cursor-pointer <?php if ($data['type'] === ALERT_SUCCESS) {
     echo 'bg-emerald-400';
 } else {
     echo 'bg-red-500';
@@ -31,4 +31,4 @@
     };
 
     alert.addEventListener("click", () => removeAlert(alert));
-</script> -->
+</script>

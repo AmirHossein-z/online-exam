@@ -202,6 +202,13 @@
                   افزودن آزمون
                 </a>
               </li>
+              <li class="items-center">
+                <a href="<?php echo URL . 'dashboard/participate/index' ?>"
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block flex items-center">
+                  <i class="fa-solid fa-square-plus text-sm ml-2 opacity-75"></i>
+                  لیست شرکت کنندگان
+                </a>
+              </li>
             <?php } else if ($data['type'] === STUDENT) { ?>
                 <li class="items-center">
                   <a href="<?php echo URL . 'dashboard/list_exams' ?>"

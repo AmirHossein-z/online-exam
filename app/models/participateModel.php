@@ -72,5 +72,35 @@ class participateModel extends Model
         $result = $this->exeQuery($query, $data, true)->fetch_column();
         return $result;
     }
+
+    /**
+     * Summary of getParticipates
+     * @return array
+     */
+    public function getParticipates(int $master_id): array
+    {
+        $query = "SELECT * FROM `participate` JOIN exam_master
+        on exam_master.exam_id = participate.exam_id
+        WHERE exam_master.master_id = ?";
+
+        $data = [
+            ['type' => 's', 'value' => $master_id]
+        ];
+
+        $participates = $this->exeQuery($query, $data, true)->fetch_all($mode = MYSQLI_ASSOC);
+        $result = [];
+        foreach ($participates as $record)
+        {
+            array_push($result,
+            [
+            'student_id' => $record['student_id'],
+            'exam_id' => $record['exam_id'],
+            'grade' => $record['grade']
+            ]
+        );
+        }
+
+        return $result;
+    }
 }
 ?>

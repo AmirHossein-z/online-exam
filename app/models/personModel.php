@@ -27,6 +27,25 @@ class personModel extends Model
     }
 
     /**
+     * Summary of get_person_name
+     * @param string $person
+     * @param int $person_id
+     * @return array
+     */
+    public function get_person_name(string $person, int $person_id): array
+    {
+        $p = $person;
+        $id = $p . '_id';
+        $query = "SELECT name FROM $p WHERE $p.$id =?";
+
+        $data = [
+            ['type' => 'i', 'value' => $person_id]
+        ];
+
+        return $this->exeQuery($query, $data, true)->fetch_assoc();
+    }
+
+    /**
      * insert a person(student OR master) to database
      * @param string $person
      * @param string $fullname
