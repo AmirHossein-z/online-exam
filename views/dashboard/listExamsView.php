@@ -51,7 +51,8 @@
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                     <?php
                     if ($exam['show_grade'] === 1)
-                        echo $data['student_grade'] . ' از ' . $exam['final_grade'];
+                        echo $exam['student_grade'];
+                        //  . ' از ' . $exam['final_grade']
                     else
                         echo 'مخفی';    
                     ?>
@@ -63,11 +64,6 @@
                 </td>
                 <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 flex items-center justify-center">
-                    <a href="<?php echo URL . 'dashboard/participate/' . $exam['id']; ?>"
-                        class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer">
-                        شرکت در آزمون
-                    </a>
-                    <span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">
                         <?php
 
                         /** check if date time of exam that stored in exam table
@@ -81,12 +77,14 @@
 
                         if(strtotime($exam['date']) < ($now + $duration))
                         {
-                            echo 'start';
+                            echo "<a href=" . URL . 'dashboard/participate/' . $exam['id'] . ' ' .
+                            "class='bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer'>
+                            شرکت در آزمون
+                        </a>";
                         }
-                        else { 
-                            $remain_time = intdiv(strtotime($exam['date']) - ($now + $duration),60);
-
-                            echo '<span>' . date('l jS \of F Y h:i:s A', mktime(0, $remain_time, 0, 0, 0, 0)) . '</span>';
+                        else {
+                            echo '<span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">';
+                            echo '<span>' . date('l jS \of F Y h:i:s A', strtotime($exam['date'])) . '</span>';
                            }
                         ?>
     

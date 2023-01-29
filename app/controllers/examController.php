@@ -113,17 +113,17 @@ class examController extends Controller
             $exam = $this->model('exam');
                 foreach ($result as $index => $item) {
                     $info = $exam->get_info_by_exam_id($item['exam_id'])[0];
-                    array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'final_grade' => $info['final_grade'], 'show_grade' => $info['show_grade'], 'date' => $info['date'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null]);
+                    
+                    // select every grade from participate table
+                    $participate_model = $this->model('participate');
+                    $student_grade = $participate_model->getStudentGrade($_SESSION['id'], $info['exam_id']);
+                    var_dump($student_grade);
+                    array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'show_grade' => $info['show_grade'], 'final_grade' => $info['final_grade'], 'date' => $info['date'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null, 'student_grade' => $student_grade != null ? $student_grade : 'ثبت نشده']);
                 }
             }
         }
-
-        $participate_model = $this->model('participate');
-        $student_grade = $participate_model->getStudentGrade($_SESSION['id']);
-        
         $data = [
-            'exams_info' => $exams_info,
-            'student_grade' => $student_grade
+            'exams_info' => $exams_info
         ];
 
         $this->header('header');
