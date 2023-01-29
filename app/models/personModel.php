@@ -27,7 +27,7 @@ class personModel extends Model
     }
 
     /**
-     * insert a person(student OR master) to db
+     * insert a person(student OR master) to database
      * @param string $person
      * @param string $fullname
      * @param string $mobile
