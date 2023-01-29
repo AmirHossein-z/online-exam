@@ -33,17 +33,22 @@ class participateModel extends Model
      * @param int $student_id
      * @return float
      */
-    public function getStudentGrade(int $student_id): float
+    public function getStudentGrade(int $student_id, int $exam_id): float
     {
+        // getting first grade of student participate
         $query = "select grade from participate
-                where student_id = ?";
+                where student_id = ? AND exam_id = ? limit 1";
 
         $data = [
-            ['type' => 'i', 'value' => $student_id]
+            ['type' => 'i', 'value' => $student_id],
+            ['type' => 'i', 'value' => $exam_id]
         ];
 
         $result = $this->exeQuery($query, $data, true)->fetch_assoc();
-        return $result['grade'];
+        if(isset($result['grade']))
+            return $result['grade'];
+        else
+            return 0;
     }
 }
 ?>

@@ -45,7 +45,7 @@ class Model
 
     /**
      * a function for detect that a record exists
-     * there is a bug in the exeQuery, I can't solve it! 
+     * because a bug in the exeQuery, I can't write it! 
      */
     // public function existsColumn($model_name, $column, $key)
     // {

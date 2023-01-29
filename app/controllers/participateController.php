@@ -48,6 +48,8 @@ class participateController extends Controller
         // third and store it in participate table
         $participate_model = $this->model('participate');
         $participate_model->insert($exam_id, $student_id, $grade);
+
+        $this->redirect('dashboard/list_exams');
     }
 }
 ?>

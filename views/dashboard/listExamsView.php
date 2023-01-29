@@ -51,7 +51,8 @@
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 text-blueGray-800">
                     <?php
                     if ($exam['show_grade'] === 1)
-                        echo $data['student_grade'] . ' از ' . $exam['final_grade'];
+                        echo $exam['student_grade'];
+                        //  . ' از ' . $exam['final_grade']
                     else
                         echo 'مخفی';    
                     ?>
@@ -63,18 +64,30 @@
                 </td>
                 <td
                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm text-center whitespace-nowrap p-4 flex items-center justify-center">
-                    <a href="<?php echo URL . 'dashboard/participate/' . $exam['id']; ?>"
-                        class="bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer">
-                        شرکت در آزمون
-                    </a>
-                    <span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">
-                        <input type="time" class="date">
-                        <?php 
+                        <?php
 
-                        echo($exam['date']);
-                        if($exam['date'] < time())
+                        /** check if date time of exam that stored in exam table
+                         * less than now with time() function
+                         * now() returns unix based datetime (sum of seconds from 1 jan 1970)
+                         */
+
+                        // echo date('l jS \of F Y h:i:s A', mktime(0, 0, 0, 1, 28, 2023));
+                        $now = time() + 60 * 60 + 24;
+                        $duration = ($exam['duration']) * 60;
+
+                        if(strtotime($exam['date']) < ($now + $duration))
+                        {
+                            echo "<a href=" . URL . 'dashboard/participate/' . $exam['id'] . ' ' .
+                            "class='bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer'>
+                            شرکت در آزمون
+                        </a>";
+                        }
+                        else {
+                            echo '<span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">';
+                            echo '<span>' . date('l jS \of F Y h:i:s A', strtotime($exam['date'])) . '</span>';
+                           }
                         ?>
-
+    
                     </span>
                 </td>
             </tr>
