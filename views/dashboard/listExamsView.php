@@ -68,13 +68,28 @@
                         شرکت در آزمون
                     </a>
                     <span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">
-                        <input type="time" class="date">
-                        <?php 
+                        <?php
 
-                        echo($exam['date']);
-                        if($exam['date'] < time())
+                        /** check if date time of exam that stored in exam table
+                         * less than now with time() function
+                         * now() returns unix based datetime (sum of seconds from 1 jan 1970)
+                         */
+
+                        // echo date('l jS \of F Y h:i:s A', mktime(0, 0, 0, 1, 28, 2023));
+                        $now = time() + 60 * 60 + 24;
+                        $duration = ($exam['duration']) * 60;
+
+                        if(strtotime($exam['date']) < ($now + $duration))
+                        {
+                            echo 'start';
+                        }
+                        else { 
+                            $remain_time = intdiv(strtotime($exam['date']) - ($now + $duration),60);
+
+                            echo '<span>' . date('l jS \of F Y h:i:s A', mktime(0, $remain_time, 0, 0, 0, 0)) . '</span>';
+                           }
                         ?>
-
+    
                     </span>
                 </td>
             </tr>

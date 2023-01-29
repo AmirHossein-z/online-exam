@@ -30,7 +30,7 @@ class examModel extends Model
             ['type' => 's', 'value' => $title],
             ['type' => 's', 'value' => $description],
             ['type' => 'i', 'value' => $duration],
-            ['type' => 'd', 'value' => 20.5],
+            ['type' => 'd', 'value' => $final_grade],
             ['type' => 'i', 'value' => $show_grade],
             ['type' => 's', 'value' => $date],
         ];
@@ -107,7 +107,7 @@ class examModel extends Model
             ['type' => 's', 'value' => $title],
             ['type' => 's', 'value' => $description],
             ['type' => 'i', 'value' => $duration],
-            ['type' => 'd', 'value' => 20.5],
+            ['type' => 'd', 'value' => $final_grade],
             ['type' => 'i', 'value' => $show_grade],
             ['type' => 's', 'value' => $date],
         ];
