@@ -4,9 +4,9 @@
     echo 'bg-red-500';
 } ?>" id="alert">
     <?php if ($data['type'] === ALERT_ERROR) { ?>
-        <i class="fa-solid fa-circle-exclamation text-5xl text-red-500"></i>
+        <i class="fa-solid fa-circle-exclamation text-5xl text-red-500 text-center"></i>
     <?php } else if ($data['type'] === ALERT_SUCCESS) { ?>
-            <i class="fa-solid fa-circle-check text-5xl text-emerald-500"></i>
+            <i class="fa-solid fa-circle-check text-5xl text-emerald-500 text-center"></i>
     <?php } ?>
     <div class="grid items-center text-center mx-auto p-3">
         <h2 class="font-semibold text-xl">

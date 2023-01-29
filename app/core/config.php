@@ -7,3 +7,4 @@ define('MASTER', 'master');
 define('STUDENT', 'student');
 define('ALERT_SUCCESS', 'SUCCESS');
 define('ALERT_ERROR', 'ERROR');
+define("NOWHERE", 'no_where');

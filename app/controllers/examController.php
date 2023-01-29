@@ -87,7 +87,10 @@ class examController extends Controller
         $data = $exams;
         
         $this->header('header');
-        // $this->navbar('navbar');
+        $data = $this->set_alert_for_show($data);
+        if (isset($data['alert'])) {
+            $this->view('layout/alert', $data['alert']);
+        }
         $this->view('dashboard/ExamIndexView', $data);
         $this->footer('footer');
     }

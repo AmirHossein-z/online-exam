@@ -1,13 +1,14 @@
 <?php $exam_id = explode('/', $_GET['url']);
 ?>
-<div class="flex-auto px-4 lg:px-10 py-10 pt-0 w-full bg-blueGray-800">
-    <form action="<?= URL . 'dashboard/exam_addQuestion/' . $exam_id[2] ?> method="POST" class="max-w-xl grid mx-auto bg-blueGray-200 p-5">
+
+<div class="px-8 lg:px-10 w-full h-screen bg-blueGray-800">
+    <form action="<?= URL . 'dashboard/exam_addQuestion/' . $exam_id[2] ?> method="POST" class="max-w-xl grid mx-auto bg-blueGray-200 p-4">
 
     <div class="relative w-full my-4">
             <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="title">
                 انتخاب سوالات :
             </label>
-    <select name="questions[]" multiple>
+    <select name="questions[]" multiple class="w-full p-2">
                 <?php
                 foreach ($data as $question) {
                     ?>
@@ -23,3 +24,4 @@
                 افزودن سوال
             </button>
                 </form>
+</div>

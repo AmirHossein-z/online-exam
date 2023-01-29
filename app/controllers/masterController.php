@@ -56,10 +56,10 @@ class masterController extends Controller
         $status = $student_master->update_state($master_id, $student_id);
         if ($status) {
             $this->set_alert_info('موفق', 'کاربر به لیست دانشجویان شما اضافه شد', ALERT_SUCCESS);
-            header('Location:' . URL . 'dashboard/list_students');
+            $this->redirect('dashboard/list_students');
         } else {
             $this->set_alert_info('خطا', 'مشکلی پیش آمده است،دوباره تلاش کنید.', ALERT_ERROR);
-            header('Location:' . URL . 'dashboard/list_students');
+            $this->redirect('dashboard/list_students');
         }
     }
 }
