@@ -213,4 +213,19 @@ class examController extends Controller
         $this->view('dashboard/addExamQuestionView', $questions);
         $this->footer('footer');
     }
+
+    public function addQuestion(): void
+    {
+        $url_explode = explode('/', $_GET['url']);
+        $exam_id = $url_explode[2];
+
+        foreach($_POST['questions'] as $question_id)
+        {
+            $question_id = filter_var($question_id, FILTER_SANITIZE_NUMBER_INT);
+            $exam_question_model = $this->model('exam_question');
+            $exam_question_model->insert($exam_id, $question_id);
+        }
+
+        $this->redirect('dashboard/exam/index');
+    }
 }

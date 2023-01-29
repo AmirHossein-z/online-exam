@@ -150,9 +150,9 @@ class Router
             ],
             'exam_storeQuestion' => [
                 'type' => 'POST',
-                'pattern_url' => '/^\/dashboard\/exam_delete\/\d{1,10}$/',
+                'pattern_url' => '/^\/dashboard\/exam_addQuestion\/\d{1,10}$/',
                 'controller' => 'examController',
-                'action' => 'delete',
+                'action' => 'addQuestion',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_master:dashboard/index']
             ],
             'list_exams' => [
