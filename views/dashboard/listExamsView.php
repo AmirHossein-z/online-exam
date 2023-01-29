@@ -71,11 +71,10 @@
                          * now() returns unix based datetime (sum of seconds from 1 jan 1970)
                          */
 
-                        // echo date('l jS \of F Y h:i:s A', mktime(0, 0, 0, 1, 28, 2023));
-                        $now = time() + 60 * 60 + 24;
-                        $duration = ($exam['duration']) * 60;
+                        $now = time();
+                        // $duration = ($exam['duration']) * 60;
 
-                        if(strtotime($exam['date']) < ($now + $duration))
+                        if(strtotime($exam['date']) < ($now))
                         {
                             echo "<a href=" . URL . 'dashboard/participate/' . $exam['id'] . ' ' .
                             "class='bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer'>

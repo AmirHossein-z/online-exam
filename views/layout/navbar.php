@@ -176,10 +176,16 @@
           <!-- Divider -->
           <hr class="my-4 md:min-w-full" />
           <!-- Heading -->
+          <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">تاریخ و ساعت سامانه
+          </h6>
+          <span><?php echo date('l jS \of F Y h:i:s A', time());?></span>
+
+          <!-- Divider -->
+          <hr class="my-4 md:min-w-full" />
+          <!-- Heading -->
           <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">آزمون
           </h6>
           <!-- Navigation -->
-
           <ul class="md:flex-col md:min-w-full flex flex-col justify-between list-none">
             <?php if ($data['type'] === MASTER) { ?>
               <li class="items-center">

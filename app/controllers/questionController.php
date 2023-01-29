@@ -217,34 +217,5 @@ class questionController extends Controller
 
     }
 
-    public function questions_exam(int $exam_id)
-    {
-        $question = $this->model('question');
-        $option = $this->model('option');
-        $exam_questionsID = $question->exam_questionsID($exam_id);
-        $questions_info = [];
-        $options_info = [];
-
-        foreach ($exam_questionsID as $index => $question_id) {
-            $question_item = $question->get_question_byID($question_id)[0];
-            array_push($questions_info, ['id' => $question_item['question_id'], 'info' => $question_item['q_info'], 'type' => $question_item['type'], 'grade' => $question_item['grade']]);
-            $option_list = $option->get_all_option_by_question_id($question_item['question_id']);
-
-            foreach ($option_list as $option_item) {
-                array_push($options_info, ['id' => $option_item['option_id'], 'info' => $question_item['type'] === 1 ? $option_item['info'] : "", 'question_id' => $option_item['question_id']]);
-            }
-        }
-
-        $data = [
-            'exam_id' => $exam_id,
-            'questions_info' => $questions_info,
-            'options_info' => $options_info,
-        ];
-
-        $this->header('header');
-        $this->view('dashboard/participateExamView', $data);
-        $this->footer('footer');
-    }
-
     
 }

@@ -165,15 +165,15 @@ class Router
             'test' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/participate\/\d{1,10}$/',
-                'controller' => 'questionController',
-                'action' => 'questions_exam',
+                'controller' => 'participateController',
+                'action' => 'create',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
             ],
             'test_action' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/test_action$/',
                 'controller' => 'participateController',
-                'action' => 'test_action',
+                'action' => 'store',
                 'middleware' => ['personPolicy:is_login:auth/login', 'personPolicy:is_student:dashboard/index']
             ],
             'list_students' => [

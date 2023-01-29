@@ -117,7 +117,6 @@ class examController extends Controller
                     // select every grade from participate table
                     $participate_model = $this->model('participate');
                     $student_grade = $participate_model->getStudentGrade($_SESSION['id'], $info['exam_id']);
-                    var_dump($student_grade);
                     array_push($exams_info, ['id' => $info['exam_id'], 'title' => $info['title'], 'description' => $info['description'], 'duration' => $info['duration'], 'show_grade' => $info['show_grade'], 'final_grade' => $info['final_grade'], 'date' => $info['date'], 'master_name' => $item['master_id'] === $master_info['master_id'] ? $master_info['name'] : null, 'student_grade' => $student_grade != null ? $student_grade : 'ثبت نشده']);
                 }
             }

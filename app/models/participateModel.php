@@ -50,5 +50,27 @@ class participateModel extends Model
         else
             return 0;
     }
+
+     /**
+      * Summary of checkNumberOfParticipate
+      * @param int $exam_model
+      * @param int $student_id
+      * @return int
+      */
+
+    public function checkNumberOfParticipate(int $exam_id, int $student_id): int
+    {
+        $query = "SELECT count(*) from participate
+                  WHERE exam_id = ? AND student_id = ?";
+
+        $data =
+            [
+                ['type' => 's', 'value' => $exam_id],
+                ['type' => 's', 'value' => $student_id]
+            ];
+
+        $result = $this->exeQuery($query, $data, true)->fetch_column();
+        return $result;
+    }
 }
 ?>
