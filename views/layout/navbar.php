@@ -19,7 +19,7 @@
           id="example-collapse-sidebar">
           <div class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
             <div class="flex flex-wrap">
-              <div class="w-6/12 flex justify-end">
+              <div class="w-6/12 flex justify-center">
                 <button type="button"
                   class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
                   onclick="toggleNavbar('example-collapse-sidebar')">
@@ -92,7 +92,6 @@
             <?php if ($data['type'] === MASTER) { ?>دانشجو
             <?php } else if ($data['type'] === STUDENT) { ?>استاد<?php } ?>
           </h6>
-          <!-- Navigation -->
 
           <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
             <?php if ($data['type'] === MASTER) { ?>
@@ -112,11 +111,15 @@
                   </a>
                 </li>
             <?php } ?>
-            <li>
-                <a href="<?php echo URL . 'auth/logout' ?>"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">خروج</a>
-            </li>
           </ul>
+
+          <hr class="my-4 md:min-w-full" />
+
+          <!-- logout -->
+          <p class="items-center">
+              <a href="<?php echo URL . 'auth/logout' ?>"
+              class="text-lg py-2 px-4 font-bold block w-full text-red-500">خروج</a>
+          </p>
         </div>
       </div>
     </nav>

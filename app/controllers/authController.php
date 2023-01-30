@@ -58,7 +58,7 @@ class authController extends Controller
         $person = $this->model($this->check_user());
         $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
         if ($status === 1) {
-            $this->set_alert('خطا', 'کاربری با این اطلاعات وجود دارد! ', ALERT_ERROR);
+            $this->set_alert('کاربری با این اطلاعات وجود دارد! ', ALERT_ERROR);
         } else {
             $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 

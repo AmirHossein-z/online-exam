@@ -6,7 +6,7 @@ class Router
     {
         $request_type = $_SERVER['REQUEST_METHOD'];
 
-        $url = '/' . $_GET['url'];
+        $url = '/' . ( $_GET['url'] ?? "");
 
         $routes = [
             '404' => [
@@ -206,6 +206,7 @@ class Router
             ],
         ];
 
+        $page_found = false;
         foreach ($routes as $route) {
             if (
                 preg_match(
@@ -234,11 +235,18 @@ class Router
                 require 'app/controllers/' . $route['controller'] . '.php';
                 $object = new $route['controller']();
                 call_user_func_array([$object, $route['action']], $params);
+                $page_found = true;
             }
         }
 
+        if(!$page_found) {
+            require_once 'app/controllers/indexController.php';
+            $object = new indexController();
+            $object->four_four();
+        }
+
         if ($_GET['url'] === null) {
-            require 'app/controllers/indexController.php';
+            require_once 'app/controllers/indexController.php';
             $object = new indexController();
             $object->show_main_page();
         }
