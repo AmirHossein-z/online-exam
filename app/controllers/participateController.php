@@ -16,25 +16,29 @@ class participateController extends Controller
     public function create(int $exam_id)
     {
         $student_id = $_SESSION['id'];
-        //prerequirement: checking date and time of exam
         $exam_model = $this->model('exam');
         $exam_info = $exam_model->get_info_by_exam_id($exam_id);
+
+        //prerequirement: checking date and time of exam
+        // if the time of exam passed not accept any answer
+
         $now = time();
-        $duration = $exam_info[0]['duration'];
+    
+        $exam_time = strtotime($exam_info[0]['date']);
+        // duration when convert to timestamp maens now + duration
+        $duration = $exam_time + ($exam_info[0]['duration']*60);
 
-        // var_dump($now); exit;
         $participate_model = $this->model('participate');
-
         $numberOfParticipate = $participate_model->checkNumberOfParticipate($exam_id, $student_id);
 
         /**
          * if date of exam arrived and number of participating of student is zero
-         * also if date of exam is greater than now and duration of exam
          * in other word just participate can exam just between datetime of exam and a time after that (duration)
          */
-        if($exam_info[0]['date'] > ($now) && ($numberOfParticipate !== 0) && $exam_info[0]['date'] > $now + $duration){
+        if($duration < ($now) || ($numberOfParticipate !== 0)){
             // show error
             $this->redirect('dashboard/list_exams');
+            exit;
         }
 
         $question = $this->model('question');
@@ -71,6 +75,24 @@ class participateController extends Controller
      */
     public function store(): void
     {
+        // if the time of exam passed not accept any answer
+
+        $now = time();
+        // duration when convert to timestamp maens now + duration
+
+        $exam_model = $this->model('exam');
+        $exam_info = $exam_model->get_info_by_exam_id($_POST['exam_id'])[0];
+
+        $exam_time = strtotime($exam_info['date']);
+        $duration = $exam_time + ($exam_info['duration']*60);
+
+        // if the duration of exam_time passed
+        if($now > $duration) {
+            // show error
+            $this->redirect('dashboard/list_exams');
+            exit;
+        }
+
         //first of all create answers in answer table
         $student_id = $_SESSION['id'];
         $exam_id = $_POST['exam_id'];
