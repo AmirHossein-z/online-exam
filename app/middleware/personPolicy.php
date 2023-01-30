@@ -9,56 +9,82 @@ class personPolicy extends Controller
 
     /**
      * check whether person is logged in
+     * @param string $path
      * @return bool
      */
-    public function is_login(string $first_path,$second_path): bool
+    public function is_login(string $path): bool
     {
-        // if session was set and also has an id,then user has logged in
         if (isset($_SESSION) && isset($_SESSION['id'])) {
-            if($first_path !== NOWHERE) {
-                // this condition checks for redirecting to valid path
-                $this->redirect($first_path);
-            }
+            $this->redirect($path);
             return true;
         }
-        if($second_path !== NOWHERE) {
-            $this->redirect($second_path);
+        return false;
+    }
+
+    /**
+     * check whether person is not logged in
+     * @param string $path
+     * @return bool
+     */
+    public function is_not_login(string $path):bool {
+        if(!(isset($_SESSION) && isset($_SESSION['id']))) {
+            $this->redirect($path);
+            return true;
         }
         return false;
     }
 
     /**
      * check whether person is logged in as master
+     * @param string $path
      * @return bool
      */
-    public function is_master(string $first_path,$second_path): bool
+    public function is_master(string $path): bool
     {
         if (isset($_SESSION['id']) && $_SESSION['type'] === MASTER) {
-            if($first_path !== NOWHERE) {
-                $this->redirect($first_path);
-            }
+            $this->redirect($path);
             return true;
         }
-        if($second_path !== NOWHERE) {
-            $this->redirect($second_path);
+        return false;
+    }
+
+    /**
+     * check whether person is not logged in as master
+     * @param string $path
+     * @return bool
+     */
+    public function is_not_master(string $path):bool {
+        if (!(isset($_SESSION['id']) && $_SESSION['type'] === MASTER)) {
+            $this->redirect($path);
+            return true;
         }
         return false;
     }
 
     /**
      * check whether person is logged in as student
+     * @param string $path
      * @return bool
      */
-    public function is_student(string $first_path,$second_path): bool
+    public function is_student(string $path): bool
     {
         if (isset($_SESSION['id']) && $_SESSION['type'] === STUDENT) {
-            if($first_path !== NOWHERE) {
-                $this->redirect($first_path);
-            }
+            $this->redirect($path);
             return true;
         }
-        if($second_path !== NOWHERE) {
-            $this->redirect($second_path);
+        return false;
+    }
+
+    /**
+     * check whether person is not logged in as student
+     * @param string $path
+     * @return bool
+     */
+    public function is_not_student(string $path): bool
+    {
+        if (!(isset($_SESSION['id']) && $_SESSION['type'] === STUDENT)) {
+            $this->redirect($path);
+            return true;
         }
         return false;
     }
