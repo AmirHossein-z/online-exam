@@ -20,15 +20,19 @@ class participateController extends Controller
         $exam_model = $this->model('exam');
         $exam_info = $exam_model->get_info_by_exam_id($exam_id);
         $now = time();
+        $duration = $exam_info[0]['duration'];
 
+        // var_dump($now); exit;
         $participate_model = $this->model('participate');
 
         $numberOfParticipate = $participate_model->checkNumberOfParticipate($exam_id, $student_id);
 
         /**
          * if date of exam arrived and number of participating of student is zero
+         * also if date of exam is greater than now and duration of exam
+         * in other word just participate can exam just between datetime of exam and a time after that (duration)
          */
-        if($exam_info[0]['date'] > ($now) && ($numberOfParticipate !== 0)){
+        if($exam_info[0]['date'] > ($now) && ($numberOfParticipate !== 0) && $exam_info[0]['date'] > $now + $duration){
             // show error
             $this->redirect('dashboard/list_exams');
         }
@@ -67,7 +71,6 @@ class participateController extends Controller
      */
     public function store(): void
     {
-        var_dump($_POST); exit;
         //first of all create answers in answer table
         $student_id = $_SESSION['id'];
         $exam_id = $_POST['exam_id'];
