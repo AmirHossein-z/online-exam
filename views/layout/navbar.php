@@ -14,47 +14,7 @@
           href='<?php echo URL . 'dashboard/index' ?>'>
           <?php echo $data['name'] ?>
         </a>
-        <ul class="md:hidden items-center flex flex-wrap list-none">
-          <li class="inline-block relative">
-            <a class="text-blueGray-500 block py-1 px-3" href="#pablo"
-              onclick="openDropdown(event,'notification-dropdown')"><i class="fas fa-bell"></i></a>
-            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-              id="notification-dropdown">
-              <a href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
-                href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
-                action</a><a href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
-                else here</a>
-              <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-              <a href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">some</a>
-            </div>
-          </li>
-          <li class="inline-block relative">
-            <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-responsive-dropdown')">
-              <div class="items-center flex">
-                <span
-                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-              </span>
-              </div>
-            </a>
-            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-              id="user-responsive-dropdown">
-              <a href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
-                href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
-                action</a><a href="#pablo"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
-                else here</a>
-              <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-              <a href="<?php echo URL . 'auth/logout' ?>"
-                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">خروج</a>
-            </div>
-          </li>
-        </ul>
+        
         <div
           class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
           id="example-collapse-sidebar">
@@ -183,25 +143,37 @@
         <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           <a class="text-white text-sm hidden lg:inline-block font-semibold text-red-500"
             href="./index.html">داشبورد</a>
-          <!-- <form class="md:flex hidden flex-row flex-wrap items-center lg:mr-auto mr-3">
-            <div class="relative flex w-full flex-wrap items-stretch">
-              <input type="text" placeholder="جستجو کنید"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
-              <span
-                class="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute left-0 bg-transparent rounded text-base items-center justify-center w-8 pr-3 py-3"><i
-                  class="fas fa-search"></i></span>
+
+            <!-- 
+
+        <ul class="md:hidden items-center flex flex-wrap list-none">
+          <li class="inline-block relative">
+            <a class="text-blueGray-500 block py-1 px-3" href="#pablo"
+              onclick="openDropdown(event,'notification-dropdown')"><i class="fas fa-bell"></i></a>
+            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+              id="notification-dropdown">
+              <a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
+                href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
+                action</a><a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
+                else here</a>
+              <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
+              <a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">some</a>
             </div>
-          </form> -->
-          <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
-            <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-dropdown')">
+          </li>
+          <li class="inline-block relative">
+            <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-responsive-dropdown')">
               <div class="items-center flex">
                 <span
                   class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-                </span>
+              </span>
               </div>
             </a>
             <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-              id="user-dropdown">
+              id="user-responsive-dropdown">
               <a href="#pablo"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
                 href="#pablo"
@@ -213,8 +185,11 @@
               <a href="<?php echo URL . 'auth/logout' ?>"
                 class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">خروج</a>
             </div>
-          </ul>
-        </div>
+          </li>
+        </ul>
+        
+             -->
+          </div>
       </nav>
       <!-- Header -->
     </div>

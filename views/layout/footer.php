@@ -119,6 +119,9 @@
 
 <!-- COPYRIGHT -->
 
+<!-- <footer class="copyright">&copy; All Right reserved for RezaDehghani and AmirHoseeingZareian Under MIT Licence
+</footer> -->
+
 </body>
 
 </html>
