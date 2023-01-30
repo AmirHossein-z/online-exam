@@ -7,7 +7,7 @@
             <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="title">
                 انتخاب سوالات :
             </label>
-    <select name="questions[]" multiple>
+    <select name="questions[]" multiple class="w-full p-2">
                 <?php
                 foreach ($data as $question) {
                     ?>
@@ -23,3 +23,4 @@
                 افزودن سوال
             </button>
                 </form>
+</div>

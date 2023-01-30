@@ -14,10 +14,6 @@ class questionController extends Controller
     public function add_question()
     {
         $data = [];
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('dashboard/addQuestionView');
         $this->footer('footer');
@@ -51,10 +47,10 @@ class questionController extends Controller
             if ($index === $correct_option_index) {
                 $status = $question->update_optionID($question_id, $option_id);
                 if ($status) {
-                    $this->set_alert_info('موفق', 'سوال اضافه شد!', ALERT_SUCCESS);
+                    $this->set_alert('سوال اضافه شد!', ALERT_SUCCESS);
                     $this->redirect('dashboard/add_question');
                 } else {
-                    $this->set_alert_info('خطا', 'دوباره تلاش کنید', ALERT_ERROR);
+                    $this->set_alert('دوباره تلاش کنید', ALERT_ERROR);
                     $this->redirect('dashboard/add_question');
                 }
             }
@@ -95,10 +91,6 @@ class questionController extends Controller
             ];
         }
 
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('dashboard/questionsView', $data);
         $this->footer('footer');
@@ -132,10 +124,6 @@ class questionController extends Controller
             'options_list' => $options_list
         ];
 
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('dashboard/editQuestionView', $data);
         $this->footer('footer');
@@ -175,10 +163,10 @@ class questionController extends Controller
         }
 
         if ($status1 && $status2) {
-            $this->set_alert_info('موفق', 'سوال مورد نظر ویرایش شد.', ALERT_SUCCESS);
+            $this->set_alert('سوال مورد نظر ویرایش شد.', ALERT_SUCCESS);
             $this->redirect('dashboard/questions');
         } else {
-            $this->set_alert_info('خطا', 'دوباره تلاش کنید.', ALERT_ERROR);
+            $this->set_alert('دوباره تلاش کنید.', ALERT_ERROR);
             $this->redirect('dashboard/edit_question/' . $question_id);
         }
 
@@ -203,15 +191,15 @@ class questionController extends Controller
 
 
             if ($status1 && $status2) {
-                $this->set_alert_info('موفق', 'سوال حذف شد', ALERT_SUCCESS);
+                $this->set_alert('سوال حذف شد', ALERT_SUCCESS);
                 $this->redirect('dashboard/questions');
             } else {
-                $this->set_alert_info('خطا', 'مشکلی پیش آمده است،دوباره تلاش کنید', ALERT_ERROR);
+                $this->set_alert('مشکلی پیش آمده است،دوباره تلاش کنید', ALERT_ERROR);
                 $this->redirect('dashboard/questions');
             }
 
         } else {
-            $this->set_alert_info('خطا', 'سوال نمی تواند حذف شود،چون در آزمون استاد انتخاب شده است٬', ALERT_ERROR);
+            $this->set_alert('سوال نمی تواند حذف شود،چون در آزمون استاد انتخاب شده است٬', ALERT_ERROR);
             $this->redirect('dashboard/questions');
         }
 

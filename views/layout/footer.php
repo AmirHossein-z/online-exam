@@ -1,6 +1,45 @@
 </div>
+<!-- alert -->
+<?php if(isset($_SESSION['alert'])) { ?>
+<div class="grid items-center justify-center gap-6 m-4 p-4 max-w-580-px max-h-860-px z-50 fixed right-0 top-0 rounded-md cursor-pointer <?php if ($_SESSION['alert']['type'] === ALERT_SUCCESS) {
+    echo 'bg-emerald-400';
+} else {
+    echo 'bg-red-500';
+} ?>" id="alert">
+    <?php if ($_SESSION['alert']['type'] === ALERT_ERROR) { ?>
+        <i class="fa-solid fa-circle-exclamation text-5xl text-red-500 text-center"></i>
+    <?php } else if ($_SESSION['alert']['type'] === ALERT_SUCCESS) { ?>
+        <i class="fa-solid fa-circle-check text-5xl text-emerald-500 text-center"></i>
+    <?php } ?>
+    <div class="grid items-center text-center mx-auto p-3">
+        <?php if ($_SESSION['alert']['type'] === ALERT_SUCCESS) { ?>
+            <h2 class="font-semibold text-xl">موفق</h2>
+        <?php } else if($_SESSION['alert']['type'] === ALERT_ERROR) { ?>
+            <h2 class="font-semibold text-xl">خطا</h2>
+        <?php } ?>
+        <p class="text-lg">
+            <?php echo $_SESSION['alert']['message'] ?>
+        </p>
+    </div>
+</div>
+<?php } $_SESSION['alert'] = null ?>
 
-    <script src="<?php echo URL ?>public/js/popper.js"></script>
+<!-- alert functionality -->
+<script>
+    const alert = document.querySelector("#alert");
+    const alertId = setTimeout(() => {
+        removeAlert(alert)
+    }, 5000);
+
+    const removeAlert = (e) => {
+        clearTimeout(alertId);
+        e.remove();
+    };
+
+    alert.addEventListener("click", () => removeAlert(alert));
+</script>
+
+<script src="<?php echo URL ?>public/js/popper.js"></script>
 <script>
     /* Make dynamic date appear */
     (function () {

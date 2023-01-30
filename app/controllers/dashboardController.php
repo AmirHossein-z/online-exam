@@ -15,10 +15,6 @@ class dashboardController extends Controller
             'type' => $_SESSION['type'],
             'id' => $_SESSION['id']
         ];
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('layout/navbar', $data);
 
