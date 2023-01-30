@@ -83,10 +83,6 @@ class examController extends Controller
         $data = $exams;
         
         $this->header('header');
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->view('dashboard/ExamIndexView', $data);
         $this->footer('footer');
     }
@@ -195,10 +191,10 @@ class examController extends Controller
         $exam_model = $this->model('exam');
         $result = $exam_model->delete($exam_id);
         if ($result == true) {
-                $this->set_alert_info('موفق', 'آزمون با موفقیت حذف شد', ALERT_SUCCESS);
+                $this->set_alert('آزمون با موفقیت حذف شد', ALERT_SUCCESS);
                 $this->redirect('dashboard/exam/index');
             } else {
-                $this->set_alert_info('خطا', 'آزمون نمی تواند حذف شود', ALERT_ERROR);
+                $this->set_alert('آزمون نمی تواند حذف شود', ALERT_ERROR);
                 $this->redirect('dashboard/exam/index');
         }
     }

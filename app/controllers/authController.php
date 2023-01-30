@@ -40,11 +40,6 @@ class authController extends Controller
     public function register(): void
     {
         $this->header('header');
-        $data = [];
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->view('auth/registerView');
         $this->footer('footer');
     }
@@ -63,15 +58,15 @@ class authController extends Controller
         $person = $this->model($this->check_user());
         $status = $person->isPersonExists($this->check_user(), $email, $password)['status'];
         if ($status === 1) {
-            $this->set_alert_info('خطا', 'کاربری با این اطلاعات وجود دارد! ', ALERT_ERROR);
+            $this->set_alert('خطا', 'کاربری با این اطلاعات وجود دارد! ', ALERT_ERROR);
         } else {
             $result = $person->insertPerson($this->check_user(), $fullname, $mobile, $email, $password);
 
             if ($result['status'] === 1) {
-                $this->set_alert_info('موفق', 'با موفقیت ثبت نام شدید!', ALERT_SUCCESS);
+                $this->set_alert('با موفقیت ثبت نام شدید!', ALERT_SUCCESS);
                 $this->redirect('auth/login');
             } else {
-                $this->set_alert_info('خطا', 'ثبت نام با خطا مواجه شد.دوباره تلاش کنید', ALERT_ERROR);
+                $this->set_alert('ثبت نام با خطا مواجه شد.دوباره تلاش کنید', ALERT_ERROR);
                 $this->redirect('auth/register');
             }
         }
@@ -83,11 +78,6 @@ class authController extends Controller
      */
     public function login(): void
     {
-        $data = [];
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('auth/loginView');
         $this->footer('footer');
@@ -111,10 +101,10 @@ class authController extends Controller
         }
         if ($status === 1) {
             $this->save_user_session($name, $id);
-            $this->set_alert_info('موفق', 'شما با موفقیت وارد شدید!', ALERT_SUCCESS);
+            $this->set_alert('شما با موفقیت وارد شدید!', ALERT_SUCCESS);
             $this->redirect('dashboard/index');
         } else {
-            $this->set_alert_info('خطا', 'مشکلی در ورود پیش آمده است دوباره امتحان کنید', ALERT_ERROR);
+            $this->set_alert('مشکلی در ورود پیش آمده است دوباره امتحان کنید', ALERT_ERROR);
             $this->redirect('auth/login');
         }
     }

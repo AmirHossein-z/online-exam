@@ -31,10 +31,6 @@ class studentController extends Controller
             'masters_info' => $masters_info
         ];
 
-        $data = $this->set_alert_for_show($data);
-        if (isset($data['alert'])) {
-            $this->view('layout/alert', $data['alert']);
-        }
         $this->header('header');
         $this->view('dashboard/mastersListView', $data);
         $this->footer('footer');
@@ -58,14 +54,14 @@ class studentController extends Controller
                 $status3 = $student_master->insert_by_studentID($student_id, false, $result['result']['master_id']);
 
                 if ($status3) {
-                    $this->set_alert_info('موفق', 'منتظر تایید استاد باشید', ALERT_SUCCESS);
+                    $this->set_alert('منتظر تایید استاد باشید', ALERT_SUCCESS);
                     $this->redirect('dashboard/list_masters');
                 } else {
-                    $this->set_alert_info('خطا', 'مشکلی پیش آمده است.دوباره تلاش کنید', ALERT_ERROR);
+                    $this->set_alert('مشکلی پیش آمده است.دوباره تلاش کنید', ALERT_ERROR);
                     $this->redirect('dashboard/list_masters');
                 }
             } else {
-                $this->set_alert_info('خطا', 'شما قبلا درخواست داده اید٬', ALERT_ERROR);
+                $this->set_alert('شما قبلا درخواست داده اید٬', ALERT_ERROR);
                 $this->redirect('dashboard/list_masters');
             }
         }

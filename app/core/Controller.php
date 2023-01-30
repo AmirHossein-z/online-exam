@@ -19,33 +19,15 @@ class Controller
 
     /**
      * set alert info in session
-     * @param string $title
      * @param string $message
      * @param string $type
      * @return void
      */
-    public function set_alert_info(string $title, string $message, string $type)
+    public function set_alert(string $message, string $type)
     {
-        $_SESSION['alert']['title'] = $title;
         $_SESSION['alert']['message'] = $message;
         $_SESSION['alert']['type'] = $type;
         return;
-    }
-
-    /**
-     * set alert_info in data for showing to user
-     * @param array $data
-     * @return array
-     */
-    public function set_alert_for_show(array $data = []): array
-    {
-        if (isset($_SESSION['alert'])) {
-            $alert = ['type' => $_SESSION['alert']['type'], 'title' => $_SESSION['alert']['title'], 'message' => $_SESSION['alert']['message']];
-            $data['alert'] = $alert;
-            // alert should be shown to user only once
-            $_SESSION['alert'] = null;
-        }
-        return $data;
     }
 
     /**
