@@ -162,19 +162,49 @@ class Router
                 'action' => 'list_exams',
                 'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_student:dashboard/index'],
             ],
+
+            // participate routes
             'test' => [
                 'type' => 'GET',
                 'pattern_url' => '/^\/dashboard\/participate\/\d{1,10}$/',
-                'controller' => 'questionController',
-                'action' => 'questions_exam',
+                'controller' => 'participateController',
+                'action' => 'create',
                 'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_student:dashboard/index'],
             ],
             'test_action' => [
                 'type' => 'POST',
                 'pattern_url' => '/^\/dashboard\/test_action$/',
                 'controller' => 'participateController',
-                'action' => 'test_action',
+                'action' => 'store',
                 'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_student:dashboard/index'],
+            ],
+            'participate_index' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate\/index$/',
+                'controller' => 'participateController',
+                'action' => 'index',
+                'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is__not_master:dashboard/index']
+            ],
+            'participate_show' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate_show\/\d{1,10}$/',
+                'controller' => 'participateController',
+                'action' => 'show',
+                'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_master:dashboard/index']
+            ],
+            'participate_index' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate\/index$/',
+                'controller' => 'participateController',
+                'action' => 'index',
+                'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_master:dashboard/index']
+            ],
+            'participate_show' => [
+                'type' => 'GET',
+                'pattern_url' => '/^\/dashboard\/participate_show\/\d{1,10}$/',
+                'controller' => 'participateController',
+                'action' => 'show',
+                'middleware' => ['personPolicy:is_not_login:auth/login', 'personPolicy:is_not_master:dashboard/index']
             ],
             'list_students' => [
                 'type' => 'GET',

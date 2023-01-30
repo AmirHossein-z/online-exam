@@ -14,6 +14,7 @@
           href='<?php echo URL . 'dashboard/index' ?>'>
           <?php echo $data['name'] ?>
         </a>
+        
         <div
           class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
           id="example-collapse-sidebar">
@@ -30,10 +31,19 @@
           </div>
           <!-- Divider -->
           <hr class="my-4 md:min-w-full" />
-          <h6 class="md:min-w-full text-blueGray-500 text-xs font-bold block pt-1 pb-4 no-underline">آزمون
+          <!-- Heading -->
+          <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">تاریخ و ساعت سامانه
+          </h6>
+
+          <!-- Date time of system -->
+          <span><?php echo date('l jS \of F Y h:i:s A', time());?></span>
+
+          <!-- Divider -->
+          <hr class="my-4 md:min-w-full" />
+          <!-- Heading -->
+          <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">آزمون
           </h6>
           <!-- Navigation -->
-
           <ul class="md:flex-col md:min-w-full flex flex-col justify-between list-none">
             <?php if ($data['type'] === MASTER) { ?>
               <li class="items-center">
@@ -48,6 +58,13 @@
                   class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block flex items-center">
                   <i class="fa-solid fa-square-plus text-sm ml-2 opacity-75"></i>
                   افزودن آزمون
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="<?php echo URL . 'dashboard/participate/index' ?>"
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block flex items-center">
+                  <i class="fa-solid fa-square-plus text-sm ml-2 opacity-75"></i>
+                  لیست شرکت کنندگان
                 </a>
               </li>
             <?php } else if ($data['type'] === STUDENT) { ?>
@@ -123,7 +140,62 @@
         </div>
       </div>
     </nav>
+    <div class="relative md:ml-64 bg-blueGray-50">
+      <nav
+        class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+        <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
+          <a class="text-white text-sm hidden lg:inline-block font-semibold text-red-500"
+            href="./index.html">داشبورد</a>
 
+            <!-- 
+
+        <ul class="md:hidden items-center flex flex-wrap list-none">
+          <li class="inline-block relative">
+            <a class="text-blueGray-500 block py-1 px-3" href="#pablo"
+              onclick="openDropdown(event,'notification-dropdown')"><i class="fas fa-bell"></i></a>
+            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+              id="notification-dropdown">
+              <a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
+                href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
+                action</a><a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
+                else here</a>
+              <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
+              <a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">some</a>
+            </div>
+          </li>
+          <li class="inline-block relative">
+            <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-responsive-dropdown')">
+              <div class="items-center flex">
+                <span
+                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+              </span>
+              </div>
+            </a>
+            <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+              id="user-responsive-dropdown">
+              <a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Action</a><a
+                href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Another
+                action</a><a href="#pablo"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Something
+                else here</a>
+              <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
+              <a href="<?php echo URL . 'auth/logout' ?>"
+                class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-red-500">خروج</a>
+            </div>
+          </li>
+        </ul>
+        
+             -->
+          </div>
+      </nav>
+      <!-- Header -->
+    </div>
   </div>
 </div>
 </div>

@@ -6,7 +6,7 @@ class Model
     public function __construct()
     {
         $this->connection = new mysqli('localhost', 'root', '123456', 'online-test');
-        // $this->connection = new mysqli('localhost', 'root', '', 'online-test');
+        $this->setTimeZone();
     }
 
     /**
@@ -52,4 +52,10 @@ class Model
     //     $query = "SELECT * FROM $model_name where $column = ?";
     //     return $this->exeQuery($query, [$key] , false);
     // }
+
+    public function setTimeZone(): void
+    {
+        $query = "set time_zone = '+03:30'";
+        $this->exeQuery($query, [], false);
+    }
 }

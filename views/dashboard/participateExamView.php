@@ -1,11 +1,39 @@
 <?php if (count($data['questions_info']) > 0) { ?>
     <h2
         class="block text-blueGray-600 text-base text-center text-center my-4 transition-all duration-300 cursor-pointer p-4 max-w-4xl mx-auto">
+        مدت زمان باقیمانده: 
+        <br><br>
+        <?php
+
+        // calculate duration datetime
+
+        $minutes_to_add = $data['exam_duration'];
+
+        $time = new DateTime($data['exam_date']);
+        $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+
+        $remaining_time = $time->format('Y-m-d H:i:s');
+        ?>
+
+        <span id="defaultCountdown"></span>
+            <script>
+                $(function () {
+	                var austDay = new Date(<?= "'" . $remaining_time . "'"?>);
+
+                    console.log(austDay);
+
+	                $('#defaultCountdown').countdown({
+                        until: austDay,
+                    });
+                });            
+    </script>
+
         تعداد کل سوالات: <span class="">
             <?php echo count($data['questions_info']); ?>
         </span>
     </h2>
     <form class="max-w-4xl mx-auto" method="POST" action="<?php echo URL . 'dashboard/test_action' ?>">
+    
     <input type="hidden" name="exam_id" value="<?= $data['exam_id']; ?>">    
     <div class="grid grid-cols-2 gap-6 p-2">
             <?php foreach ($data['questions_info'] as $question) { ?>
@@ -43,13 +71,13 @@
                                 <?php if ($option['question_id'] === $question['id']) { ?>
                                     <h1 class="block text-blueGray-600 text-sm transition-all duration-300 cursor-pointer mb-2">پاسخ:
                                     </h1>
-                                    <textarea name="option_descriptive_answer" cols="30" rows="4"
+                                    <textarea name="option_descriptive_answer[<?php echo intval($question['id']); ?>]" cols="30" rows="4"
                                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"></textarea>
                                     <div class="relative my-4">
                                         <label for="option_descriptive_answer_file" class="block text-blueGray-600 text-xs font-bold mb-2">آپلود پاسخ: </label>
-                                        <input type="file" name="option_descriptive_answer_file" accept=".zip" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                                        <input type="file" name="option_descriptive_answer_file[<?php echo intval($question['id']); ?>]" accept=".zip" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                     </div>
-                                    <input type="hidden" value="<?php echo $question['id']; ?>" name="option_descriptive_question_id">
+                                    <!-- <input type="hidden" value="<?php echo $question['id']; ?>" name="option_descriptive_question_id"> -->
                                     <?php } ?>
                                 <?php } ?>
                         </div>

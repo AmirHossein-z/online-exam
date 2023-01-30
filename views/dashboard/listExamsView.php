@@ -71,21 +71,32 @@
                          * now() returns unix based datetime (sum of seconds from 1 jan 1970)
                          */
 
-                        // echo date('l jS \of F Y h:i:s A', mktime(0, 0, 0, 1, 28, 2023));
-                        $now = time() + 60 * 60 + 24;
-                        $duration = ($exam['duration']) * 60;
+                        $now = time();
+                        // duration when convert to timestamp maens now + duration
+                        
+                        $exam_time = strtotime($exam['date']);
+                        $duration = $exam_time + ($exam['duration']*60);
+                        
+                        // if the time passed from exam_time + duration of exam_time
+                        if($now > $duration)
+                        {
+                                echo "<span class='bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer'>
+                                آزمون بسته شده است
+                        </span>"; 
+                        }
 
-                        if(strtotime($exam['date']) < ($now + $duration))
+                        // if the this time (now) between exam_time and duration of it
+                        if($now > $exam_time && $now < $duration)
                         {
                             echo "<a href=" . URL . 'dashboard/participate/' . $exam['id'] . ' ' .
                             "class='bg-lightBlue-500 text-white text-sm px-2 py-1 rounded ml-3 cursor-pointer'>
                             شرکت در آزمون
                         </a>";
                         }
-                        else {
-                            echo '<span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">';
-                            echo '<span>' . date('l jS \of F Y h:i:s A', strtotime($exam['date'])) . '</span>';
-                           }
+                       
+                        // echo date of exam
+                        echo '<span class="bg-blueGray-600 text-sm px-2 py-1 rounded ml-3 text-blueGray-100">';
+                        echo '<span>' . date('l jS \of F Y h:i:s A', $exam_time) . '</span></span>';
                         ?>
     
                     </span>
