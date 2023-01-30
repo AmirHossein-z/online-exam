@@ -31,9 +31,9 @@ class participateModel extends Model
     /**
      * Summary of getStudentGrade
      * @param int $student_id
-     * @return float
+     * @return mixed
      */
-    public function getStudentGrade(int $student_id, int $exam_id): float
+    public function getStudentGrade(int $student_id, int $exam_id) : mixed
     {
         // getting first grade of student participate
         $query = "select grade from participate
@@ -45,10 +45,9 @@ class participateModel extends Model
         ];
 
         $result = $this->exeQuery($query, $data, true)->fetch_assoc();
-        if(isset($result['grade']))
-            return $result['grade'];
-        else
-            return 0;
+        if ($result === NULL)
+            return NULL;
+        else return $result['grade'];
     }
 
      /**

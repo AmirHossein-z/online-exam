@@ -1,10 +1,33 @@
 <?php if (count($data['questions_info']) > 0) { ?>
     <h2
         class="block text-blueGray-600 text-base text-center text-center my-4 transition-all duration-300 cursor-pointer p-4 max-w-4xl mx-auto">
-        مدت زمان باقیمانده: <span class="">
-            <?php echo $data['exam_duration'] ?>
-        </span>
-        <br>
+        مدت زمان باقیمانده: 
+        <br><br>
+        <?php
+
+        // calculate duration datetime
+
+        $minutes_to_add = $data['exam_duration'];
+
+        $time = new DateTime($data['exam_date']);
+        $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+
+        $remaining_time = $time->format('Y-m-d H:i:s');
+        ?>
+
+        <span id="defaultCountdown"></span>
+            <script>
+                $(function () {
+	                var austDay = new Date(<?= "'" . $remaining_time . "'"?>);
+
+                    console.log(austDay);
+
+	                $('#defaultCountdown').countdown({
+                        until: austDay,
+                    });
+                });            
+    </script>
+
         تعداد کل سوالات: <span class="">
             <?php echo count($data['questions_info']); ?>
         </span>

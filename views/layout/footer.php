@@ -70,6 +70,16 @@
 <?php } ?>
 <!-- END of ALERT LAYOUT -->
 
+<!-- START of timer plugin -->
+<link rel="stylesheet" href="<?= URL ?>public/plugin/timer/css/jquery.countdown.css">
+
+<script src="<?= URL ?>public/plugin/timer/js/jquery.plugin.min.js"></script>
+<script src="<?= URL ?>public/plugin/timer/js/jquery.countdown.js"></script>
+
+<!-- END of timer plugin -->
+
+<!-- COPYRIGHT -->
+
 </body>
 
 </html>

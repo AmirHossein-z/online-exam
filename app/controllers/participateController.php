@@ -59,6 +59,7 @@ class participateController extends Controller
 
         $data = [
             'exam_id' => $exam_id,
+            'exam_date' => $exam_info[0]['date'],
             'exam_duration' => $exam_info[0]['duration'],
             'questions_info' => $questions_info,
             'options_info' => $options_info,
@@ -93,40 +94,49 @@ class participateController extends Controller
             exit;
         }
 
+        
         //first of all create answers in answer table
         $student_id = $_SESSION['id'];
         $exam_id = $_POST['exam_id'];
 
-        $student_answers = $_POST['option_multi_answer'];
-        
-        include_once('answerController.php');
-        $answerController = new answerController;
-        $answerController->create($exam_id, $student_answers, $student_id);
+        if (array_key_exists('option_multi_answer', $_POST)) {
+            $student_answers = $_POST['option_multi_answer'];
 
-        //second evaluate the exam and calculate the grade of participate(student)
-        $grade = 0;
+            include_once('answerController.php');
+            $answerController = new answerController;
+            $answerController->create($exam_id, $student_answers, $student_id);
 
-        $question_model = $this->model('question');
-        $answer_questions = $question_model->selectCorrectOptions($exam_id);
+            //second evaluate the exam and calculate the grade of participate(student)
+            $grade = 0;
 
-        // convert student answer type to int for better handling
-        foreach ($student_answers as $key => $value) {
-            $student_answers[$key] = intval($value);
-        }
+            $question_model = $this->model('question');
+            $answer_questions = $question_model->selectCorrectOptions($exam_id);
 
-        foreach($answer_questions as $question_id => $correct_answer)
-        {
-            if(array_key_exists($question_id, $student_answers))
-            {
-                $student_answer = $student_answers[$question_id];
-                $correct_answer;
-                if($student_answer === $correct_answer)
-                {
-                    $question_grade = $question_model->getGrade($question_id);
-                    $grade += $question_grade;
-                }
+            // convert student answer type to int for better handling
+            foreach ($student_answers as $key => $value) {
+                $student_answers[$key] = intval($value);
+            }
+
+            foreach ($answer_questions as $question_id => $correct_answer) {
+                if (array_key_exists($question_id, $student_answers)) {
+                    $student_answer = $student_answers[$question_id];
+                    $correct_answer;
+                    if ($student_answer === $correct_answer) {
+                        $question_grade = $question_model->getGrade($question_id);
+                        $grade += $question_grade;
+                    }
                 }
             }
+
+        }
+        //end of if option multi answer exists
+
+        //else if student not answer to any question set it's grade 0 and end the exam
+        else if (!array_key_exists('option_multi_answer', $_POST))
+        {
+        $student_answer = null;
+        $grade = 0;
+        }
 
         // third and store it in participate table
         $participate_model = $this->model('participate');

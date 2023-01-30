@@ -127,9 +127,8 @@
             <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-responsive-dropdown')">
               <div class="items-center flex">
                 <span
-                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"><img
-                    alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
-                    src="../../assets/img/team-1-800x800.jpg" /></span>
+                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+              </span>
               </div>
             </a>
             <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
@@ -178,6 +177,8 @@
           <!-- Heading -->
           <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">تاریخ و ساعت سامانه
           </h6>
+
+          <!-- Date time of system -->
           <span><?php echo date('l jS \of F Y h:i:s A', time());?></span>
 
           <!-- Divider -->
@@ -281,7 +282,7 @@
         <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
           <a class="text-white text-sm hidden lg:inline-block font-semibold text-red-500"
             href="./index.html">داشبورد</a>
-          <form class="md:flex hidden flex-row flex-wrap items-center lg:mr-auto mr-3">
+          <!-- <form class="md:flex hidden flex-row flex-wrap items-center lg:mr-auto mr-3">
             <div class="relative flex w-full flex-wrap items-stretch">
               <input type="text" placeholder="جستجو کنید"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
@@ -289,14 +290,13 @@
                 class="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute left-0 bg-transparent rounded text-base items-center justify-center w-8 pr-3 py-3"><i
                   class="fas fa-search"></i></span>
             </div>
-          </form>
+          </form> -->
           <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
             <a class="text-blueGray-500 block" href="#pablo" onclick="openDropdown(event,'user-dropdown')">
               <div class="items-center flex">
                 <span
-                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"><img
-                    alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
-                    src="../../assets/img/team-1-800x800.jpg" /></span>
+                  class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+                </span>
               </div>
             </a>
             <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
