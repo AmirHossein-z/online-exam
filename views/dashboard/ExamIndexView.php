@@ -1,3 +1,7 @@
+<div class="flex justify-end m-4">
+    <a href="<?php echo URL.'dashboard/index'; ?>" class="bg-indigo-500 px-4 py-2 rounded-lg text-white">بازگشت به صفحه اصلی</a>
+</div>
+
 <div>
     <h1 class="block text-blueGray-800 text-2xl text-center my-4 transition-all duration-300 cursor-pointer">لیست آزمون های شما</h1>
 </div>

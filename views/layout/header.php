@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<?php echo URL ?>public/css/tailwind.css">
     <link rel="stylesheet" href="<?php echo URL ?>public/css/style.css">
     
-    <!-- IMPORT SCTIPTS -->
+    <!-- IMPORT SCRIPTS -->
     <script src="<?php echo URL ?>public/js/kit_fontawesome.js"></script>
     <script src="<?= URL ?>public/js/jquery-3.6.3.min.js"></script>
 

@@ -269,12 +269,14 @@ class Router
             }
         }
 
+        // if page doesn't found,show 404 page
         if(!$page_found) {
             require_once 'app/controllers/indexController.php';
             $object = new indexController();
             $object->four_four();
         }
 
+        // if user are in /, show main page
         if ($_GET['url'] === null) {
             require_once 'app/controllers/indexController.php';
             $object = new indexController();

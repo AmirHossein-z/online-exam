@@ -1,13 +1,14 @@
-<?php
-// var_dump($data[0]['show_grade']);
-?>
+
 <div class="flex-auto px-4 lg:px-10 py-10 pt-0 w-full bg-blueGray-800">
+    <div class="flex justify-end">
+        <a href="<?php echo URL.'dashboard/index'; ?>" class="bg-indigo-500 px-4 py-2 rounded-lg text-white">بازگشت به صفحه اصلی</a>
+    </div>
     <form action="<?php
     if (isset($data[0]['exam_id']))
         echo URL . 'dashboard/exam_update';
     else
     echo URL . 'dashboard/exam/store' ?>" method="POST"
-        class="max-w-xl grid mx-auto bg-blueGray-200 p-5">
+        class="max-w-xl grid mx-auto bg-blueGray-200 p-5 rounded">
             <input type="hidden" name="exam_id" value="
             <?php
             /* if create exam set value of exam_id to last exam_id + 1 and if 
