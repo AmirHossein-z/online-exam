@@ -36,7 +36,7 @@ class participateController extends Controller
          * in other word just participate can exam just between datetime of exam and a time after that (duration)
          */
         if($duration < ($now) || ($numberOfParticipate !== 0)){
-            // show error
+            $this->set_alert('زمان آزمون شما معتبر نمی باشد.',ALERT_ERROR);
             $this->redirect('dashboard/list_exams');
             exit;
         }
@@ -89,7 +89,7 @@ class participateController extends Controller
 
         // if the duration of exam_time passed
         if($now > $duration) {
-            // show error
+            $this->set_alert('زمان آزمون گذشته است',ALERT_ERROR);
             $this->redirect('dashboard/list_exams');
             exit;
         }

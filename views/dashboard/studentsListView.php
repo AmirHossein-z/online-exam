@@ -1,3 +1,7 @@
+<div class="flex justify-end m-4">
+    <a href="<?php echo URL.'dashboard/index'; ?>" class="bg-indigo-500 px-4 py-2 rounded-lg text-white">بازگشت به صفحه اصلی</a>
+</div>
+
 <div class="ease-linear transition-all duration-150 grid items-center justify-center p-4">
     <p class="text-base font-bold">توکن شما: </p>
     <div

@@ -13,4 +13,12 @@ class indexController extends Controller
         $this->view('mainView');
         $this->header('footer');
     }
+
+    public function four_four()
+    {
+        $this->header('header');
+        $this->view('dashboard/four_fourView');
+        $this->footer('footer');
+        exit();
+    }
 }

@@ -17,13 +17,6 @@ class dashboardController extends Controller
         ];
         $this->header('header');
         $this->view('layout/navbar', $data);
-
         $this->footer('footer');
-    }
-
-    public function four_four()
-    {
-        $this->view('dashboard/four_fourView');
-        exit();
     }
 }

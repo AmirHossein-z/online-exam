@@ -61,7 +61,7 @@ class studentController extends Controller
                     $this->redirect('dashboard/list_masters');
                 }
             } else {
-                $this->set_alert('شما قبلا درخواست داده اید٬', ALERT_ERROR);
+                $this->set_alert('شما قبلا درخواست داده اید.', ALERT_ERROR);
                 $this->redirect('dashboard/list_masters');
             }
         }

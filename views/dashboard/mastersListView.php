@@ -1,3 +1,7 @@
+<div class="flex justify-end m-4">
+    <a href="<?php echo URL.'dashboard/index'; ?>" class="bg-indigo-500 px-4 py-2 rounded-lg text-white">بازگشت به صفحه اصلی</a>
+</div>
+
 <form method="POST" action="<?php echo URL . 'dashboard/add_master/' . $data['id']; ?>"
     class="flex justify-end items-center p-5 gap-6">
     <div class="flex items-center">

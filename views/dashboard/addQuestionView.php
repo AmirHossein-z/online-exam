@@ -1,6 +1,10 @@
 <div class="flex-auto px-4 lg:px-10 py-10 pt-0 w-full bg-blueGray-800">
+
+    <div class="flex justify-end">
+        <a href="<?php echo URL.'dashboard/index'; ?>" class="bg-indigo-500 px-4 py-2 rounded-lg text-white">بازگشت به صفحه اصلی</a>
+    </div>
     <form action="<?php echo URL . 'dashboard/add_one_question' ?>" method="post"
-        class="max-w-xl grid mx-auto bg-blueGray-200 p-5">
+        class="max-w-xl grid mx-auto bg-blueGray-200 p-5 rounded">
         <div class="relative w-full my-4">
             <label class="block text-blueGray-600 text-xs font-bold mb-2" htmlFor="question_info">
                 سوال:
