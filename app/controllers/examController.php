@@ -83,7 +83,12 @@ class examController extends Controller
         $data = $exams;
         
         $this->header('header');
+        if($data == null) 
+        $this->view('dashboard/ExamIndexView');
+
+        else
         $this->view('dashboard/ExamIndexView', $data);
+        
         $this->footer('footer');
     }
 
