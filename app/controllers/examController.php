@@ -18,7 +18,13 @@ class examController extends Controller
         $data = $exam_model->get_last_id();
 
         $this->header('header');
+       
+        if($data == null)
+        $this->view('dashboard/addExamView');
+
+        else
         $this->view('dashboard/addExamView', $data);
+
         $this->footer('footer');
     }
 
