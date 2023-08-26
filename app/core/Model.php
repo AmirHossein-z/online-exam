@@ -5,7 +5,7 @@ class Model
     public $connection = "";
     public function __construct()
     {
-        $this->connection = new mysqli('localhost', 'root', '123456', 'online-test');
+        $this->connection = new mysqli('localhost', 'root', '', 'online-test');
         // $this->connection = new mysqli('localhost', 'root', '', 'online-test');
         $this->setTimeZone();
     }
