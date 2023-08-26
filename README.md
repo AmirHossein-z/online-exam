@@ -1,4 +1,4 @@
-# online-exam (آزمون آنلاین)
+# Online-exam (آزمون آنلاین)
 
 ## Usage
 
