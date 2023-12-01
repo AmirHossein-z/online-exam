@@ -14,6 +14,10 @@ then open this [http://localhost/online-exam/](http://localhost/online-exam/) in
 For see demo of project you can going to this post.
 (https://hireza.ir/projects/online-exam/auth/login)
 
+Login test credentials for professor and student
+username: test@hireza.ir
+password: 123456
+
 ## Authors
 -   [@Amirhossein_Zareian](https://github.com/AmirHossein-z)
 -   [@Reza_Dehghani](https://github.com/reza-dehghani)
