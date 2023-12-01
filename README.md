@@ -12,7 +12,7 @@ then open this [http://localhost/online-exam/](http://localhost/online-exam/) in
 
 ## Demo
 For see demo of project you can going to this post.
-[https://hireza.ir/projects/online-exam/auth/login]
+(https://hireza.ir/projects/online-exam/auth/login)
 
 ## Authors
 -   [@Amirhossein_Zareian](https://github.com/AmirHossein-z)
