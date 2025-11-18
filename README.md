@@ -26,25 +26,11 @@ View results (if allowed)
 
 🛠️ Tech Stack
 
-Backend: Laravel
+Backend: Pure PHP custom MVC System
 Frontend: Blade templates / HTML / CSS / JS
 Database: MySQL
-Authentication: Laravel Auth
-Other: Eloquent ORM, MVC architecture, RESTful routes
+Other: MVC architecture
 
-📂 Project Structure
-
-Online-Exam/
-├── app/
-│   ├── Http/
-│   ├── Models/
-│   └── ...
-├── resources/
-│   └── views/
-├── public/
-├── database/
-│   └── migrations/
-└── ...
 ---
 
 🚀 Installation
