@@ -90,20 +90,7 @@ php artisan serve
 4. Submit answers
 5. View score (if allowed)
 ---
-
-📸 Screenshots ()
-
----
-
-## Usage
-
-First install xampp from this [link](https://www.apachefriends.org/).
-
-then copy all files from project to htdocs directory.
-
-then create a database in phpmyadmin named **online-test** and import database from dababase folder in this project.
-
-then open this [http://localhost/online-exam/](http://localhost/online-exam/) in browser
+https://github.com/AmirHossein-z/online-exam
 
 <!--## Demo
 For see demo of project you can going to this post.
@@ -113,6 +100,7 @@ Login test credentials for professor and student
 username: test@hireza.ir
 password: 123456
 -->
+
 ## Authors
 -   [@Amirhossein_Zareian](https://github.com/AmirHossein-z)
 -   [@Reza_Dehghani](https://github.com/reza-dehghani)
@@ -122,16 +110,10 @@ password: 123456
 
 Made with [contrib.rocks](https://contrib.rocks).
 
-## Contributing
-
+## 📝 Contributing
 Contributions are always welcome!
 
 Please set pull request for any recommendations and bugs in project!
-
-📝 Contributing
-
-Pull requests are welcome!
-If you want to suggest a new feature or fix a bug, feel free to open an issue.
 
 ## License
 
