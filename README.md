@@ -27,7 +27,6 @@ View results (if allowed)
 🛠️ Tech Stack
 
 Backend: Pure PHP custom MVC System
-Frontend: Blade templates / HTML / CSS / JS
 Database: MySQL
 Other: MVC architecture
 
