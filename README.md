@@ -38,23 +38,13 @@ Other: MVC architecture
 git clone https://github.com/AmirHossein-z/online-exam.git
 cd online-exam
 
-2️⃣ Install dependencies
-composer install
-npm install
-npm run dev
+First install xampp from this [link](https://www.apachefriends.org/).
 
-3️⃣ Create .env file
-cp .env.example .env
-Set database name, user, and password inside .env.
+then copy all files from project to htdocs directory.
 
-4️⃣ Generate app key
-php artisan key:generate
+then create a database in phpmyadmin named **online-test** and import database from dababase folder in this project.
 
-5️⃣ Run migrations
-php artisan migrate
-
-6️⃣ Start the server
-php artisan serve
+then open this [http://localhost/online-exam/](http://localhost/online-exam/) in browser
 
 ---
 
