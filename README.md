@@ -47,6 +47,11 @@ then create a database in phpmyadmin named **online-test** and import database f
 then open this [http://localhost/online-exam/](http://localhost/online-exam/) in browser
 
 ---
+Test account:
+**username: hi@hireza.ir
+password: 123456789**
+
+---
 
 🧪 How to Use
 
