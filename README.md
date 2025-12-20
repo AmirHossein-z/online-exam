@@ -3,6 +3,7 @@
 A full-featured web application for creating, managing, and taking online exams.
 This project provides an admin panel for instructors and an exam interface for students, built with clean architecture and scalable features.
 
+<img src="https://raw.githubusercontent.com/AmirHossein-z/online-exam/refs/heads/main/mockup/online%20exam%20mockup.png" />
 ✨ Features
 
 👨‍🏫 For Admin / Teacher
